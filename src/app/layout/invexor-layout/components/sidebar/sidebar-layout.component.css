@@ -54,7 +54,7 @@ body {
   transition: 300ms ease-in-out;
   overflow: hidden;
   text-wrap: nowrap;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 0 1px rgba(0, 0, 0, 0.2);
 }
 #sidebar.close {
   padding: 5px;
