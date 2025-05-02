@@ -1,3 +1,12 @@
+:root {
+  --base-clr: #293650;
+  --line-clr: #42434a;
+  --hover-clr: #293650;
+  --text-clr: #e6e6ef;
+  --accent-clr: #5e63ff;
+  --secondary-text-clr: #b0b3c1;
+}
+
 @import "tailwindcss";
 @plugin "daisyui" {
   themes: all;
