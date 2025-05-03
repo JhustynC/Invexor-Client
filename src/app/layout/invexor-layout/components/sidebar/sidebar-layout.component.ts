@@ -12,6 +12,7 @@ import {
   styleUrls: ['./sidebar-layout.component.css'],
 })
 export class SidebarLayoutComponent {
+
   @ViewChild('sidebar') sidebar!: ElementRef<HTMLElement>;
   @ViewChild('toggleBtn') toggleButton!: ElementRef<HTMLButtonElement>;
   @ViewChild('#toggleTheme') toggleTheme!: ElementRef<HTMLButtonElement>;

@@ -9,7 +9,7 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () =>
-          import('./feature/dashboard/components/grid-layout.component'),
+          import('./feature/dashboard/components/grid-widgets/grid-layout.component'),
       },
     ],
   },

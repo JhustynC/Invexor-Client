@@ -39,7 +39,7 @@ export default class GridLayoutComponent {
 
   ngOnInit(): void {
     this.options = {
-      gridTypes: [GridType.Fit, GridType.ScrollHorizontal],
+      gridTypes: GridType.ScrollVertical,
       compactType: CompactType.CompactUp,
       margin: 10,
       outerMargin: true,
