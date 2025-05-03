@@ -1,0 +1,9 @@
+<gridster [options]="options"
+          class="custom-gridster">
+  @for (item of dashboard; track item) {
+  <gridster-item [item]="item"
+                 class="rounded-xl flex content-center items-center custom-gridster-item">
+
+  </gridster-item>
+  }
+</gridster>

@@ -4,9 +4,9 @@
   box-sizing: border-box;
   height: 100vh;
   width: 250px;
-  padding: 5px 1em;
+  /* padding: 5px 1em; */
   background-color: var(--base-clr);
-  border-right: 1px solid var(--line-clr);
+  /* border-right: 1px solid var(--line-clr); */
 
   position: sticky;
   top: 0;
@@ -19,7 +19,18 @@
 #sidebar.close {
   padding: 5px;
   width: 60px;
+
+
 }
+
+#sidebar.close > ul > li:first-child {
+  justify-content: center;
+
+  > span {
+    display: none;
+  }
+}
+
 #sidebar ul {
   list-style: none;
   display: flex;
@@ -43,7 +54,7 @@
   }
 }
 #sidebar > ul > li:first-child button:hover {
-  background-color: green;
+  /* background-color: green; */
 }
 #sidebar ul li.active a {
   color: var(--accent-clr);
@@ -56,7 +67,7 @@
 #sidebar a,
 #sidebar .dropdown-btn,
 #sidebar .logo {
-  border-radius: 0.5em;
+  /* border-radius: 0.5em; */
   padding: 0.85em;
   text-decoration: none;
   color: var(--text-clr);

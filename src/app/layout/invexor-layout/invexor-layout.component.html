@@ -1,8 +1,8 @@
 <div class="flex flex-row h-screen w-screen">
   <sidebar-layout></sidebar-layout>
-  <div class="w-full h-full grid grid-rows-[auto_1fr]">
+  <div class="flex flex-col flex-1 h-full">
     <header-layout></header-layout>
-    <div class="bg-[#111827]">
+    <div class="bg-[#111827] overflow-auto flex-1">
       <router-outlet></router-outlet>
     </div>
   </div>
