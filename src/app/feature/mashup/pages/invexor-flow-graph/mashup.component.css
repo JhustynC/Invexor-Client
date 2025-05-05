@@ -2,9 +2,28 @@
   display: block;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
+/* *header */
+.content {
+  text-align: center;
+  margin: 2rem;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  color: #f1f5f9;
+  margin-bottom: 1rem;
+}
+
+.page-description {
+  font-size: 1.2rem;
+  color: #a0aec0;
+}
+
+/** Graph */
 .graph-wrapper {
   display: flex;
   justify-content: center;
@@ -54,4 +73,95 @@
     display: none;
   }
 
+}
+
+/** footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #111827;
+  color: #a0aec0;
+  margin-top: 2rem;
+}
+
+.footer-link {
+  color: #63b3ed;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/** Text-info */
+.info-box {
+  background-color: #1a202c;
+  color: #e2e8f0;
+  padding: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info-box h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.info-box ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.info-box li {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/** Button */
+
+.action-button {
+  background-color: #f97316;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.action-button:hover {
+  background-color: #357abd;
+}
+
+.warning-message {
+  background-color: #ffcc00;
+  color: #000;
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px; /* Espacio debajo del mensaje si está encima del gráfico */
+}
+
+.graph-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#graphContainer {
+  width: 100%;
+  height: 100%;
+  background-color: #111827;
 }

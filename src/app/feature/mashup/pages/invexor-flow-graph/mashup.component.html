@@ -1,6 +1,33 @@
+<div class="warning-message">
+  <p>Advertencia: Cada vez que el tamaño de la pantalla cambie, el gráfico se volverá a renderizar.</p>
+</div>
+
+<div class="content">
+  <h1 class="page-title">Visualización de Redes</h1>
+  <p class="page-description">
+    Esta visualización interactiva representa diversas relaciones entre sucursales, áreas y entidades.
+  </p>
+</div>
+
+<div class="info-box">
+  <h2>¿Cómo interpretar la visualización?</h2>
+  <ul>
+    <li><strong>Sucursales:</strong> Representan las ubicaciones físicas de la empresa.</li>
+    <li><strong>Áreas:</strong> Diferentes departamentos dentro de cada sucursal.</li>
+    <li><strong>Entidades:</strong> Entidades que forman parte de los diferentes departamentos.</li>
+  </ul>
+</div>
+
+
+
+<div class="button-container">
+  <button (click)="rechargeGraph()"
+          class="action-button">Recargar Gráfico</button>
+</div>
 @if (renderGraph) {
 <div class="graph-wrapper">
   <div #graphContainer
        class="graph-card"></div>
 </div>
 }
+

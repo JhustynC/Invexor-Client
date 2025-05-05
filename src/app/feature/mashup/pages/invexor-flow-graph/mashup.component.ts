@@ -23,18 +23,39 @@ export default class MashupComponent implements AfterViewInit {
       this.renderGraph = true;
 
       // Esperamos a que el DOM se renderice completamente
-      setTimeout(() => {
-        this.initGraph();
+      setTimeout(async () => {
+        await this.initGraph();
       }, 0);
     }, 0);
   }
 
-  ngAfterViewInit(): void {
-    this.initGraph();
+  async ngAfterViewInit(): Promise<void> {
+    await this.initGraph();
   }
 
-  private initGraph() {
+
+  // toggleGraph() {
+  //   this.renderGraph = !this.renderGraph;
+  //   this.initGraph();
+  // }
+
+  // Método para re-renderizar el gráfico
+  async rechargeGraph() {
+    this.renderGraph = false;
+    setTimeout(async () => {
+      this.renderGraph = true;
+      await this.initGraph();
+    }, 0);
+  }
+
+  private async initGraph() {
     if (!this.graphContainer) return;
+
+    // Si ya existe una instancia, la destruimos
+    if (this.graphInstance) {
+      this.graphInstance.renderer().clear();
+      this.graphInstance.renderer().dispose();
+    }
 
     const graphData = {
       nodes: [
@@ -71,7 +92,7 @@ export default class MashupComponent implements AfterViewInit {
 
     const { width, height } = this.getContainerSize();
 
-    this.graphInstance = new ForceGraph3D(this.graphContainer.nativeElement)
+    this.graphInstance = new ForceGraph3D(this.graphContainer?.nativeElement)
       .graphData(graphData)
       .width(width)
       .height(height)
@@ -109,5 +130,10 @@ export default class MashupComponent implements AfterViewInit {
     }
 
     return { width, height };
+  }
+
+  onNgDestroy() {
+    this.graphInstance?.renderer().clear();
+    this.graphInstance?.renderer().dispose();
   }
 }
