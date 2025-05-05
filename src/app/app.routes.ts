@@ -1,16 +1,19 @@
 import { Routes } from '@angular/router';
+import InvexorLayoutComponent from './layout/invexor-layout/invexor-layout.component';
 
 export const routes: Routes = [
   {
     path: 'client',
-    loadComponent: () =>
-      import('./layout/invexor-layout/invexor-layout.component'),
-    children: [
-      {
-        path: 'dashboard',
-        loadComponent: () =>
-          import('./feature/dashboard/components/grid-widgets/grid-layout.component'),
-      },
-    ],
+    component: InvexorLayoutComponent,
+    loadChildren:() => import('./feature/invexor.routes'),
   },
+  {
+    path: 'auth',
+    redirectTo: 'client',
+    pathMatch: 'full'
+  },
+  // {
+  //   path: '**',
+  //   redirectTo: 'client',
+  // }
 ];

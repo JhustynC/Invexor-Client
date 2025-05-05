@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.graph-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.graph-card {
+  background-color: #111827;
+  border-radius: 1rem;         /* Bordes redondeados */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra elegante */
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  max-width: 1000px;
+  max-height: 600px; /* Reducimos la altura máxima */
+}
+
+.graph-container {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 800px) {
+
+  .graph-wrapper {
+    height: calc(100dvh - 160px);
+    width: 100dvw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+  }
+
+  .graph-card{
+    width: auto;
+    height: auto;
+    align-self: center;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ::ng-deep .graph-card .graph-info-msg{
+    display: none;
+  }
+
+}
