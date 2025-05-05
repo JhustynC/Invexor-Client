@@ -50,7 +50,7 @@
     align-items: center;
   }
 
-  ::ng-deep .graph-card .graph-info-msg{
+  ::ng-deep .graph-card .scene-nav-info{
     display: none;
   }
 
