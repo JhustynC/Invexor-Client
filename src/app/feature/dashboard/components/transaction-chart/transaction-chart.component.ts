@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, input, OnDestroy, OnInit } from '@angular/core';
+import { GridsterItem } from 'angular-gridster2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'transaction-chart-dashboard',
@@ -6,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class TransactionChartComponent implements OnInit {
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit(): void {
+      
+  }
+  
 }

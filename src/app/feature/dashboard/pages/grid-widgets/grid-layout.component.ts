@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { TransactionChartComponent } from '../../components/transaction-chart/transaction-chart.component';
+import { CommonModule } from '@angular/common';
 
 import {
   CompactType,
@@ -19,10 +21,14 @@ interface Safe extends GridsterConfig {
   pushDirections: PushDirections;
 }
 
+interface item2 extends GridsterItem {
+  type?: string;
+}
+
 @Component({
   selector: 'grid-layout-dashboard',
   templateUrl: './grid-layout.component.html',
-  imports: [GridsterComponent, GridsterItemComponent],
+  imports: [GridsterComponent, GridsterItemComponent, TransactionChartComponent, CommonModule],
   styles:
   `
   ::ng-deep .custom-gridster {
@@ -35,7 +41,9 @@ interface Safe extends GridsterConfig {
 })
 export default class GridLayoutComponent {
   options!: Safe;
-  dashboard!: Array<GridsterItem>;
+  dashboard!: Array<item2>;
+
+  resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
 
   ngOnInit(): void {
     this.options = {
@@ -92,15 +100,18 @@ export default class GridLayoutComponent {
       disableWindowResize: false,
       disableWarnings: false,
       scrollToNewItems: false,
+      // itemResizeCallback: item => {
+      //   this.resizeEvent.emit(item);
+      // }
     };
 
     this.dashboard = [
-      { cols: 2, rows: 1, y: 0, x: 0 },
-      { cols: 2, rows: 2, y: 0, x: 2, hasContent: true },
-      { cols: 1, rows: 1, y: 0, x: 4 },
-      { cols: 1, rows: 1, y: 2, x: 5 },
-      { cols: 1, rows: 1, y: 1, x: 0 },
-      { cols: 1, rows: 1, y: 1, x: 0 },
+      { cols: 2, rows: 1, y: 0, x: 0, type: 'Transacciones'},
+      { cols: 2, rows: 2, y: 0, x: 2, hasContent: true},
+      { cols: 1, rows: 1, y: 0, x: 4},
+      { cols: 1, rows: 1, y: 2, x: 5},
+      { cols: 1, rows: 1, y: 1, x: 0},
+      { cols: 1, rows: 1, y: 1, x: 0}
     ];
   }
 

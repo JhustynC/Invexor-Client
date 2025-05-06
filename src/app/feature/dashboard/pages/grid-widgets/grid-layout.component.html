@@ -3,7 +3,10 @@
   @for (item of dashboard; track item) {
   <gridster-item [item]="item"
                  class="rounded-xl flex content-center items-center custom-gridster-item">
-
+    @if (item.type === 'Transacciones') {
+    <transaction-chart-dashboard></transaction-chart-dashboard>
+    }
+    
   </gridster-item>
   }
 </gridster>
