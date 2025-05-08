@@ -42,6 +42,7 @@ export class SidebarLayoutComponent {
 
     //! To force a rezise event to make the main content responsive
     window.dispatchEvent(new Event('resize'));
+
   }
 
   public toggleSubMenu(button: HTMLElement) {

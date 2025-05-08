@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 import {
   CompactType,
@@ -37,20 +37,36 @@ interface Safe extends GridsterConfig {
 export default class GridLayoutComponent {
   options!: Safe;
   dashboard!: Array<GridsterItem>;
+  private wasMaximized = false;
+  @HostListener('window:resize', [])
+  onResize() {
+    const isMaximized =
+      window.innerWidth === screen.width &&
+      window.innerHeight === screen.height;
+
+    if (isMaximized && !this.wasMaximized) {
+      console.log('🚀 La ventana fue maximizada');
+      // window.dispatchEvent(new Event('resize'));
+    }
+
+    this.wasMaximized = isMaximized;
+  }
+
+
 
   ngOnInit(): void {
     this.options = {
-      gridTypes: GridType.ScrollVertical,
+      gridTypes: GridType.Fit,
       compactType: CompactType.CompactUp,
       margin: 10,
       outerMargin: true,
       outerMarginTop: null,
-      outerMarginRight: 10,
+      outerMarginRight: null,
       outerMarginBottom: null,
       outerMarginLeft: null,
       useTransformPositioning: true,
       mobileBreakpoint: 800,
-      useBodyForBreakpoint: true,
+      useBodyForBreakpoint: false,
       minCols: 1,
       maxCols: 5,
       minRows: 1,
@@ -89,7 +105,7 @@ export default class GridLayoutComponent {
       disablePushOnResize: false,
       pushDirections: { north: true, east: true, south: true, west: true },
       pushResizeItems: false,
-      displayGrid: DisplayGrid.OnDragAndResize,
+      displayGrid: DisplayGrid.None,
       disableWindowResize: false,
       disableWarnings: false,
       scrollToNewItems: false,
@@ -97,7 +113,7 @@ export default class GridLayoutComponent {
 
     this.dashboard = [
       { cols: 2, rows: 1, y: 0, x: 0 },
-      { cols: 2, rows: 2, y: 0, x: 2, hasContent: true },
+      { cols: 2, rows: 2, y: 0, x: 2 },
       { cols: 1, rows: 1, y: 0, x: 4 },
       { cols: 1, rows: 1, y: 2, x: 5 },
       { cols: 1, rows: 1, y: 1, x: 0 },

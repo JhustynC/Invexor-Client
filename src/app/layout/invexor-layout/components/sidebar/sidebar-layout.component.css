@@ -3,7 +3,8 @@
 #sidebar {
   box-sizing: border-box;
   height: 100vh;
-  width: 235px;
+  width: 250px;
+  min-width: 250px;
   /*! Si se quita causa que el dashboar se desborde de la pantalla al cambiar tamaño de pantalla (pasar de uan pequeña a una grande)*/
   /* padding: 5px 1em; */
   background-color: var(--base-clr);
@@ -22,6 +23,7 @@
 #sidebar.close {
   padding: 5px;
   width: 60px;
+  min-width: 60px;
 
   /*! Para poder ver los tooltip al cerrar el sidenav */
   overflow: visible;
@@ -153,7 +155,7 @@
 
 @media (max-width: 800px) {
   #sidebar ul {
-    height: auto; /* anula el 95% */
+    height: auto; /*! anula el 95% */
   }
   #sidebar {
     z-index: 500;
