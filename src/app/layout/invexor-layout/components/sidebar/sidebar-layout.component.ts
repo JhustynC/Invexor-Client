@@ -34,6 +34,10 @@ export class SidebarLayoutComponent {
   public toggleSidebar() {
     this.sidebar?.nativeElement.classList.toggle('close');
     this.toggleButton?.nativeElement.classList.toggle('rotate');
+    // this.toggleButton?.nativeElement.classList.toggle('tooltip');
+    // this.toggleButton?.nativeElement.classList.toggle('tooltip tooltip-right');
+
+
     this.closeAllSubMenus();
 
     //! To force a rezise event to make the main content responsive

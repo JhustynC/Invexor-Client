@@ -2,8 +2,10 @@
           class="custom-gridster">
   @for (item of dashboard; track item) {
   <gridster-item [item]="item"
-                 class="rounded-xl flex content-center items-center custom-gridster-item">
-
+                 class="custom-gridster-item p-2">
+    <div class="w-full h-full overflow-auto scrollbar-custom flex flex-col">
+      <transaction-chart-dashboard class="w-full h-full max-h-[400px] sm:max-h-[600px]"></transaction-chart-dashboard>
+    </div>
   </gridster-item>
   }
 </gridster>
