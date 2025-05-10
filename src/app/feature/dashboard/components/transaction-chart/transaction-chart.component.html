@@ -2,12 +2,18 @@
 
 <div class="layout">
     <header>
-        <app-transaction-chart-header></app-transaction-chart-header>
+        <app-transaction-chart-header [title]="title" [description]="description"></app-transaction-chart-header>
     </header>
     <main>
-        <transaction-chart-row class="row"></transaction-chart-row>
-        <transaction-chart-row class="row"></transaction-chart-row>
-        <transaction-chart-row class="row"></transaction-chart-row>
+        @for (item of transactionChartService.rows; track $index) {
+            <transaction-chart-row class="row" 
+            [date]="item.date" 
+            [date_hour]="item.date_hour" 
+            [id]="item.id" 
+            [type]="item.type">
+
+            </transaction-chart-row>
+        }
     </main>
 </div>
   

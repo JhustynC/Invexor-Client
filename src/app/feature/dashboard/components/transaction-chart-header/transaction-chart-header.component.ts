@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-transaction-chart-header',
@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class TransactionChartHeaderComponent {
 
+  title = input<string>();
+  description = input<string>();
+  constructor() {
+  }
 }
