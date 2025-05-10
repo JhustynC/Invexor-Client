@@ -2,10 +2,14 @@
           class="custom-gridster">
   @for (item of dashboard; track item) {
   <gridster-item [item]="item"
-                 class="custom-gridster-item p-2">
+                 class="custom-gridster-item"> <!--p-2 es el padding-->
     <div class="w-full h-full overflow-auto scrollbar-custom flex flex-col">
-      <transaction-chart-dashboard class="w-full h-full max-h-[400px] sm:max-h-[600px]"></transaction-chart-dashboard>
-    </div>
+      <!--<transaction-chart-dashboard class="w-full h-full max-h-[400px] sm:max-h-[600px]"></transaction-chart-dashboard>-->
+      
+      <app-dashboard-element></app-dashboard-element>
+      
+  </div>
+    
   </gridster-item>
   }
 </gridster>

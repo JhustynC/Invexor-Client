@@ -13,6 +13,7 @@ import {
   Resizable,
 } from 'angular-gridster2';
 import { TransactionChartComponent } from "../../components/transaction-chart/transaction-chart.component";
+import { DashboardElementComponent } from "../../components/dashboard-element/dashboard-element.component";
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -23,7 +24,7 @@ interface Safe extends GridsterConfig {
 @Component({
   selector: 'grid-layout-dashboard',
   templateUrl: './grid-layout.component.html',
-  imports: [GridsterComponent, GridsterItemComponent, TransactionChartComponent],
+  imports: [GridsterComponent, GridsterItemComponent, TransactionChartComponent, DashboardElementComponent],
   styles:
   `
   ::ng-deep .custom-gridster {
