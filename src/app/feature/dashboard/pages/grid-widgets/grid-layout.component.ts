@@ -24,7 +24,7 @@ interface Safe extends GridsterConfig {
 @Component({
   selector: 'grid-layout-dashboard',
   templateUrl: './grid-layout.component.html',
-  imports: [GridsterComponent, GridsterItemComponent, TransactionChartComponent, DashboardElementComponent],
+  imports: [GridsterComponent, GridsterItemComponent, DashboardElementComponent],
   styles:
   `
   ::ng-deep .custom-gridster {
