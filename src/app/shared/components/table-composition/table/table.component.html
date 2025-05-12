@@ -1,0 +1,26 @@
+<div class="overflow-x-auto">
+  <table class="table">
+    <thead class="bg-[#293650]">
+      <tr>
+        <th>#</th>
+        @for (colName of columnNames(); track $index) {
+        <th>{{ colName | titlecase }}</th>
+        }
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of data(); track $index) {
+      <tr>
+        <th>{{ ($index + 1) + (currentPage() - 1) * rowsPerPage() }}</th>
+        @for (colName of columnNames(); track $index) {
+        <td>{{ row[colName] }}</td>
+        }
+        <td>
+          <button class="btn btn-primary btn-outline">Edit</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

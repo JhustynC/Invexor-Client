@@ -1,0 +1,43 @@
+<div class="p-10">
+
+  <div class="flex items-center gap-4 mb-4">
+
+    <!-- Búsqueda -->
+    <input type="search"
+           placeholder="Buscar..."
+           (input)="onSearch($any($event.target).value)"
+           class="input w-full max-w-xs" />
+
+    <!-- Ordenamiento -->
+    <select class="select w-fit"
+            (change)="onSortChange($any($event.target).value)">
+      <option value="">Ningún orden</option>
+      @for (col of columnNames(); track $index) {
+      <option [value]="col"
+              [selected]="sortField() === col">
+        {{ col | titlecase }}
+      </option>
+      }
+    </select>
+
+    <!-- Indicador de dirección -->
+    @if(sortField()){
+    <span (click)="toggleSortDirection()"
+          class="cursor-pointer">
+      {{ sortDirection() === 'asc' ? '🔼' : '🔽' }}
+    </span>
+    }
+
+  </div>
+
+  <table-shared [data]="paginatedData()"
+                [columnNames]="columnNames()"
+                [rowsPerPage]="rowsPerPage()"
+                [currentPage]="currentPage()" />
+
+  <table-pagination [data]="filteredData()"
+                    [rowsPerPage]="rowsPerPage()"
+                    [currentPage]="currentPage()"
+                    (emitCurrentPage)="onPageChange($event)" />
+
+</div>

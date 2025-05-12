@@ -1,0 +1,19 @@
+<div class="flex justify-center mt-4 gap-2">
+  <button class="btn btn-sm"
+          (click)="prevPage()"
+          [disabled]="currentPage() === 1">
+    ‹
+  </button>
+
+  <div>
+    <span class="text-sm">
+      Page {{ currentPage() }} of {{ totalPages() }}
+    </span>
+  </div>
+
+  <button class="btn btn-sm"
+          (click)="nextPage()"
+          [disabled]="currentPage() === totalPages()">
+    ›
+  </button>
+</div>

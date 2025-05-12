@@ -7,7 +7,7 @@
   min-width: 250px;
   /*! Si se quita causa que el dashboar se desborde de la pantalla al cambiar tamaño de pantalla (pasar de uan pequeña a una grande)*/
   /* padding: 5px 1em; */
-  background-color: var(--base-clr);
+background-color: var(--base-clr);
   /* border-right: 10px solid var(--line-clr); */
 
   position: sticky;
