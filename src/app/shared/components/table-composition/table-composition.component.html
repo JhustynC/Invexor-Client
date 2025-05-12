@@ -1,14 +1,13 @@
 <div class="p-10">
+  <div class="flex items-center gap-4 mb-4 flex-wrap">
 
-  <div class="flex items-center gap-4 mb-4">
-
-    <!-- Búsqueda -->
+    <!--* Búsqueda -->
     <input type="search"
            placeholder="Buscar..."
            (input)="onSearch($any($event.target).value)"
-           class="input w-full max-w-xs" />
+           class="input w-fit max-w-xs" />
 
-    <!-- Ordenamiento -->
+    <!--* Ordenamiento -->
     <select class="select w-fit"
             (change)="onSortChange($any($event.target).value)">
       <option value="">Ningún orden</option>
@@ -20,24 +19,29 @@
       }
     </select>
 
-    <!-- Indicador de dirección -->
+    <!--* Indicador de dirección -->
     @if(sortField()){
     <span (click)="toggleSortDirection()"
-          class="cursor-pointer">
+          class="cursor-pointer select-none">
       {{ sortDirection() === 'asc' ? '🔼' : '🔽' }}
     </span>
     }
 
+    <button class="btn btn-primary ml-auto">
+      Add+
+    </button>
   </div>
 
+  <!--* Tabla -->
   <table-shared [data]="paginatedData()"
                 [columnNames]="columnNames()"
                 [rowsPerPage]="rowsPerPage()"
-                [currentPage]="currentPage()" />
+                [currentPage]="currentPage()"
+                class="table-fixed"/>
 
+  <!--* Paginación -->
   <table-pagination [data]="filteredData()"
                     [rowsPerPage]="rowsPerPage()"
                     [currentPage]="currentPage()"
                     (emitCurrentPage)="onPageChange($event)" />
-
 </div>

@@ -7,6 +7,7 @@ import { TableComponent } from '../../../../shared/components/table-composition/
   selector: 'branchs-entities-manager',
   imports: [TableCompositionComponent],
   templateUrl: './branchs.component.html',
+  styleUrls: ['./branchs.component.css']
 })
 export default class BranchsComponent {
   sucursales = [

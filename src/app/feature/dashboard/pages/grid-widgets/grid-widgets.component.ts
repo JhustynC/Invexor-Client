@@ -12,7 +12,7 @@ import {
   PushDirections,
   Resizable,
 } from 'angular-gridster2';
-import { TransactionChartComponent } from "../../components/transaction-chart/transaction-chart.component";
+import { TransactionChartComponent } from '../../components/transaction-chart/transaction-chart.component';
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -22,17 +22,20 @@ interface Safe extends GridsterConfig {
 
 @Component({
   selector: 'grid-layout-dashboard',
-  templateUrl: './grid-layout.component.html',
-  imports: [GridsterComponent, GridsterItemComponent, TransactionChartComponent],
-  styles:
-  `
+  templateUrl: './grid-widgets.component.html',
+  imports: [
+    GridsterComponent,
+    GridsterItemComponent,
+    TransactionChartComponent,
+  ],
+  styles: `
   ::ng-deep .custom-gridster {
     background-color: #111827 !important;
   }
   ::ng-deep .custom-gridster-item {
     background-color: #293650 !important;
   }
-  `
+  `,
 })
 export default class GridLayoutComponent {
   options!: Safe;
@@ -51,8 +54,6 @@ export default class GridLayoutComponent {
 
     this.wasMaximized = isMaximized;
   }
-
-
 
   ngOnInit(): void {
     this.options = {

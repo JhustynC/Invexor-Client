@@ -5,6 +5,32 @@ import { Component, input, OnInit, signal } from '@angular/core';
   selector: 'table-shared',
   templateUrl: './table.component.html',
   imports: [TitleCasePipe],
+  styles: `
+
+  @media (width <= 800px) {
+
+    table thead{
+      display: none;
+    }
+
+    table td{
+      text-align: right;
+      display: block;
+      font-size: 1rem;
+    }
+
+    table tr td::before {
+      content: attr(data-title) ': ';
+      float: left;
+      font-weight: bold;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #293650;
+    }
+  }
+
+  `,
 })
 export class TableComponent {
   columnNames = input<string[]>();

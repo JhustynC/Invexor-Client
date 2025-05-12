@@ -9,18 +9,21 @@ import { TitleCasePipe } from '@angular/common';
   selector: 'table-composition-shared',
   templateUrl: './table-composition.component.html',
   imports: [TableComponent, PaginationComponent, TitleCasePipe],
+  
 })
 export class TableCompositionComponent {
+  //* Definición de las propiedades de entrada
   inputData = input<any[]>([]);
   rowsPerPage = input<number>(5);
   columnNames = input<string[]>([]);
 
+  //* Definición de las propiedades internas
   currentPage = signal(1);
   searchTerm = signal('');
   sortField = signal<string | null>(null);
   sortDirection = signal<'asc' | 'desc'>('asc');
 
-  // 1. Filtro por búsqueda
+  //* 1. Filtro por búsqueda
   filteredData = computed(() => {
     const term = this.searchTerm().toLowerCase();
     if (!term) return this.inputData();
@@ -29,7 +32,7 @@ export class TableCompositionComponent {
     );
   });
 
-  // 2. Ordenamiento
+  //* 2. Ordenamiento
   sortedData = computed(() => {
     const data = [...this.filteredData()];
     const field = this.sortField();
@@ -52,14 +55,14 @@ export class TableCompositionComponent {
     });
   });
 
-  // 3. Paginación
+  //* 3. Paginación
   paginatedData = computed(() => {
     const start = (this.currentPage() - 1) * this.rowsPerPage();
     const end = start + this.rowsPerPage();
     return this.sortedData().slice(start, end);
   });
 
-  // 4. Eventos
+  //* 4. Eventos
   onSearch(term: string) {
     this.searchTerm.set(term);
     this.currentPage.set(1);
@@ -71,7 +74,7 @@ export class TableCompositionComponent {
 
   onSortChange(field: string) {
     if (!field) {
-      // Si se selecciona "Ningún orden"
+      //? Si se selecciona "Ningún orden"
       this.sortField.set(null);
       this.sortDirection.set('asc');
       return;

@@ -166,6 +166,7 @@ background-color: var(--base-clr);
     padding: 0;
     position: fixed;
     top: unset;
+    /* top: 100dvh; */
     bottom: 0;
     border-top: 1px solid var(--line-clr);
 
