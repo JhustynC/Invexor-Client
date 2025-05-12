@@ -5,7 +5,8 @@
         <app-transaction-chart-header [title]="title" [description]="description"></app-transaction-chart-header>
     </header>
     <main>
-        @for (item of transactionChartService.rows; track $index) {
+        
+        @for (item of rows; track $index) {
             <transaction-chart-row class="row" 
             [date]="item.date" 
             [date_hour]="item.date_hour" 

@@ -1,4 +1,4 @@
-.layout, div{
+/*.layout, div{
     background-color: #FFE3CA;
     border: 10px solid blue;
 }
@@ -13,6 +13,6 @@ header {
     color: black;
 }
 
-row {
+.row {
     background-color: red;
-}
+}*/

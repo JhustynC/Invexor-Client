@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'transaction-chart-row',
+  standalone: true,
   imports: [],
   templateUrl: './transaction-chart-row.component.html',
   styleUrl: './transaction-chart-row.component.css'
