@@ -15,6 +15,7 @@ import {
   PushDirections,
   Resizable,
 } from 'angular-gridster2';
+import { ItemChartComponent } from "../../components/item-chart/item-chart.component";
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -33,8 +34,9 @@ interface ItemByType extends GridsterItem {
     GridsterComponent,
     GridsterItemComponent,
     TransactionChartComponent,
-    TransactionsGraphComponent
-  ],
+    TransactionsGraphComponent,
+    ItemChartComponent
+],
   styles: `
   ::ng-deep .custom-gridster {
     background-color: #111827 !important;
@@ -122,7 +124,7 @@ export default class GridLayoutComponent {
     this.dashboard = [
       { cols: 2, rows: 1, y: 0, x: 0, type: 'Graph'},
       { cols: 2, rows: 2, y: 0, x: 2, type: 'LastTransactions' },
-      { cols: 1, rows: 1, y: 0, x: 4 },
+      { cols: 1, rows: 1, y: 0, x: 4, type: 'Items' },
       { cols: 1, rows: 1, y: 2, x: 5 },
       { cols: 1, rows: 1, y: 1, x: 0 },
       { cols: 1, rows: 1, y: 1, x: 0 },
