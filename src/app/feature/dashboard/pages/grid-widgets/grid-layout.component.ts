@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { TransactionChartComponent } from '../../components/transaction-chart/transaction-chart.component';
-import { CommonModule } from '@angular/common';
+import { TransactionsGraphComponent } from '../../components/transactions-graph/transactions-graph.component';
 
 import {
   CompactType,
@@ -14,8 +14,6 @@ import {
   PushDirections,
   Resizable,
 } from 'angular-gridster2';
-import { TransactionChartComponent } from "../../components/transaction-chart/transaction-chart.component";
-//import { DashboardElementComponent } from "../../components/dashboard-element/dashboard-element.component";
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -23,14 +21,18 @@ interface Safe extends GridsterConfig {
   pushDirections: PushDirections;
 }
 
-interface item2 extends GridsterItem {
+interface ItemByType extends GridsterItem {
   type?: string;
 }
 
 @Component({
   selector: 'grid-layout-dashboard',
   templateUrl: './grid-layout.component.html',
-  imports: [GridsterComponent, GridsterItemComponent, TransactionChartComponent],
+  imports: [GridsterComponent,
+    GridsterItemComponent,
+    TransactionChartComponent,
+    TransactionsGraphComponent
+  ],
   styles:
   `
   ::ng-deep .custom-gridster {
@@ -43,7 +45,7 @@ interface item2 extends GridsterItem {
 })
 export default class GridLayoutComponent {
   options!: Safe;
-  dashboard!: Array<item2>;
+  dashboard!: Array<ItemByType>;
 
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
 
@@ -101,15 +103,12 @@ export default class GridLayoutComponent {
       displayGrid: DisplayGrid.OnDragAndResize,
       disableWindowResize: false,
       disableWarnings: false,
-      scrollToNewItems: false,
-      // itemResizeCallback: item => {
-      //   this.resizeEvent.emit(item);
-      // }
+      scrollToNewItems: false
     };
 
     this.dashboard = [
-      { cols: 2, rows: 1, y: 0, x: 0, type: 'Transacciones'},
-      { cols: 2, rows: 2, y: 0, x: 2, hasContent: true},
+      { cols: 2, rows: 1, y: 0, x: 0, type: 'Graph'},
+      { cols: 2, rows: 2, y: 0, x: 2, hasContent: true, type: 'LastTransactions'},
       { cols: 1, rows: 1, y: 0, x: 4},
       { cols: 1, rows: 1, y: 2, x: 5},
       { cols: 1, rows: 1, y: 1, x: 0},

@@ -7,10 +7,20 @@
       <!--<transaction-chart-dashboard class="w-full h-full max-h-[400px] sm:max-h-[600px]"></transaction-chart-dashboard>-->
       
       <!--<app-dashboard-element></app-dashboard-element>-->
+      @switch (item.type) {
+        @case ('LastTransactions') {
+          <transaction-chart-dashboard></transaction-chart-dashboard>
+        }
+        @case ('Graph') {
+          <transactions-graph-dashboard></transactions-graph-dashboard>
+        }
+        @default {
+          <p>Default content.</p>
+        }
+      }
 
-      <transaction-chart-dashboard></transaction-chart-dashboard>
       
-  </div>
+    </div>
     
   </gridster-item>
   }
