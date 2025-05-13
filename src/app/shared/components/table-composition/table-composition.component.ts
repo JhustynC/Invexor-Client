@@ -3,13 +3,13 @@ import { Component, input, signal, computed } from '@angular/core';
 import { TableComponent } from './table/table.component';
 import { PaginationComponent } from './pagination/table-pagination.component';
 import { TitleCasePipe } from '@angular/common';
+import { TableFilterbarComponent } from './filterbar/table-filterbar.component';
 // ...
 
 @Component({
   selector: 'table-composition-shared',
   templateUrl: './table-composition.component.html',
-  imports: [TableComponent, PaginationComponent, TitleCasePipe],
-  
+  imports: [TableComponent, PaginationComponent, TableFilterbarComponent],
 })
 export class TableCompositionComponent {
   //* Definición de las propiedades de entrada
