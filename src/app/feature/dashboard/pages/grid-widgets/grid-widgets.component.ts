@@ -20,6 +20,10 @@ interface Safe extends GridsterConfig {
   pushDirections: PushDirections;
 }
 
+interface ItemByType extends GridsterItem {
+  type?: string;
+}
+
 @Component({
   selector: 'grid-layout-dashboard',
   templateUrl: './grid-widgets.component.html',
@@ -109,7 +113,7 @@ export default class GridLayoutComponent {
       displayGrid: DisplayGrid.None,
       disableWindowResize: false,
       disableWarnings: false,
-      scrollToNewItems: false,
+      scrollToNewItems: false
     };
 
     this.dashboard = [

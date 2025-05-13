@@ -1,0 +1,41 @@
+.main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    color: black;
+    background-color: #FFE3CA; 
+}
+
+.main__date{
+    font-size: 10px;
+    margin-left: 20px;
+}
+
+.main__icon{
+    font-size: 10px;
+    margin-left: 5px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.main__info{
+    /*transform: translateX(-50px);*/
+    margin-left: 0px;
+}
+
+.info__type{
+    font-weight: bold;
+}
+
+.info__id{
+    font-size: 11px;
+}
+
+@container (width < 3000px) {
+    .main{
+        background-color: yellow;
+    }
+}
+
+
