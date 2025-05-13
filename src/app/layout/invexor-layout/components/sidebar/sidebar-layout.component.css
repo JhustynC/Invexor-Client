@@ -3,7 +3,8 @@
 #sidebar {
   box-sizing: border-box;
   height: 100vh;
-  width: 250px;
+  width: 235px;
+  /*! Si se quita causa que el dashboar se desborde de la pantalla al cambiar tamaño de pantalla (pasar de uan pequeña a una grande)*/
   /* padding: 5px 1em; */
   background-color: var(--base-clr);
   /* border-right: 10px solid var(--line-clr); */
@@ -11,7 +12,7 @@
   position: sticky;
   top: 0;
   align-self: start;
-  transition: 300ms ease-in-out;
+  transition: 300ms linear;
   overflow: hidden;
   text-wrap: nowrap;
   /* box-shadow: 1px 0 1px rgba(0, 0, 0, 0.2); */

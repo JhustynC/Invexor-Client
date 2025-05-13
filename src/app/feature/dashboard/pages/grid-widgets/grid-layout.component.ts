@@ -14,6 +14,8 @@ import {
   PushDirections,
   Resizable,
 } from 'angular-gridster2';
+import { TransactionChartComponent } from "../../components/transaction-chart/transaction-chart.component";
+//import { DashboardElementComponent } from "../../components/dashboard-element/dashboard-element.component";
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -28,7 +30,7 @@ interface item2 extends GridsterItem {
 @Component({
   selector: 'grid-layout-dashboard',
   templateUrl: './grid-layout.component.html',
-  imports: [GridsterComponent, GridsterItemComponent, TransactionChartComponent, CommonModule],
+  imports: [GridsterComponent, GridsterItemComponent, TransactionChartComponent],
   styles:
   `
   ::ng-deep .custom-gridster {
@@ -52,12 +54,12 @@ export default class GridLayoutComponent {
       margin: 10,
       outerMargin: true,
       outerMarginTop: null,
-      outerMarginRight: null,
+      outerMarginRight: 10,
       outerMarginBottom: null,
       outerMarginLeft: null,
       useTransformPositioning: true,
-      mobileBreakpoint: 640,
-      useBodyForBreakpoint: false,
+      mobileBreakpoint: 800,
+      useBodyForBreakpoint: true,
       minCols: 1,
       maxCols: 5,
       minRows: 1,

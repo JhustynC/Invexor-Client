@@ -1,3 +1,20 @@
-<div style="position: relative; height: 400px; width: 100%;">
-  <canvas #myChart></canvas>
+
+
+<div class="layout">
+    <header>
+        <app-transaction-chart-header [title]="title" [description]="description"></app-transaction-chart-header>
+    </header>
+    <main>
+        
+        @for (item of rows; track $index) {
+            <transaction-chart-row class="row" 
+            [date]="item.date" 
+            [date_hour]="item.date_hour" 
+            [id]="item.id" 
+            [type]="item.type">
+
+            </transaction-chart-row>
+        }
+    </main>
 </div>
+  
