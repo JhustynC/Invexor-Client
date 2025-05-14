@@ -19,6 +19,7 @@
     </div> -->
     <button type="submit">Submit</button>
   </form>
+
   <hr>
   <h3>Agregar campo</h3>
   <form (submit)="addField(); $event.preventDefault();">
@@ -36,6 +37,7 @@
     <button type="submit">Agregar</button>
   </form>
   <hr>
+  
   <button (click)="saveToLocalStorage()"
           class="btn btn-primary">Guardar</button>
   <button (click)="resetForm()"

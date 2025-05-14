@@ -42,6 +42,29 @@
   <p>No hay controles disponibles en el formulario.</p>
   }
 
+  <div class="my-5">
+    <hr>
+    <div class="py-5">
+      <form (submit)="addField(); $event.preventDefault();"
+            class="add-field-form">
+        <label>Add Field</label>
+        <input type="text"
+               placeholder="Name of new field"
+               [(ngModel)]="newFieldLabel"
+               name="newFieldLabel"
+               required />
+        <select [(ngModel)]="newFieldType"
+                name="newFieldType">
+          <option value="text">Texto</option>
+          <option value="number">Número</option>
+          <option value="date">Fecha</option>
+        </select>
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
+    <hr>
+  </div>
+
   <button type="submit"
           [disabled]="myForm.invalid">Enviar</button>
 </form>
