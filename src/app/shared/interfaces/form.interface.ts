@@ -1,22 +1,22 @@
 export interface JsonFormData {
-  controls: Control[];
+  controls: JsonFormControl[];
 }
 
-export interface Control {
+export interface JsonFormControl {
   name: string;
   label: string;
   value: string;
   type: string;
-  validators: Validators;
-  options?: Options;
+  validators: JsonFormValidators;
+  options?: JsonFormOptions;
 }
 
-export interface Validators {
+export interface JsonFormValidators {
   required?: boolean;
   minLength?: number;
 }
 
-export interface Options {
+export interface JsonFormOptions {
   min: string;
   max: string;
   step: string;

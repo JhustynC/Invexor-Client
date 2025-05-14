@@ -1,0 +1,47 @@
+<form [formGroup]="myForm"
+      (ngSubmit)="onSubmit()"
+      class="form">
+
+  @for (control of jsonFormData().controls; track control.name) {
+  <div class="form-group">
+    <label [for]="control.name">{{ control.label }}</label>
+
+    <input [type]="control.type"
+           [formControlName]="control.name"
+           [id]="control.name"
+           [class.invalid]="myForm.get(control.name)?.invalid && myForm.get(control.name)?.touched" />
+
+    <!-- Mensajes de error -->
+    @if (myForm.get(control.name)?.invalid && myForm.get(control.name)?.touched) {
+    <div class="error-message">
+      @if (myForm.get(control.name)?.errors?.['required']) {
+      <div>Este campo es obligatorio.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['email']) {
+      <div>Formato de email inválido.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['min']) {
+      <div>El valor es menor al mínimo permitido.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['max']) {
+      <div>El valor excede el máximo permitido.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['minlength']) {
+      <div>Texto demasiado corto.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['maxlength']) {
+      <div>Texto demasiado largo.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['pattern']) {
+      <div>Formato no válido.</div>
+      }
+    </div>
+    }
+  </div>
+  } @empty {
+  <p>No hay controles disponibles en el formulario.</p>
+  }
+
+  <button type="submit"
+          [disabled]="myForm.invalid">Enviar</button>
+</form>
