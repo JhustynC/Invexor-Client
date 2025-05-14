@@ -10,11 +10,8 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'invexor-client';
 
-  name: string = 'Juan'
-  constructor() { }
+  name: string = 'Juan';
+  constructor() {}
 
-
-
-
-
+  ngOnInit() {}
 }

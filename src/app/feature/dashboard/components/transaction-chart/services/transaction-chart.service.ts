@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TransactionChartService {
   public title: string = '';
   public description: string = '';
@@ -12,9 +10,7 @@ export class TransactionChartService {
 
   private apiURL: string = 'transaction-chart.json';
 
-  
-  constructor(private http: HttpClient) { 
-  }
+  constructor(private http: HttpClient) {}
 
   getData(): Observable<any> {
     return this.http.get<any>(this.apiURL);
