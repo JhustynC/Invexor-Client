@@ -1,6 +1,7 @@
 <div class="json-form-container">
   <h2>Dynamic JSON Form</h2>
-  <form (submit)="$event.preventDefault()">
+  <form (submit)="$event.preventDefault()"
+        (ngSubmit)="onSubmit()">
     @for(field of fields(); track $index){
     <label class="floating-label mt-5">
       <input [type]="field.type"
@@ -16,6 +17,7 @@
     }
     <!-- <div *ngFor="let field of fields() as f; let i = index">
     </div> -->
+    <button type="submit">Submit</button>
   </form>
   <hr>
   <h3>Agregar campo</h3>

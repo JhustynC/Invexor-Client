@@ -1,4 +1,10 @@
-import { Component, signal, effect, computed, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  signal,
+  effect,
+  computed,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -32,20 +38,20 @@ export class DynamicJsonFormComponent {
 
   addField() {
     if (!this.newFieldLabel.trim()) return;
-    this.fields.update(f => [
+    this.fields.update((f) => [
       ...f,
       {
         label: this.newFieldLabel,
         type: this.newFieldType,
-        value: ''
-      }
+        value: '',
+      },
     ]);
     this.newFieldLabel = '';
     this.newFieldType = 'text';
   }
 
   removeField(index: number) {
-    this.fields.update(f => f.filter((_, i) => i !== index));
+    this.fields.update((f) => f.filter((_, i) => i !== index));
   }
 
   saveToLocalStorage() {
@@ -64,5 +70,9 @@ export class DynamicJsonFormComponent {
   resetForm() {
     this.fields.set([]);
     localStorage.removeItem(this.STORAGE_KEY);
+  }
+
+  onSubmit() {
+    console.log('Form valid:', this.fields);
   }
 }

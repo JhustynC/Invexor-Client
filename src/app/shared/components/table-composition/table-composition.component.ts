@@ -12,6 +12,8 @@ import { TableFilterbarComponent } from './filterbar/table-filterbar.component';
   imports: [TableComponent, PaginationComponent, TableFilterbarComponent],
 })
 export class TableCompositionComponent {
+  //TODO: Create the dropdown menu for change data sources (To Resources (Resource Type), Users (Rols) and Items (Categories))
+
   //* Definición de las propiedades de entrada
   inputData = input<any[]>([]);
   rowsPerPage = input<number>(5);

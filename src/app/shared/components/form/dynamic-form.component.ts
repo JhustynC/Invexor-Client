@@ -5,15 +5,16 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 @Component({
   selector: 'dynamic-form-shared',
   templateUrl: './dynamic-form.component.html',
-  imports: [ CommonModule, ReactiveFormsModule ]
+  imports: [CommonModule, ReactiveFormsModule],
 })
-
 export class DynamicFormComponent {
- formulario: FormGroup;
+  //TODO: Create the final component for forms
+
+  formulario: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.formulario = this.fb.group({
-      campos: this.fb.array([]) // Inicialmente sin campos
+      campos: this.fb.array([]), // Inicialmente sin campos
     });
   }
 
