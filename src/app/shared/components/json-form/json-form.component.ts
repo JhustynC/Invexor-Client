@@ -103,7 +103,7 @@ export class JsonFormComponent implements AfterViewInit {
     this.myForm = this.formBuilder.group(group);
   }
 
-  //* Para obtener los valores del formulario
+  //! Para obtener los valores del formulario
   submitFormValues = output<any>();
 
   onSubmit() {
@@ -123,20 +123,34 @@ export class JsonFormComponent implements AfterViewInit {
   addField() {
     if (!this.newFieldLabel.trim()) return;
 
-    const newControlName = `field_${Date.now()}`;
+    // const newControlName = `field_${Date.now()}`;
+    // const newControl: JsonFormControl = {
+    //   name: newControlName,
+    //   label: this.newFieldLabel,
+    //   type: this.newFieldType,
+    //   value: '',
+    //   validators: { required: true },
+    // };
     const newControl: JsonFormControl = {
-      name: newControlName,
+      name: this.newFieldLabel,
       label: this.newFieldLabel,
       type: this.newFieldType,
       value: '',
       validators: { required: true },
     };
 
-    //? Esto puede ser lo que este ocacionando el borrado de los otros campos al crea uno nuevo
-    const updatedControls = [...this.jsonFormData().controls, newControl];
-    this.jsonFormData.set({ controls: updatedControls });
+    //! Esto genera el borrado de los otros campos al crea uno nuevo
+    // const updatedControls = [...this.jsonFormData().controls, newControl];
+    // this.jsonFormData.set({ controls: updatedControls });
+
+    //? Solución - No volver a generar todos los controles desde 0
+    this.jsonFormData().controls.push(newControl);
+
+    //TODO: Guardar en BD en la branch especifica sin modificar el json original
+
     this.myForm.addControl(
-      newControlName,
+      // newControlName
+      this.newFieldLabel,
       this.formBuilder.control('', Validators.required)
     );
 

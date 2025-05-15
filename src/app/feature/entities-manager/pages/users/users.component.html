@@ -8,10 +8,9 @@
 
   <!-- Visualización JSON -->
   <div
-       class="w-full max-w-2xl border border-yellow-500 border-dashed rounded-md bg-yellow-50 p-4 text-left text-sm font-mono text-gray-800 dark:bg-yellow-900 dark:text-yellow-100 dark:border-yellow-400 overflow-auto">
-    <pre class="whitespace-pre-wrap break-words">
-      {{ modalValues() | json }}
-    </pre>
+       class="border border-yellow-500 border-dashed rounded-md bg-yellow-50 p-4 text-left text-sm font-mono text-gray-800 dark:bg-yellow-900 dark:text-yellow-100 dark:border-yellow-400 overflow-auto+">
+    <pre>{{ modalValues() | json }}</pre>
+    <!-- <pre>{{ fields() | json }}</pre> -->
   </div>
 
 </div>
