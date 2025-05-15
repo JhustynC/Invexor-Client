@@ -30,7 +30,7 @@ import { CommonModule } from '@angular/common';
 })
 export class JsonFormComponent implements AfterViewInit {
   //TODO: Use this form to the entire application
-  //! Use this form to the entire application
+  //! Usar este formilario para toda la aplicación
 
   private formBuilder = inject(FormBuilder);
   private fetchJsonService = inject(FetchJsonService);
@@ -112,9 +112,11 @@ export class JsonFormComponent implements AfterViewInit {
     this.submitFormValues.emit(this.myForm.value);
   }
 
-  //* To add field to form functionality
-  /*TODO: Logica para guardar el formularion personalizado en cada branch (sucursal) y que muestre
-   y que se muestre al usuario una lista de los custom forms */
+  //* Para añadir un nuevo campo al formulario
+  //TODO: Logica para guardar el formularion personalizado en cada branch (sucursal) y que se muestre al usuario una lista de los custom forms dependiendo de las sección
+  //TODO: Cambiar la forma para dar nombre al nuevo campo
+  //! Cuando se crea un nuevo campo se elminan los valores de los otros
+  //TODO: Solucionar borrado de campos al crear uno nuevo
   newFieldLabel = '';
   newFieldType: 'text' | 'number' | 'date' = 'text';
 
@@ -130,6 +132,7 @@ export class JsonFormComponent implements AfterViewInit {
       validators: { required: true },
     };
 
+    //? Esto puede ser lo que este ocacionando el borrado de los otros campos al crea uno nuevo
     const updatedControls = [...this.jsonFormData().controls, newControl];
     this.jsonFormData.set({ controls: updatedControls });
     this.myForm.addControl(
