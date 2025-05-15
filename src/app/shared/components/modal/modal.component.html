@@ -1,1 +1,9 @@
-<p>modal works!</p>,
+<!-- modal-html.component.html -->
+
+
+
+<json-form [jsonFormDataUrl]="jsonFormDataUrl()"
+           (submitFormValues)="onSubmit($event)"
+           (cancelButtonOutput)="onCancelButton()"
+           [showCancelButton]="showCancelButton()">
+</json-form>

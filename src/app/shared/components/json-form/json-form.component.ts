@@ -6,6 +6,7 @@ import {
   effect,
   inject,
   signal,
+  output,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -20,7 +21,7 @@ import { FetchJsonService } from './fetch-json.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-json-form',
+  selector: 'json-form',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './json-form.component.html',
@@ -28,6 +29,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./json-form.component.css'],
 })
 export class JsonFormComponent implements AfterViewInit {
+  //TODO: Use this form to the entire application
+  //! Use this form to the entire application
+
   private formBuilder = inject(FormBuilder);
   private fetchJsonService = inject(FetchJsonService);
 
@@ -99,12 +103,16 @@ export class JsonFormComponent implements AfterViewInit {
     this.myForm = this.formBuilder.group(group);
   }
 
+  //* Para obtener los valores del formulario
+  submitFormValues = output<any>();
+
   onSubmit() {
     console.log('Form valid:', this.myForm.valid);
     console.log('Form values:', this.myForm.value);
+    this.submitFormValues.emit(this.myForm.value);
   }
 
-  // * Add field to form functionality
+  //* To add field to form functionality
   /*TODO: Logica para guardar el formularion personalizado en cada branch (sucursal) y que muestre
    y que se muestre al usuario una lista de los custom forms */
   newFieldLabel = '';
@@ -131,5 +139,13 @@ export class JsonFormComponent implements AfterViewInit {
 
     this.newFieldLabel = '';
     this.newFieldType = 'text';
+  }
+
+  //? To cancel button
+  showCancelButton = input<boolean>(false);
+  cancelButtonOutput = output<void>();
+
+  onCancel() {
+    this.cancelButtonOutput.emit();
   }
 }

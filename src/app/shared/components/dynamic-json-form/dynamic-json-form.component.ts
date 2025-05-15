@@ -22,6 +22,8 @@ interface DynamicField {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicJsonFormComponent {
+  //! DON'T USE THIS FORM IS A PROTOTYPE
+
   private readonly STORAGE_KEY = 'dynamic-json-form-config';
   fields = signal<DynamicField[]>([]);
 

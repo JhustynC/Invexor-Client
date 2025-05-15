@@ -4,10 +4,6 @@ import { HeaderLayoutComponent } from './components/header/header-layout.compone
 import { RouterOutlet } from '@angular/router';
 import { ProgressbarComponent } from '../../shared/components/progressbar/progressbar.component';
 
-//?CACHE
-
-//!COMPONENT???
-
 @Component({
   selector: 'invexor-layout',
   templateUrl: './invexor-layout.component.html',

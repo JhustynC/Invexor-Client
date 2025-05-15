@@ -1,6 +1,6 @@
 <form [formGroup]="myForm"
       (ngSubmit)="onSubmit()"
-      class="form">
+      class="form min-w-2xs">
 
   @for (control of jsonFormData().controls; track control.name) {
   <div class="form-group">
@@ -66,5 +66,12 @@
   </div>
 
   <button type="submit"
-          [disabled]="myForm.invalid">Enviar</button>
+          [disabled]="myForm.invalid">Done</button>
+
+
+  @if(showCancelButton()){
+  <button type="button"
+          class="btn btn-error w-full my-2 text-[1rem] font-bold"
+          (click)="onCancel()">Cancel</button>
+  }
 </form>

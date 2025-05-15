@@ -1,6 +1,23 @@
-<div class="flex flex-col items-center justify-center w-[100%] h-[100%] gap-5">
-  <!--? Forma de consumir los valores de las sub-list -->
-  <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>
-
-  <enter-img (previewUrlOutput)="onEnterImg($event)"></enter-img>
+<div class="w-full h-full flex justify-center items-center  flex-col">
+  <button (click)="onShowModal()"
+          class="btn btn-primary">Show</button>
+  <pre class="border-dashed border-2 border-warning">
+    {{modalValues() | json}}
+  </pre>
 </div>
+
+@if(showModal()){
+<div class="absolute inset-0 z-50 overflow-y-auto">
+  <!-- Fondo que se adapta al contenido scrollable -->
+  <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
+
+  <!-- Contenedor del modal -->
+  <div class="relative z-20 p-4 min-h-full">
+    <modal-form [showCancelButton]="true"
+                [jsonFormDataUrl]="'./form-templates/modal-form-example.json'"
+                (cancelButtonOutput)="onShowModal()"
+                (modalFormValues)="onModalFormValues($event)">
+    </modal-form>
+  </div>
+</div>
+}

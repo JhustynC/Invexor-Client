@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'dynamic-form-shared',
@@ -8,7 +14,7 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
   imports: [CommonModule, ReactiveFormsModule],
 })
 export class DynamicFormComponent {
-  //TODO: Create the final component for forms
+  //! DON'T USE THIS FORM IS A PROTOTYPE
 
   formulario: FormGroup;
 
