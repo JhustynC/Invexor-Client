@@ -18,16 +18,14 @@
   </ul>
 </div>
 
-
-
 <div class="button-container">
   <button (click)="rechargeGraph()"
           class="action-button">Recargar Gráfico</button>
 </div>
+
 @if (renderGraph) {
 <div class="graph-wrapper">
   <div #graphContainer
        class="graph-card"></div>
 </div>
 }
-

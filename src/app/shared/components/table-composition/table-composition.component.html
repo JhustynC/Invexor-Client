@@ -1,0 +1,23 @@
+<div class="p-10">
+
+  <!--* Filtros -->
+  <table-filterbar (onSearchOutput)="onSearch($event)"
+                    (onSortChangeOutput)="onSortChange($event)"
+                    [columnNames]="columnNames()"
+                    [sortField]="sortField()"
+                    [sortDirection]="sortDirection()"
+                    (sortDirectionOutput)="toggleSortDirection()"></table-filterbar>
+
+  <!--* Tabla -->
+  <table-shared [data]="paginatedData()"
+                [columnNames]="columnNames()"
+                [rowsPerPage]="rowsPerPage()"
+                [currentPage]="currentPage()"
+                class="table-fixed" />
+
+  <!--* Paginación -->
+  <table-pagination [data]="filteredData()"
+                    [rowsPerPage]="rowsPerPage()"
+                    [currentPage]="currentPage()"
+                    (emitCurrentPage)="onPageChange($event)" />
+</div>

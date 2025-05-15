@@ -1,0 +1,77 @@
+<form [formGroup]="myForm"
+      (ngSubmit)="onSubmit()"
+      class="form min-w-2xs">
+
+  @for (control of jsonFormData().controls; track control.name) {
+  <div class="form-group">
+    <label [for]="control.name">{{ control.label }}</label>
+
+    <input [type]="control.type"
+           [formControlName]="control.name"
+           [id]="control.name"
+           [class.invalid]="myForm.get(control.name)?.invalid && myForm.get(control.name)?.touched" />
+
+    <!-- Mensajes de error -->
+    @if (myForm.get(control.name)?.invalid && myForm.get(control.name)?.touched) {
+    <div class="error-message">
+      @if (myForm.get(control.name)?.errors?.['required']) {
+      <div>Este campo es obligatorio.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['email']) {
+      <div>Formato de email inválido.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['min']) {
+      <div>El valor es menor al mínimo permitido.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['max']) {
+      <div>El valor excede el máximo permitido.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['minlength']) {
+      <div>Texto demasiado corto.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['maxlength']) {
+      <div>Texto demasiado largo.</div>
+      }
+      @if (myForm.get(control.name)?.errors?.['pattern']) {
+      <div>Formato no válido.</div>
+      }
+    </div>
+    }
+  </div>
+  } @empty {
+  <p>No hay controles disponibles en el formulario.</p>
+  }
+
+  <div class="my-5">
+    <hr>
+    <div class="py-5">
+      <form (submit)="addField(); $event.preventDefault();"
+            class="add-field-form">
+        <label>Add Field</label>
+        <input type="text"
+               placeholder="Name of new field"
+               [(ngModel)]="newFieldLabel"
+               name="newFieldLabel"
+               required />
+        <select [(ngModel)]="newFieldType"
+                name="newFieldType">
+          <option value="text">Texto</option>
+          <option value="number">Número</option>
+          <option value="date">Fecha</option>
+        </select>
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
+    <hr>
+  </div>
+
+  <button type="submit"
+          [disabled]="myForm.invalid">Done</button>
+
+
+  @if(showCancelButton()){
+  <button type="button"
+          class="btn btn-error w-full my-2 text-[1rem] font-bold"
+          (click)="onCancel()">Cancel</button>
+  }
+</form>

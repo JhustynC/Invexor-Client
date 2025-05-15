@@ -1,0 +1,37 @@
+<div class="flex items-center justify-between gap-4 mb-4 flex-wrap">
+
+  <div class="flex items-center gap-3 grow-1 sm:grow-0">
+    <!--* Ordenamiento -->
+    <select class="select w-full"
+            (change)="onSortChange($any($event.target).value)">
+      <option value="">Ningún orden</option>
+      @for (col of columnNames(); track $index) {
+      <option [value]="col"
+              [selected]="sortField() === col">
+        {{ col | titlecase }}
+      </option>
+      }
+    </select>
+
+    <!--* Indicador de dirección -->
+    @if(sortField()){
+    <span (click)="toggleSortDirection()"
+          class="cursor-pointer select-none">
+      {{ sortDirection() === 'asc' ? '🔼' : '🔽' }}
+    </span>
+    }
+  </div>
+
+  <div class="flex items-center justify-between grow-1 gap-3 sm:grow-0">
+    <!--* Búsqueda -->
+    <input type="search"
+           placeholder="Buscar..."
+           (input)="onSearch($any($event.target).value)"
+           class="input w-full max-w-xs sm:w-fit" />
+
+    <button class="btn btn-primary ml-auto">
+      Add+
+    </button>
+
+  </div>
+</div>

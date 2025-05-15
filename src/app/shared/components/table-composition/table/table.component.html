@@ -1,0 +1,54 @@
+<div>
+  <table class="table">
+    <thead class="bg-[#293650]">
+      <tr>
+        <th>#</th>
+        @for (colName of columnNames(); track $index) {
+        <th>{{ colName | titlecase }}</th>
+        }
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of data(); track $index) {
+      <tr>
+        <th>{{ ($index + 1) + (currentPage() - 1) * rowsPerPage() }}</th>
+        @for (colName of columnNames(); track $index) {
+        <td [attr.data-title]="colName">{{ row[colName] }}</td>
+        }
+        <td data-title='Actions'>
+          <!-- <button class="btn btn-primary btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="24"
+                 height="24"
+                 viewBox="0 0 256 256">
+              <path fill="currentColor"
+                    d="M144 128a16 16 0 1 1-16-16a16 16 0 0 1 16 16m-84-16a16 16 0 1 0 16 16a16 16 0 0 0-16-16m136 0a16 16 0 1 0 16 16a16 16 0 0 0-16-16" />
+            </svg>
+          </button> -->
+          <div class="dropdown dropdown-start">
+            <div tabindex="0"
+                 role="button"
+                 class="btn btn-ghost btn-circle">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24"
+                     height="24"
+                     viewBox="0 0 256 256">
+                  <path fill="currentColor"
+                        d="M144 128a16 16 0 1 1-16-16a16 16 0 0 1 16 16m-84-16a16 16 0 1 0 16 16a16 16 0 0 0-16-16m136 0a16 16 0 1 0 16 16a16 16 0 0 0-16-16" />
+                </svg>
+              </div>
+            </div>
+            <ul tabindex="0"
+                class="menu menu-sm dropdown-content bg-[#293650] z-1 mt-1 w-fit p-2 shadow">
+              <li><a class="text-success">Edit</a></li>
+              <li><a class="text-error">Delete</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

@@ -1,1 +1,35 @@
-<p>users works!</p>,
+<div class="w-full h-full flex flex-col items-center justify-center gap-6 p-6 bg-gray-100 dark:bg-gray-900">
+
+  <!-- Botón -->
+  <button (click)="onShowModal()"
+          class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-md transition duration-200">
+    Mostrar Modal
+  </button>
+
+  <!-- Visualización JSON -->
+  <div
+       class="w-full max-w-2xl border border-yellow-500 border-dashed rounded-md bg-yellow-50 p-4 text-left text-sm font-mono text-gray-800 dark:bg-yellow-900 dark:text-yellow-100 dark:border-yellow-400 overflow-auto">
+    <pre class="whitespace-pre-wrap break-words">
+      {{ modalValues() | json }}
+    </pre>
+  </div>
+
+</div>
+
+@if(showModal()){
+<!--! TODO ESTE CODIGO ES NECESARIO PARA MOSTRAR **BIEN** EL MODAL -->
+<div class="absolute inset-0 z-50 overflow-y-auto">
+  <!-- Fondo que se adapta al contenido scrollable -->
+  <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
+
+  <!-- Contenedor del modal -->
+  <div class="relative z-20 p-4 min-h-full">
+    <modal-form [showCancelButton]="true"
+                [jsonFormDataUrl]="'./form-templates/modal-form-example.json'"
+                (cancelButtonOutput)="onShowModal()"
+                (modalFormValues)="onModalFormValues($event)">
+    </modal-form>
+  </div>
+</div>
+<!--! TODO ESTE CODIGO ES NECESARIO PARA MOSTRAR **BIEN** EL MODAL -->
+}
