@@ -12,8 +12,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EnterImgComponent {
-  //TODO: Define the enter image component
-
+  //TODO: Change the delete image button implementation for when we will use a backend service
   previewUrl = signal<string | ArrayBuffer | null>(null);
   previewUrlOutput = output<string | ArrayBuffer | null>();
 

@@ -114,10 +114,8 @@ export class JsonFormComponent implements AfterViewInit {
 
   //* Para añadir un nuevo campo al formulario
   //TODO: Logica para guardar el formularion personalizado en cada branch (sucursal) y que se muestre al usuario una lista de los custom forms dependiendo de las sección
-  //TODO: Cambiar la forma para dar nombre al nuevo campo
-  //! Cuando se crea un nuevo campo se elminan los valores de los otros
-  //TODO: Solucionar borrado de campos al crear uno nuevo
-  newFieldLabel = '';
+  //TODO: Agregar custom selects al formulario - se puede hacer despues de la inicialización del formulario en el constructor
+   newFieldLabel = '';
   newFieldType: 'text' | 'number' | 'date' = 'text';
 
   addField() {
