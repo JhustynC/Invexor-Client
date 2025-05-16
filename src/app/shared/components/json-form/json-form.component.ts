@@ -29,7 +29,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./json-form.component.css'],
 })
 export class JsonFormComponent implements AfterViewInit {
-  //TODO: Use this form to the entire application
   //! Usar este formilario para toda la aplicación
 
   private formBuilder = inject(FormBuilder);
@@ -113,9 +112,9 @@ export class JsonFormComponent implements AfterViewInit {
   }
 
   //* Para añadir un nuevo campo al formulario
-  //TODO: Logica para guardar el formularion personalizado en cada branch (sucursal) y que se muestre al usuario una lista de los custom forms dependiendo de las sección
+  //TODO: Logica para guardar el formulario personalizado en cada branch (sucursal) y que se muestre al usuario una lista de los custom forms dependiendo de las sección
   //TODO: Agregar custom selects al formulario - se puede hacer despues de la inicialización del formulario en el constructor
-   newFieldLabel = '';
+  newFieldLabel = '';
   newFieldType: 'text' | 'number' | 'date' = 'text';
 
   addField() {
@@ -154,6 +153,8 @@ export class JsonFormComponent implements AfterViewInit {
 
     this.newFieldLabel = '';
     this.newFieldType = 'text';
+
+    //TODO: Guardar en BD en la branch especifica sin modificar el json original
   }
 
   //? To cancel button
