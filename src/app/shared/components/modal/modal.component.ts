@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { JsonFormComponent } from '../json-form/json-form.component';
 import { JsonFormData } from '../../interfaces/form.interface';
+import { TableCompositionComponent } from '../table-composition/table-composition.component';
 
 @Component({
   selector: 'modal-form',

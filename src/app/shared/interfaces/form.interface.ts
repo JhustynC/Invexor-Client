@@ -9,6 +9,12 @@ export interface JsonFormControl {
   type: string;
   validators: JsonFormValidators;
   options?: JsonFormOptions;
+  selectOptions?: SelectOptions[]; // Para campos tipo select
+}
+
+export interface SelectOptions {
+  label: string;
+  value: any;
 }
 
 export interface JsonFormValidators {

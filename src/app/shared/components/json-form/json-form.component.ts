@@ -19,11 +19,17 @@ import { JsonFormControl, JsonFormData } from '../../interfaces/form.interface';
 import { input } from '@angular/core';
 import { FetchJsonService } from './fetch-json.service';
 import { CommonModule } from '@angular/common';
+import { TableCompositionComponent } from '../table-composition/table-composition.component';
 
 @Component({
   selector: 'json-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+    TableCompositionComponent,
+  ],
   templateUrl: './json-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./json-form.component.css'],
@@ -115,7 +121,8 @@ export class JsonFormComponent implements AfterViewInit {
   //TODO: Logica para guardar el formulario personalizado en cada branch (sucursal) y que se muestre al usuario una lista de los custom forms dependiendo de las sección
   //TODO: Agregar custom selects al formulario - se puede hacer despues de la inicialización del formulario en el constructor
   newFieldLabel = '';
-  newFieldType: 'text' | 'number' | 'date' = 'text';
+  newFieldOptions: string = ''; // separado por coma, por ejemplo: "Opción 1, Opción 2"
+  newFieldType: 'text' | 'number' | 'date' | 'select' = 'text';
 
   addField() {
     if (!this.newFieldLabel.trim()) return;
@@ -134,7 +141,18 @@ export class JsonFormComponent implements AfterViewInit {
       type: this.newFieldType,
       value: '',
       validators: { required: true },
+      selectOptions: [],
     };
+
+    // Si es tipo SELECT, parseamos las opciones
+    if (this.newFieldType === 'select') {
+      newControl.selectOptions = this.newFieldOptions
+        .split(',')
+        .map((option) => {
+          const [value, label] = option.split(':');
+          return { value: value.trim(), label: label.trim() };
+        });
+    }
 
     //! Esto genera el borrado de los otros campos al crea uno nuevo
     // const updatedControls = [...this.jsonFormData().controls, newControl];
@@ -153,6 +171,7 @@ export class JsonFormComponent implements AfterViewInit {
 
     this.newFieldLabel = '';
     this.newFieldType = 'text';
+    this.newFieldOptions = '';
 
     //TODO: Guardar en BD en la branch especifica sin modificar el json original
   }
@@ -164,4 +183,129 @@ export class JsonFormComponent implements AfterViewInit {
   onCancel() {
     this.cancelButtonOutput.emit();
   }
+
+  //! START: PARA EJEMPO DE USO DE UNA TABLA EN EL FORM
+  sucursales = [
+    {
+      nombre: 'Sucursal A',
+      ciudad: 'Cuenca',
+      telefono: '07-1234567',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal B',
+      ciudad: 'Quito',
+      telefono: '02-7654321',
+      estado: 'Inactiva',
+    },
+    {
+      nombre: 'Sucursal C',
+      ciudad: 'Guayaquil',
+      telefono: '04-9876543',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal D',
+      ciudad: 'Loja',
+      telefono: '07-1112233',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal E',
+      ciudad: 'Ambato',
+      telefono: '03-3344556',
+      estado: 'Inactiva',
+    },
+    {
+      nombre: 'Sucursal F',
+      ciudad: 'Riobamba',
+      telefono: '03-9988776',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal G',
+      ciudad: 'Manta',
+      telefono: '05-2233445',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal H',
+      ciudad: 'Esmeraldas',
+      telefono: '06-6677889',
+      estado: 'Inactiva',
+    },
+    {
+      nombre: 'Sucursal I',
+      ciudad: 'Tena',
+      telefono: '06-5544332',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal J',
+      ciudad: 'Ibarra',
+      telefono: '06-3344556',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal A',
+      ciudad: 'Cuenca',
+      telefono: '07-1234566',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal B',
+      ciudad: 'Quito',
+      telefono: '02-7654321',
+      estado: 'Inactiva',
+    },
+    {
+      nombre: 'Sucursal C',
+      ciudad: 'Guayaquil',
+      telefono: '04-9876543',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal D',
+      ciudad: 'Loja',
+      telefono: '07-1112233',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal E',
+      ciudad: 'Ambato',
+      telefono: '03-3344556',
+      estado: 'Inactiva',
+    },
+    {
+      nombre: 'Sucursal F',
+      ciudad: 'Riobamba',
+      telefono: '03-9988776',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal G',
+      ciudad: 'Manta',
+      telefono: '05-2233445',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal H',
+      ciudad: 'Esmeraldas',
+      telefono: '06-6677889',
+      estado: 'Inactiva',
+    },
+    {
+      nombre: 'Sucursal I',
+      ciudad: 'Tena',
+      telefono: '06-5544332',
+      estado: 'Activa',
+    },
+    {
+      nombre: 'Sucursal J',
+      ciudad: 'Ibarra',
+      telefono: '06-3344556',
+      estado: 'Activa',
+    },
+  ];
+  //! END: PARA EJEMPO DE USO DE UNA TABLA EN EL FORM
 }
