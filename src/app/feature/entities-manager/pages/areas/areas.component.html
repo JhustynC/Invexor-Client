@@ -1,2 +1,14 @@
+<!--? Se pasa un componente a dentro de otro y se rendirazo con <ng-content> -->
 
-<json-form [jsonFormDataUrl]="'/form-templates/form.json'"></json-form>
+<json-form [jsonFormDataUrl]="'/form-templates/form.json'">
+  <!--* START: EJEMPLO DE PASAR UNA TABLA AL FORMULARIO -->
+  <div class="overflow-hidden  my-5">
+    <div class="overflow-y-scroll h-[250px] my-5">
+      <table-composition-shared [columnNames]="['nombre', 'ciudad', 'telefono', 'estado']"
+                                [inputData]="sucursales"
+                                [rowsPerPage]="15" />
+    </div>
+    <hr>
+  </div>
+  <!--* END: EJEMPLO DE PASAR UNA TABLA AL FORMULARIO -->
+</json-form>
