@@ -1,0 +1,24 @@
+{
+  "controls": [
+    {
+      "name": "Nombre",
+      "label": "Nombre:",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 3
+      }
+    },
+    {
+      "name": "Email",
+      "label": "Email:",
+      "value": "",
+      "type": "text",
+      "validators": {
+          "required": "Email is required",
+          "email": true
+      }
+    }
+  ]
+}

@@ -15,6 +15,11 @@ export class TableFilterbarComponent implements OnInit {
   onSortChangeOutput = output<string>();
   sortDirectionOutput = output<string>();
 
+  addButonClicked = output<void>();
+  emitAddButtonClicked() {
+    this.addButonClicked.emit();
+  }
+
   constructor() {}
 
   ngOnInit() {}
