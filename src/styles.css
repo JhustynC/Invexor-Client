@@ -11,6 +11,55 @@
 @plugin "daisyui" {
   themes: all;
 }
+@plugin "daisyui/theme" {
+  name: "customtheme";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: oklch(from #FAFAFA l c h); /* Fondo principal */
+  --color-base-200: oklch(from #D1D5DB l c h); /* Fondo secundario */
+  --color-base-300: oklch(from #293650 l c h); /* Fondo terciario */
+  --color-base-content: oklch(from #111827 l c h); /* Texto base */
+
+  --color-primary: oklch(from #F97316 l c h); /* Naranja vivo */
+  --color-primary-content: oklch(from #FAFAFA l c h); /* Texto claro sobre naranja */
+
+  --color-secondary: oklch(from #FFB020 l c h); /* Amarillo vibrante */
+  --color-secondary-content: oklch(from #111827 l c h); /* Texto oscuro sobre amarillo */
+
+  --color-accent: oklch(from #293650 l c h); /* Azul oscuro como acento */
+  --color-accent-content: oklch(from #FAFAFA l c h); /* Texto claro sobre acento */
+
+  --color-neutral: oklch(from #111827 l c h); /* Neutro base */
+  --color-neutral-content: oklch(from #FAFAFA l c h); /* Texto claro en neutro */
+
+  --color-info: oklch(from #3B82F6 l c h); /* Azul informativo (tailwind blue-500) */
+  --color-info-content: oklch(from #FAFAFA l c h);
+
+  --color-success: oklch(from #10B981 l c h); /* Verde (tailwind green-500) */
+  --color-success-content: oklch(from #FAFAFA l c h);
+
+  --color-warning: oklch(from #FACC15 l c h); /* Amarillo (tailwind yellow-400) */
+  --color-warning-content: oklch(from #111827 l c h);
+
+  --color-error: oklch(from #EF4444 l c h); /* Rojo (tailwind red-500) */
+  --color-error-content: oklch(from #FAFAFA l c h);
+
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+
+  --depth: 1;
+  --noise: 0;
+}
+
+
 @layer components {
   .custom-gridster {
     width: 100% !important;

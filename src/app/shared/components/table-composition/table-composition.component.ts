@@ -3,15 +3,17 @@ import { Component, input, signal, computed } from '@angular/core';
 import { TableComponent } from './table/table.component';
 import { PaginationComponent } from './pagination/table-pagination.component';
 import { TitleCasePipe } from '@angular/common';
+import { TableFilterbarComponent } from './filterbar/table-filterbar.component';
 // ...
 
 @Component({
   selector: 'table-composition-shared',
   templateUrl: './table-composition.component.html',
-  imports: [TableComponent, PaginationComponent, TitleCasePipe],
-  
+  imports: [TableComponent, PaginationComponent, TableFilterbarComponent],
 })
 export class TableCompositionComponent {
+  //TODO: Create the dropdown menu for change data sources (To Resources (Resource Type), Users (Rols) and Items (Categories))
+
   //* Definición de las propiedades de entrada
   inputData = input<any[]>([]);
   rowsPerPage = input<number>(5);

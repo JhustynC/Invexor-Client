@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 import { Component, HostListener, OnInit } from '@angular/core';
 import { TransactionChartComponent } from '../../components/transaction-chart/transaction-chart.component';
 import { TransactionsGraphComponent } from '../../components/transactions-graph/transactions-graph.component';
 
 
+=======
+import { Component, EventEmitter, HostListener } from '@angular/core';
+import { TransactionChartComponent } from '../../components/transaction-chart/transaction-chart.component';
+import { TransactionsGraphComponent } from '../../components/transactions-graph/transactions-graph.component';
+>>>>>>> dashboard-leandro
 import {
   CompactType,
   DisplayGrid,
@@ -28,13 +34,22 @@ interface ItemByType extends GridsterItem {
 
 @Component({
   selector: 'grid-layout-dashboard',
+<<<<<<< HEAD
   templateUrl: './grid-widgets.component.html',
   imports: [
     GridsterComponent,
+=======
+
+  imports: [GridsterComponent,
+>>>>>>> dashboard-leandro
     GridsterItemComponent,
     TransactionChartComponent,
     TransactionsGraphComponent
   ],
+<<<<<<< HEAD
+=======
+  templateUrl: './grid-widgets.component.html',
+>>>>>>> dashboard-leandro
   styles: `
   ::ng-deep .custom-gridster {
     background-color: #111827 !important;
@@ -46,7 +61,14 @@ interface ItemByType extends GridsterItem {
 })
 export default class GridLayoutComponent {
   options!: Safe;
+<<<<<<< HEAD
   dashboard!: Array<ItemByType>;
+=======
+
+  dashboard!: Array<ItemByType>;
+
+  resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
+>>>>>>> dashboard-leandro
   private wasMaximized = false;
   @HostListener('window:resize', [])
   onResize() {
@@ -121,11 +143,19 @@ export default class GridLayoutComponent {
 
     this.dashboard = [
       { cols: 2, rows: 1, y: 0, x: 0, type: 'Graph'},
+<<<<<<< HEAD
       { cols: 2, rows: 2, y: 0, x: 2, type: 'LastTransactions' },
       { cols: 1, rows: 1, y: 0, x: 4 },
       { cols: 1, rows: 1, y: 2, x: 5 },
       { cols: 1, rows: 1, y: 1, x: 0 },
       { cols: 1, rows: 1, y: 1, x: 0 },
+=======
+      { cols: 2, rows: 2, y: 0, x: 2, hasContent: true, type: 'LastTransactions'},
+      { cols: 1, rows: 1, y: 0, x: 4},
+      { cols: 1, rows: 1, y: 2, x: 5},
+      { cols: 1, rows: 1, y: 1, x: 0},
+      { cols: 1, rows: 1, y: 1, x: 0}
+>>>>>>> dashboard-leandro
     ];
   }
 

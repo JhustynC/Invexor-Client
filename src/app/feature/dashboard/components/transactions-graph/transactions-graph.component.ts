@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Chart, ChartConfiguration, registerables } from "chart.js";
+import { TransactionsGraphService } from "./services/transactions-graph.service";
+import { TransactionStatistics } from "./Dtos/transaction-statistics";
 
 @Component({
     selector: 'transactions-graph-dashboard',
@@ -9,65 +11,68 @@ import { Chart, ChartConfiguration, registerables } from "chart.js";
 export class TransactionsGraphComponent implements OnInit {
 
     @ViewChild('myChart', {static: true}) chartRef!: ElementRef<HTMLCanvasElement>;
+    xValues: string[] = [];
+    yValues: number[][] = [];
 
-    constructor() {
+    chart: Chart | undefined;
+
+    constructor(private transactionsGraphService: TransactionsGraphService) {
         // Register all necessary Chart.js components
         Chart.register(...registerables);
     }
 
     ngOnInit(): void {
+        this.transactionsGraphService.gettransactionStatisticsByMonth().subscribe({
+            next: (data:TransactionStatistics) => {
+                this.xValues = data.x,
+                this.yValues = data.y
 
-        const xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+                const chartConfig = this.chartConfig();
+                
+                if (this.chart) this.chart.destroy();
+                // Initialize the chart
+                this.chart = new Chart(this.chartRef.nativeElement, chartConfig);
+            },
+            error: () => {
+                console.error('Error fetching transaction statistics');
+            }
+        });
         
-        const chartConfig: ChartConfiguration<'line'> = {
+    }
+
+    chartConfig(): ChartConfiguration<'line'> {
+        return {
             type: 'line',
             data: {
-            labels: xValues,
-            datasets: [
-                {
-                data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
-                borderColor: 'red',
-                borderWidth: 2,
-                tension: 0.4, // Smooth curve
-                fill: false,
-                },
-                {
-                data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
-                borderColor: 'green',
-                borderWidth: 2,
-                tension: 0.4, // Smooth curve
-                fill: false,
-                },
-                {
-                data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
-                borderColor: 'blue',
-                borderWidth: 2,
-                tension: 0.4, // Smooth curve
-                fill: false,
-                },
-            ],
+                labels: this.xValues,
+                datasets: this.yValues.map((yValue) => ({
+                    data: yValue,
+                    borderColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: false
+                }))
             },
             options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                display: true, // Show legend
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false, // Show legend
+                    },
                 },
-            },
-            scales: {
-                x: {
-                beginAtZero: true,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                    },
                 },
-                y: {
-                beginAtZero: true,
-                },
-            },
             },
         };
-
-        // Initialize the chart
-        new Chart(this.chartRef.nativeElement, chartConfig);
-        
     }
 }

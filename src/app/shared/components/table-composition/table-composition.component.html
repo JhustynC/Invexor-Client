@@ -1,43 +1,19 @@
-<div class="p-10">
-  <div class="flex items-center gap-4 mb-4 flex-wrap">
+<div>
 
-    <!--* Búsqueda -->
-    <input type="search"
-           placeholder="Buscar..."
-           (input)="onSearch($any($event.target).value)"
-           class="input w-fit max-w-xs" />
-
-    <!--* Ordenamiento -->
-    <select class="select w-fit"
-            (change)="onSortChange($any($event.target).value)">
-      <option value="">Ningún orden</option>
-      @for (col of columnNames(); track $index) {
-      <option [value]="col"
-              [selected]="sortField() === col">
-        {{ col | titlecase }}
-      </option>
-      }
-    </select>
-
-    <!--* Indicador de dirección -->
-    @if(sortField()){
-    <span (click)="toggleSortDirection()"
-          class="cursor-pointer select-none">
-      {{ sortDirection() === 'asc' ? '🔼' : '🔽' }}
-    </span>
-    }
-
-    <button class="btn btn-primary ml-auto">
-      Add+
-    </button>
-  </div>
+  <!--* Filtros -->
+  <table-filterbar (onSearchOutput)="onSearch($event)"
+                    (onSortChangeOutput)="onSortChange($event)"
+                    [columnNames]="columnNames()"
+                    [sortField]="sortField()"
+                    [sortDirection]="sortDirection()"
+                    (sortDirectionOutput)="toggleSortDirection()"></table-filterbar>
 
   <!--* Tabla -->
   <table-shared [data]="paginatedData()"
                 [columnNames]="columnNames()"
                 [rowsPerPage]="rowsPerPage()"
                 [currentPage]="currentPage()"
-                class="table-fixed"/>
+                class="table-fixed" />
 
   <!--* Paginación -->
   <table-pagination [data]="filteredData()"
