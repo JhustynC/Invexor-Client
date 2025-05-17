@@ -1,11 +1,6 @@
-<<<<<<< HEAD:src/app/feature/dashboard/pages/grid-widgets/grid-layout.component.ts
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, HostListener } from '@angular/core';
 import { TransactionChartComponent } from '../../components/transaction-chart/transaction-chart.component';
 import { TransactionsGraphComponent } from '../../components/transactions-graph/transactions-graph.component';
-=======
-import { Component, HostListener, OnInit } from '@angular/core';
->>>>>>> main:src/app/feature/dashboard/pages/grid-widgets/grid-widgets.component.ts
-
 import {
   CompactType,
   DisplayGrid,
@@ -18,10 +13,6 @@ import {
   PushDirections,
   Resizable,
 } from 'angular-gridster2';
-<<<<<<< HEAD:src/app/feature/dashboard/pages/grid-widgets/grid-layout.component.ts
-=======
-import { TransactionChartComponent } from '../../components/transaction-chart/transaction-chart.component';
->>>>>>> main:src/app/feature/dashboard/pages/grid-widgets/grid-widgets.component.ts
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -35,24 +26,14 @@ interface ItemByType extends GridsterItem {
 
 @Component({
   selector: 'grid-layout-dashboard',
-<<<<<<< HEAD:src/app/feature/dashboard/pages/grid-widgets/grid-layout.component.ts
-  templateUrl: './grid-layout.component.html',
+
   imports: [GridsterComponent,
     GridsterItemComponent,
     TransactionChartComponent,
     TransactionsGraphComponent
   ],
-  styles:
-  `
-=======
   templateUrl: './grid-widgets.component.html',
-  imports: [
-    GridsterComponent,
-    GridsterItemComponent,
-    TransactionChartComponent,
-  ],
   styles: `
->>>>>>> main:src/app/feature/dashboard/pages/grid-widgets/grid-widgets.component.ts
   ::ng-deep .custom-gridster {
     background-color: #111827 !important;
   }
@@ -63,12 +44,10 @@ interface ItemByType extends GridsterItem {
 })
 export default class GridLayoutComponent {
   options!: Safe;
-<<<<<<< HEAD:src/app/feature/dashboard/pages/grid-widgets/grid-layout.component.ts
+
   dashboard!: Array<ItemByType>;
 
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
-=======
-  dashboard!: Array<GridsterItem>;
   private wasMaximized = false;
   @HostListener('window:resize', [])
   onResize() {
@@ -83,7 +62,6 @@ export default class GridLayoutComponent {
 
     this.wasMaximized = isMaximized;
   }
->>>>>>> main:src/app/feature/dashboard/pages/grid-widgets/grid-widgets.component.ts
 
   ngOnInit(): void {
     this.options = {
@@ -143,21 +121,12 @@ export default class GridLayoutComponent {
     };
 
     this.dashboard = [
-<<<<<<< HEAD:src/app/feature/dashboard/pages/grid-widgets/grid-layout.component.ts
       { cols: 2, rows: 1, y: 0, x: 0, type: 'Graph'},
       { cols: 2, rows: 2, y: 0, x: 2, hasContent: true, type: 'LastTransactions'},
       { cols: 1, rows: 1, y: 0, x: 4},
       { cols: 1, rows: 1, y: 2, x: 5},
       { cols: 1, rows: 1, y: 1, x: 0},
       { cols: 1, rows: 1, y: 1, x: 0}
-=======
-      { cols: 2, rows: 1, y: 0, x: 0 },
-      { cols: 2, rows: 2, y: 0, x: 2 },
-      { cols: 1, rows: 1, y: 0, x: 4 },
-      { cols: 1, rows: 1, y: 2, x: 5 },
-      { cols: 1, rows: 1, y: 1, x: 0 },
-      { cols: 1, rows: 1, y: 1, x: 0 },
->>>>>>> main:src/app/feature/dashboard/pages/grid-widgets/grid-widgets.component.ts
     ];
   }
 
