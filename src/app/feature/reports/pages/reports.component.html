@@ -1,1 +1,8 @@
-<p>reports works!</p>,
+<json-form-v2
+  [formData]="formData"
+  [submitButtonText]="'Enviar'"
+  [cancelButtonText]="'Cancelar'"
+  [showCancelButton]="true"
+  (formSubmit)="onFormSubmit($event)"
+  (cancel)="onCancel()">
+></json-form-v2>
