@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { Chart, ChartConfiguration, registerables } from "chart.js";
+import { Chart, registerables } from "chart.js";
 import { TopCategoriesService } from "./services/top-categories.service";
 import { TopCategories } from "./Dtos/top-categories";
 import { TopCategoriesRowComponent } from "./components/top-categories-row";
@@ -31,8 +31,6 @@ export class TopCategoriesComponent implements OnInit{
     constructor(
         private topCategoriesService: TopCategoriesService
     ) {
-        // Initialization logic can go here
-        // Register all necessary Chart.js components
         Chart.register(...registerables);
     }
 
@@ -49,61 +47,5 @@ export class TopCategoriesComponent implements OnInit{
                 console.error('Error fetching top categories data');
             }
         })
-        //this.chart = new Chart(this.chartRef.nativeElement, this.chartConfig());
     }
-
-    /* chartConfig(): ChartConfiguration<'bar'> {
-
-        const maxValue = Math.max(...this.yValues);
-        const barRadous = 50;
-
-        return {
-            type: 'bar',
-            data: {
-                labels: this.xValues,
-                datasets: [
-                    {
-                        backgroundColor: this.barColors,
-                        data: this.yValues,
-                        borderRadius: Number.MAX_VALUE,
-                        borderSkipped: false,
-                        barThickness: 24
-                    },
-                    {
-                        backgroundColor: '#e5e7eb',
-                        data: this.yValues.map(() => maxValue),
-                        borderRadius: Number.MAX_VALUE,
-                        borderSkipped: false,
-                        barThickness: 24
-                    }
-                    
-                ]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    x: {
-                        display: false,
-                        grid: {
-                            display: false
-                        },
-                        //stacked: true
-                    },
-                    y: {
-                        grid: {
-                            display: false
-                        },
-                        stacked: true
-                    }
-                }
-            }
-        }
-    } */
 }

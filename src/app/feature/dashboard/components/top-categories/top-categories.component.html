@@ -1,5 +1,4 @@
-<div class="flex flex-col" style="position: relative; height: 200px; width: 100%;">
-  <!-- <canvas #myChart></canvas> -->
+<div class="flex flex-col">
    @for (item of xValues; track item) {
     <top-categories-row [category]="item" [maxValue]="maxValue" [value]="yValues[xValues.indexOf(item)]"></top-categories-row>
    }
