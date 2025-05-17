@@ -1,7 +1,8 @@
 import { Component, EventEmitter, HostListener } from '@angular/core';
 import { TransactionChartComponent } from '../../components/transaction-chart/transaction-chart.component';
 import { TransactionsGraphComponent } from '../../components/transactions-graph/transactions-graph.component';
-
+import { TopCategoriesComponent } from '../../components/top-categories/top-categories.component';
+import { ItemChartComponent } from '../../components/item-chart/item-chart.component';
 import {
   CompactType,
   DisplayGrid,
@@ -28,11 +29,12 @@ interface ItemByType extends GridsterItem {
 @Component({
   selector: 'grid-layout-dashboard',
   templateUrl: './grid-widgets.component.html',
-  imports: [
-    GridsterComponent,
+  imports: [GridsterComponent,
     GridsterItemComponent,
     TransactionChartComponent,
-    TransactionsGraphComponent
+    TransactionsGraphComponent,
+    TopCategoriesComponent,
+    ItemChartComponent
   ],
   styles: `
   ::ng-deep .custom-gridster {
@@ -124,8 +126,8 @@ export default class GridLayoutComponent {
     this.dashboard = [
       { cols: 2, rows: 1, y: 0, x: 0, type: 'Graph'},
       { cols: 2, rows: 2, y: 0, x: 2, hasContent: true, type: 'LastTransactions'},
-      { cols: 1, rows: 1, y: 0, x: 4},
-      { cols: 1, rows: 1, y: 2, x: 5},
+      { cols: 1, rows: 1, y: 0, x: 4, type: 'Items'},
+      { cols: 1, rows: 1, y: 2, x: 5, type: 'TopCategories'},
       { cols: 1, rows: 1, y: 1, x: 0},
       { cols: 1, rows: 1, y: 1, x: 0}
     ];
