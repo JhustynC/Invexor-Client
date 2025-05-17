@@ -12,7 +12,16 @@
           <transaction-chart-dashboard></transaction-chart-dashboard>
         }
         @case ('Graph') {
-          <transactions-graph-dashboard></transactions-graph-dashboard>
+          <div class="w-full h-full max-h-[400px] sm:max-h-[600px]">
+            <div class="flex flex-row justify-between p-2">
+              <span class="justify-self-left text-2xl font-bold">Transactions</span>
+              <select class="select w-1/4">
+                <option>Months</option>
+                <option>Years</option>
+              </select>
+            </div>
+            <transactions-graph-dashboard></transactions-graph-dashboard>
+          </div>
         }
         @default {
           <p>Default content.</p>
