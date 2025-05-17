@@ -6,7 +6,8 @@
                     [columnNames]="columnNames()"
                     [sortField]="sortField()"
                     [sortDirection]="sortDirection()"
-                    (sortDirectionOutput)="toggleSortDirection()"></table-filterbar>
+                    (sortDirectionOutput)="toggleSortDirection()"
+                    (addButonClicked)="onFilterBarAddClicked()"></table-filterbar>
 
   <!--* Tabla -->
   <table-shared [data]="paginatedData()"

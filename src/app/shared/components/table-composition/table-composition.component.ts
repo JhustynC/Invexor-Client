@@ -1,5 +1,5 @@
 // ... imports
-import { Component, input, signal, computed } from '@angular/core';
+import { Component, input, signal, computed, output } from '@angular/core';
 import { TableComponent } from './table/table.component';
 import { PaginationComponent } from './pagination/table-pagination.component';
 import { TitleCasePipe } from '@angular/common';
@@ -13,6 +13,10 @@ import { TableFilterbarComponent } from './filterbar/table-filterbar.component';
 })
 export class TableCompositionComponent {
   //TODO: Create the dropdown menu for change data sources (To Resources (Resource Type), Users (Rols) and Items (Categories))
+
+
+  //* Definición de las propiedades de salida
+  addButtonClickedOutput = output<void>();
 
   //* Definición de las propiedades de entrada
   inputData = input<any[]>([]);
@@ -84,6 +88,10 @@ export class TableCompositionComponent {
 
     this.sortField.set(field);
     this.sortDirection.set('asc');
+  }
+
+  onFilterBarAddClicked() {
+    this.addButtonClickedOutput.emit();
   }
 
   toggleSortDirection() {

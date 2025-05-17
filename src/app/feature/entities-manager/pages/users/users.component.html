@@ -1,19 +1,32 @@
-<div class="w-full h-full flex flex-col items-center justify-center gap-6 p-6 bg-gray-100 dark:bg-gray-900">
+
+@if(!showModal()){
+  <div class="mb-[60px] overflow-hidden">
+
+      <table-composition-shared [columnNames]="['ID', 'Nombre', 'Email', 'Activo']"
+                                [inputData]="usuarios"
+                                [rowsPerPage]="15"
+                                (addButtonClickedOutput)="onShowModal()"></table-composition-shared>
+
+  </div>
+}
+
+
+<!-- <div class="w-full h-full flex flex-col items-center justify-center gap-6 p-6 bg-gray-100 dark:bg-gray-900"> -->
 
   <!-- Botón -->
-  <button (click)="onShowModal()"
+<!--  <button (click)="onShowModal()"
           class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-md transition duration-200">
     Mostrar Modal
-  </button>
+  </button> -->
 
   <!-- Visualización JSON -->
-  <div
+<!--  <div
        class="border border-yellow-500 border-dashed rounded-md bg-yellow-50 p-4 text-left text-sm font-mono text-gray-800 dark:bg-yellow-900 dark:text-yellow-100 dark:border-yellow-400 overflow-auto+">
-    <pre>{{ modalValues() | json }}</pre>
+    <pre>{{ modalValues() | json }}</pre> -->
     <!-- <pre>{{ fields() | json }}</pre> -->
-  </div>
+<!--  </div> -->
 
-</div>
+<!--</div>-->
 
 @if(showModal()){
 <!--! TODO ESTE CODIGO ES NECESARIO PARA MOSTRAR **BIEN** EL MODAL -->
@@ -22,12 +35,20 @@
   <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
 
   <!-- Contenedor del modal -->
-  <div class="relative z-20 p-4 min-h-full">
+  <div class="relative z-20 p-4 modal-container">
     <modal-form [showCancelButton]="true"
-                [jsonFormDataUrl]="'./form-templates/modal-form-example.json'"
+                [jsonFormDataUrl]="'./form-templates/form-users.json'"
                 (cancelButtonOutput)="onShowModal()"
                 (modalFormValues)="onModalFormValues($event)">
     </modal-form>
+    <table-composition-shared [columnNames]="['nombre', 'ciudad', 'telefono', 'estado']"
+                                [inputData]="usuarios"
+                                [rowsPerPage]="15" />
+
+    <!--? Forma de consumir los valores de las sub-list -->
+    <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>
+    <enter-img (previewUrlOutput)="onEnterImg($event)"></enter-img>
+                         
   </div>
 </div>
 <!--! TODO ESTE CODIGO ES NECESARIO PARA MOSTRAR **BIEN** EL MODAL -->

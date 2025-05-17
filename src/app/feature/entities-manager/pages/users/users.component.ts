@@ -4,24 +4,73 @@ import { SubListComponent } from '../../../../shared/components/sub-list/sub-lis
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 import { JsonFormData } from '../../../../shared/interfaces/form.interface';
 import { JsonPipe } from '@angular/common';
+import { TableCompositionComponent } from "../../../../shared/components/table-composition/table-composition.component";
 
 @Component({
   selector: 'app-users',
-  imports: [ModalComponent, JsonPipe],
+  imports: [ModalComponent, JsonPipe, TableCompositionComponent, SubListComponent, EnterImgComponent],
   templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class UsersComponent {
   showModal = signal<boolean>(false);
+  showTable = true;
   modalValues = signal(undefined);
 
   onModalFormValues(event: any) {
     this.modalValues.set(event);
     this.onShowModal();
+    this.onShowTable();
     console.log('Desde otro componente', event);
+    this.addUser(this.modalValues());
+    console.log('Usuarios:', this.usuarios);
+  }
+
+  subListOptions(event: Set<string>) {
+    console.log(event);
+  }
+
+  onEnterImg(event: string | ArrayBuffer | null) {
+    console.log(event);
+  }
+
+  onShowTable(){
+    this.showTable = !this.showTable;
   }
 
   onShowModal() {
     this.showModal.update((prev) => !prev);
   }
+
+  // Añade al usuario a la lista
+  addUser(new_user: any) {
+    //this.usuarios.push(new_user);
+    this.usuarios = [...this.usuarios, new_user];
+  }
+
+    usuarios = [
+    {'ID': 1, 'Nombre': 'Juan Pérez', 'Email': 'juan.perez@email.com', 'Activo': 'Sí'},
+    {'ID': 2, 'Nombre': 'María González', 'Email': 'maria.gonzalez@email.com', 'Activo': 'No'},
+    {'ID': 3, 'Nombre': 'Carlos Rodríguez', 'Email': 'carlos.rodriguez@email.com', 'Activo': 'Sí'},
+    {'ID': 4, 'Nombre': 'Ana Martínez', 'Email': 'ana.martinez@email.com', 'Activo': 'Sí'},
+    {'ID': 5, 'Nombre': 'Luis Fernández', 'Email': 'luis.fernandez@email.com', 'Activo': 'No'},
+    {'ID': 6, 'Nombre': 'Sofía López', 'Email': 'sofia.lopez@email.com', 'Activo': 'Sí'},
+    {'ID': 7, 'Nombre': 'Ricardo Jiménez', 'Email': 'ricardo.jimenez@email.com', 'Activo': 'No'},
+    {'ID': 8, 'Nombre': 'Valeria Ortiz', 'Email': 'valeria.ortiz@email.com', 'Activo': 'Sí'},
+    {'ID': 9, 'Nombre': 'Fernando Castro', 'Email': 'fernando.castro@email.com', 'Activo': 'Sí'},
+    {'ID': 10, 'Nombre': 'Patricia Rivas', 'Email': 'patricia.rivas@email.com', 'Activo': 'No'},
+    {'ID': 11, 'Nombre': 'Gabriel Muñoz', 'Email': 'gabriel.munoz@email.com', 'Activo': 'Sí'},
+    {'ID': 12, 'Nombre': 'Andrea Silva', 'Email': 'andrea.silva@email.com', 'Activo': 'Sí'},
+    {'ID': 13, 'Nombre': 'Diego Vargas', 'Email': 'diego.vargas@email.com', 'Activo': 'No'},
+    {'ID': 14, 'Nombre': 'Lorena Castillo', 'Email': 'lorena.castillo@email.com', 'Activo': 'Sí'},
+    {'ID': 15, 'Nombre': 'Héctor Navarro', 'Email': 'hector.navarro@email.com', 'Activo': 'No'},
+    {'ID': 16, 'Nombre': 'Camila Herrera', 'Email': 'camila.herrera@email.com', 'Activo': 'Sí'},
+    {'ID': 17, 'Nombre': 'Marco Salazar', 'Email': 'marco.salazar@email.com', 'Activo': 'Sí'},
+    {'ID': 18, 'Nombre': 'Isabel Fuentes', 'Email': 'isabel.fuentes@email.com', 'Activo': 'No'},
+    {'ID': 19, 'Nombre': 'Rodrigo Mendoza', 'Email': 'rodrigo.mendoza@email.com', 'Activo': 'Sí'},
+    {'ID': 20, 'Nombre': 'Cristina Paredes', 'Email': 'cristina.paredes@email.com', 'Activo': 'Sí'},
+    {'ID': 21, 'Nombre': 'Cristina Paredes', 'Email': 'cristina.paredes@email.com', 'Activo': 'Sí', 'Ciudad': 'Cuenca'},
+
+]
 }
