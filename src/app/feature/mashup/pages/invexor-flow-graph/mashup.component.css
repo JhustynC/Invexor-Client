@@ -34,7 +34,7 @@
 
 .graph-card {
   background-color: #111827;
-  border-radius: 1rem;         /* Bordes redondeados */
+  border-radius: 1rem; /* Bordes redondeados */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra elegante */
   overflow: hidden;
   width: 100%;
@@ -49,7 +49,6 @@
 }
 
 @media (max-width: 800px) {
-
   .graph-wrapper {
     height: calc(100dvh - 160px);
     width: 100dvw;
@@ -59,7 +58,7 @@
     overflow: visible;
   }
 
-  .graph-card{
+  .graph-card {
     width: auto;
     height: auto;
     align-self: center;
@@ -69,10 +68,9 @@
     align-items: center;
   }
 
-  ::ng-deep .graph-card .scene-nav-info{
+  ::ng-deep .graph-card .scene-nav-info {
     display: none;
   }
-
 }
 
 /** footer */
@@ -101,7 +99,7 @@
   padding: 2rem;
   margin-top: 3rem;
   margin-bottom: 3rem;
-  border-radius: 0.8rem;
+  /* border-radius: 0.8rem; */
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
