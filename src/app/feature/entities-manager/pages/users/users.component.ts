@@ -10,16 +10,10 @@ import { JsonPipe } from '@angular/common';
   imports: [ModalComponent, JsonPipe],
   templateUrl: './users.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: `
-  .modal-back-opacity{
-    opacity: 0.5;
-  }
-
-  `,
 })
 export default class UsersComponent {
   showModal = signal<boolean>(false);
-  modalValues = signal({});
+  modalValues = signal(undefined);
 
   onModalFormValues(event: any) {
     this.modalValues.set(event);

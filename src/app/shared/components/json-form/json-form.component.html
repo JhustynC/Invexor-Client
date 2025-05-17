@@ -1,17 +1,33 @@
 <form [formGroup]="myForm"
       (ngSubmit)="onSubmit()"
-      class="form min-w-2xs">
+      class="form  w-full">
 
   @for (control of jsonFormData().controls; track control.name) {
   <div class="form-group">
     <label [for]="control.name">{{ control.label }}</label>
 
+    <!--? Campo tipo SELECT -->
+    @if (control.type === 'select') {
+    <select [formControlName]="control.name"
+            [id]="control.name"
+            [class.invalid]="myForm.get(control.name)?.invalid && myForm.get(control.name)?.touched"
+            class="select-form-control">
+      @for(option of control.selectOptions; track $index){
+      <option [value]="option.value">
+        {{ option.label }}
+      </option>
+      }
+    </select>
+    }
+    <!--? Campo tipo INPUT (default) -->
+    @else {
     <input [type]="control.type"
            [formControlName]="control.name"
            [id]="control.name"
            [class.invalid]="myForm.get(control.name)?.invalid && myForm.get(control.name)?.touched" />
+    }
 
-    <!-- Mensajes de error -->
+    <!--! Mensajes de error -->
     @if (myForm.get(control.name)?.invalid && myForm.get(control.name)?.touched) {
     <div class="error-message">
       @if (myForm.get(control.name)?.errors?.['required']) {
@@ -65,6 +81,11 @@
     <hr>
   </div>
 
+  <!--! START: EJEMPO DE USO DE UNA TABLA EN EL FORM -->
+  <ng-content></ng-content>
+  <!--! END: EJEMPO DE USO DE UNA TABLA EN EL FORM -->
+
+
   <button type="submit"
           [disabled]="myForm.invalid">Done</button>
 
@@ -74,4 +95,6 @@
           class="btn btn-error w-full my-2 text-[1rem] font-bold"
           (click)="onCancel()">Cancel</button>
   }
+
+
 </form>

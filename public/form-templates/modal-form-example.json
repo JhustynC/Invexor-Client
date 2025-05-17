@@ -11,6 +11,21 @@
       }
     },
     {
+      "name": "country",
+      "label": "Select your country",
+      "value": "",
+      "type": "select",
+      "validators": {
+        "required": true
+      },
+      "selectOptions": [
+        { "label": "Ecuador", "value": "EC" },
+        { "label": "Colombia", "value": "CO" },
+        { "label": "Perú", "value": "PE" },
+        { "label": "Argentina", "value": "AR" }
+      ]
+    },
+    {
       "name": "lastName",
       "label": "Last name:",
       "value": "",

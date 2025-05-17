@@ -19,6 +19,7 @@ import { JsonFormControl, JsonFormData } from '../../interfaces/form.interface';
 import { input } from '@angular/core';
 import { FetchJsonService } from './fetch-json.service';
 import { CommonModule } from '@angular/common';
+import { TableCompositionComponent } from '../table-composition/table-composition.component';
 
 @Component({
   selector: 'json-form',
@@ -29,7 +30,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./json-form.component.css'],
 })
 export class JsonFormComponent implements AfterViewInit {
-  //TODO: Use this form to the entire application
   //! Usar este formilario para toda la aplicación
 
   private formBuilder = inject(FormBuilder);
@@ -103,7 +103,7 @@ export class JsonFormComponent implements AfterViewInit {
     this.myForm = this.formBuilder.group(group);
   }
 
-  //* Para obtener los valores del formulario
+  //! Para obtener los valores del formulario
   submitFormValues = output<any>();
 
   onSubmit() {
@@ -113,35 +113,62 @@ export class JsonFormComponent implements AfterViewInit {
   }
 
   //* Para añadir un nuevo campo al formulario
-  //TODO: Logica para guardar el formularion personalizado en cada branch (sucursal) y que se muestre al usuario una lista de los custom forms dependiendo de las sección
-  //TODO: Cambiar la forma para dar nombre al nuevo campo
-  //! Cuando se crea un nuevo campo se elminan los valores de los otros
-  //TODO: Solucionar borrado de campos al crear uno nuevo
+  //TODO: Logica para guardar el formulario personalizado en cada branch (sucursal) y que se muestre al usuario una lista de los custom forms dependiendo de las sección
+  //TODO: Agregar custom selects al formulario - se puede hacer despues de la inicialización del formulario en el constructor
   newFieldLabel = '';
-  newFieldType: 'text' | 'number' | 'date' = 'text';
+  newFieldOptions: string = ''; // separado por coma, por ejemplo: "Opción 1, Opción 2"
+  newFieldType: 'text' | 'number' | 'date' | 'select' = 'text';
 
   addField() {
     if (!this.newFieldLabel.trim()) return;
 
-    const newControlName = `field_${Date.now()}`;
+    // const newControlName = `field_${Date.now()}`;
+    // const newControl: JsonFormControl = {
+    //   name: newControlName,
+    //   label: this.newFieldLabel,
+    //   type: this.newFieldType,
+    //   value: '',
+    //   validators: { required: true },
+    // };
     const newControl: JsonFormControl = {
-      name: newControlName,
+      name: this.newFieldLabel,
       label: this.newFieldLabel,
       type: this.newFieldType,
       value: '',
       validators: { required: true },
+      selectOptions: [],
     };
 
-    //? Esto puede ser lo que este ocacionando el borrado de los otros campos al crea uno nuevo
-    const updatedControls = [...this.jsonFormData().controls, newControl];
-    this.jsonFormData.set({ controls: updatedControls });
+    // Si es tipo SELECT, parseamos las opciones
+    if (this.newFieldType === 'select') {
+      newControl.selectOptions = this.newFieldOptions
+        .split(',')
+        .map((option) => {
+          const [value, label] = option.split(':');
+          return { value: value.trim(), label: label.trim() };
+        });
+    }
+
+    //! Esto genera el borrado de los otros campos al crea uno nuevo
+    // const updatedControls = [...this.jsonFormData().controls, newControl];
+    // this.jsonFormData.set({ controls: updatedControls });
+
+    //? Solución - No volver a generar todos los controles desde 0
+    this.jsonFormData().controls.push(newControl);
+
+    //TODO: Guardar en BD en la branch especifica sin modificar el json original
+
     this.myForm.addControl(
-      newControlName,
+      // newControlName
+      this.newFieldLabel,
       this.formBuilder.control('', Validators.required)
     );
 
     this.newFieldLabel = '';
     this.newFieldType = 'text';
+    this.newFieldOptions = '';
+
+    //TODO: Guardar en BD en la branch especifica sin modificar el json original
   }
 
   //? To cancel button
