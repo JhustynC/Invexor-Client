@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { SidebarLayoutComponent } from './components/sidebar/sidebar-layout.component';
 import { HeaderLayoutComponent } from './components/header/header-layout.component';
 import { RouterOutlet } from '@angular/router';
@@ -26,5 +26,10 @@ import { ProgressbarComponent } from '../../shared/components/progressbar/progre
   `,
 })
 export default class InvexorLayoutComponent {
+  @HostListener('window:beforeunload', ['$event'])
+  updateView() {
+    window.dispatchEvent(new Event('resize'));
+  }
+
   constructor() {}
 }

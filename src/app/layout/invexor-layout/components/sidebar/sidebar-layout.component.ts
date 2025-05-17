@@ -16,8 +16,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   imports: [RouterLink, RouterLinkActive],
 })
 export class SidebarLayoutComponent {
-  //TODO: Create a MenuOption Component and Interface to make the sidebar dyanmic
-
   @ViewChild('sidebar') sidebar!: ElementRef<HTMLElement>;
   @ViewChild('toggleBtn') toggleButton!: ElementRef<HTMLButtonElement>;
   @ViewChild('#toggleTheme') toggleTheme!: ElementRef<HTMLButtonElement>;
