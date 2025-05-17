@@ -1,0 +1,276 @@
+<form #formRef
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      class="json-form">
+
+  <!-- Form Header -->
+  @if (formDataSignal(); as data) {
+    @if (data.title || data.description) {
+      <div class="form-header">
+        @if (data.title) {
+          <h2 class="form-title">{{ data.title }}</h2>
+        }
+        @if (data.description) {
+          <p class="form-description">{{ data.description }}</p>
+        }
+      </div>
+    }
+  }
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="form-loading">
+      <div class="spinner"></div>
+      <p>Loading form...</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (hasError()) {
+    <div class="form-error">
+      <p>{{ formError() }}</p>
+      <button type="button" (click)="loadFormData(formDataUrl() || '')">
+        Retry
+      </button>
+    </div>
+  }
+
+  <!-- Success Message -->
+  @if (hasSuccess()) {
+    <div class="form-success">
+      <p>{{ formSuccess() }}</p>
+    </div>
+  }
+
+  <!-- Form Controls -->
+  <div class="form-controls">
+    @for (control of visibleControls(); track control.name) {
+      <div class="form-group"
+           [class.has-error]="getControl(control.name)?.invalid && getControl(control.name)?.touched"
+           [class.required]="control.validators?.required">
+
+        <label [for]="control.name">
+          {{ control.label }}
+          @if (control.validators?.required) {
+            <span class="required-asterisk">*</span>
+          }
+        </label>
+
+        @if (control.description) {
+          <small class="help-text">{{ control.description }}</small>
+        }
+
+        <!-- Text Input -->
+        @if (!['select', 'textarea', 'checkbox', 'radio'].includes(control.type)) {
+          <input [id]="control.name"
+                 [type]="control.type"
+                 [formControlName]="control.name"
+                 [placeholder]="control.placeholder || ''"
+                 [attr.disabled]="control.disabled ? true : null"
+                 class="form-control" />
+        }
+
+        <!-- Textarea -->
+        @if (control.type === 'textarea') {
+          <textarea [id]="control.name"
+                   [formControlName]="control.name"
+                   [placeholder]="control.placeholder || ''"
+                   [rows]="control.options?.rows || 3"
+                   [attr.disabled]="control.disabled ? true : null"
+                   class="form-control"></textarea>
+        }
+
+        <!-- Select Dropdown -->
+        @if (control.type === 'select') {
+          <select [id]="control.name"
+                 [formControlName]="control.name"
+                 [attr.disabled]="control.disabled ? true : null"
+                 class="form-control">
+            @if (!control.validators?.required) {
+              <option [value]="null">Select an option</option>
+            }
+            @for (option of getOptions(control); track $index) {
+              <option [value]="option.value"
+                     [disabled]="option.disabled"
+                     [selected]="option.value === control.value">
+                {{ option.label }}
+              </option>
+            }
+          </select>
+        }
+
+        <!-- Checkbox -->
+        @if (control.type === 'checkbox') {
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox"
+                    [formControlName]="control.name"
+                    [id]="control.name"
+                    [attr.disabled]="control.disabled ? true : null" />
+              <span class="checkmark"></span>
+              {{ control.label }}
+            </label>
+          </div>
+        }
+
+        <!-- Radio Buttons -->
+        @if (control.type === 'radio') {
+          <div class="radio-group">
+            @for (option of getOptions(control); track $index) {
+              <label class="radio-label">
+                <input type="radio"
+                      [name]="control.name"
+                      [formControlName]="control.name"
+                      [value]="option.value"
+                      [attr.disabled]="control.disabled || option.disabled ? true : null" />
+                <span class="radiomark"></span>
+                {{ option.label }}
+              </label>
+            }
+          </div>
+        }
+
+        <!-- Error Messages -->
+        @if (getControl(control.name)?.invalid && getControl(control.name)?.touched) {
+          <div class="error-message">
+            {{ getErrorMessage(control.name) }}
+          </div>
+        }
+      </div>
+    } @empty {
+      @if (!isLoading() && !hasError()) {
+        <p>No form controls available.</p>
+      }
+    }
+  </div>
+
+  <!-- Form Actions -->
+  <div class="form-actions">
+    <button type="submit"
+            class="btn btn-primary"
+            [disabled]="form.invalid || isLoading()">
+      @if (isLoading()) {
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      }
+      {{ submitButtonText() }}
+    </button>
+
+    @if (showCancelButton()) {
+      <button type="button"
+              class="btn btn-secondary"
+              (click)="onCancel()"
+              [disabled]="isLoading()">
+        {{ cancelButtonText() }}
+      </button>
+    }
+  </div>
+</form>
+
+<!--* =========START:FIELD MANAGMENT SECTION=========== -->
+<!--! USANDO TAILWIND  SOLO PARA PROBAR-->
+<div class="flex items-center justify-center mt-10">
+
+  @if (!isLoading()) {
+  <div class="field-management">
+  <h3>Add New Field</h3>
+  <form (ngSubmit)="addField()" class="add-field-form">
+      <div class="form-group">
+        <label for="fieldName">Field Name</label>
+        <input type="text"
+        id="fieldName"
+        [ngModel]="newField().name"
+        (ngModelChange)="updateFieldName($event)"
+        name="fieldName"
+        class="form-control"
+        required />
+      </div>
+
+      <div class="form-group">
+        <label for="fieldLabel">Field Label</label>
+        <input type="text"
+        id="fieldLabel"
+        [ngModel]="newField().label"
+        (ngModelChange)="updateFieldLabel($event)"
+        name="fieldLabel"
+        class="form-control"
+        required />
+      </div>
+
+      <div class="form-group">
+        <label for="fieldType">Field Type</label>
+        <select id="fieldType"
+        [ngModel]="newField().type"
+        (ngModelChange)="updateFieldType($event)"
+        name="fieldType"
+        class="form-control"
+        required>
+        <option value="text">Text</option>
+        <option value="number">Number</option>
+        <option value="email">Email</option>
+        <option value="date">Date</option>
+        <option value="select">Select Dropdown</option>
+        <option value="checkbox">Checkbox</option>
+        <option value="radio">Radio Buttons</option>
+        <option value="textarea">Text Area</option>
+      </select>
+    </div>
+
+      @if (['select', 'radio'].includes(newField().type || '')) {
+        <div class="form-group">
+          <label for="optionsInput">Options (one per line, format: value:label or just value)</label>
+          <textarea id="optionsInput"
+          class="form-control"
+          rows="4"
+          [ngModel]="getOptionsText(newField())"
+          (ngModelChange)="updateFieldOptions($event)"
+          name="optionsInput"
+          placeholder="Option 1\nOption 2\nOr use value:label format"></textarea>
+          <small class="form-text text-muted">
+            Example: <code>1: Red\n2: Blue\n3: Green</code> or just <code>Red\nBlue\nGreen</code>
+          </small>
+        </div>
+      }
+
+      <div class="form-group">
+        <label>Validation</label>
+        <div class="form-check">
+          <input type="checkbox"
+          id="fieldRequired"
+          [ngModel]="newField().validators?.required"
+          (ngModelChange)="updateRequiredValidator($event)"
+          name="fieldRequired"
+          class="form-check-input" />
+          <label for="fieldRequired" class="form-check-label">Required</label>
+        </div>
+      </div>
+
+      <button type="submit"
+              class="btn btn-primary"
+              [disabled]="!newField().name || !newField().label">
+              Add Field
+      </button>
+  </form>
+
+  @if (formControls().length) {
+    <div class="current-fields">
+      <h4>Current Fields</h4>
+      <hr/>
+      <ul>
+        @for (field of formControls(); track field.name) {
+          <li class="field-item">
+            <span>{{ field.label }} ({{ field.name }})</span>
+            <button type="button"
+            class="btn btn-sm btn-danger"
+            (click)="removeField(field.name)">
+            Remove
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</div>
+}
+</div>
+<!--* =========END:FIELD MANAGMENT SECTION=========== -->
+
