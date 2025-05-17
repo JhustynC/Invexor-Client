@@ -15,7 +15,26 @@ import { TableCompositionComponent } from '../../../../shared/components/table-c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AreasComponent {
-  sucursales = [
+  areas = [
+    { sucursal: "Sucursal A", nombre: "Area A", telefono: "07-1234567", estado: "Activa" },
+    { sucursal: "Sucursal B", nombre: "Area B", telefono: "02-7654321", estado: "Inactiva" },
+    { sucursal: "Sucursal C", nombre: "Area C", telefono: "04-9876543", estado: "Activa" },
+    { sucursal: "Sucursal D", nombre: "Area D", telefono: "07-1112233", estado: "Activa" },
+    { sucursal: "Sucursal E", nombre: "Area E", telefono: "03-3344556", estado: "Inactiva" },
+    { sucursal: "Sucursal F", nombre: "Area F", telefono: "03-9988776", estado: "Activa" },
+    { sucursal: "Sucursal G", nombre: "Area G", telefono: "05-2233445", estado: "Activa" },
+    { sucursal: "Sucursal H", nombre: "Area H", telefono: "06-6677889", estado: "Inactiva" },
+    { sucursal: "Sucursal I", nombre: "Area I", telefono: "06-5544332", estado: "Activa" },
+    { sucursal: "Sucursal J", nombre: "Area J", telefono: "06-3344556", estado: "Activa" },
+    { sucursal: "Sucursal K", nombre: "Area K", telefono: "07-2233445", estado: "Activa" },
+    { sucursal: "Sucursal L", nombre: "Area L", telefono: "02-1234567", estado: "Inactiva" },
+    { sucursal: "Sucursal M", nombre: "Area M", telefono: "04-2233445", estado: "Activa" },
+    { sucursal: "Sucursal N", nombre: "Area N", telefono: "07-9988776", estado: "Activa" },
+    { sucursal: "Sucursal O", nombre: "Area O", telefono: "03-5544332", estado: "Inactiva" },
+    { sucursal: "Sucursal P", nombre: "Area P", telefono: "05-3344556", estado: "Activa" },
+    { sucursal: "Sucursal Q", nombre: "Area Q", telefono: "06-4455667", estado: "Activa" }
+  ];
+  /* sucursales = [
     {
       nombre: 'Sucursal A',
       ciudad: 'Cuenca',
@@ -136,5 +155,5 @@ export default class AreasComponent {
       telefono: '06-3344556',
       estado: 'Activa',
     },
-  ];
+  ]; */
 }
