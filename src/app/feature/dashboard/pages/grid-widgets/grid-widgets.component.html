@@ -23,6 +23,12 @@
             <transactions-graph-dashboard></transactions-graph-dashboard>
           </div>
         }
+        @case ('TopCategories') {
+          <div class="w-full h-full max-h-[400px] sm:max-h-[600px]">
+            <span class="justify-self-left text-2xl font-bold">Top Categories</span>
+            <top-categories-dashboard></top-categories-dashboard>
+          </div>
+        }
         @default {
           <p>Default content.</p>
         }
