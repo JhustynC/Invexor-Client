@@ -29,6 +29,9 @@
             <top-categories-dashboard></top-categories-dashboard>
           </div>
         }
+        @case ('Items'){
+          <app-item-chart></app-item-chart>
+        }
         @default {
           <p>Default content.</p>
         }

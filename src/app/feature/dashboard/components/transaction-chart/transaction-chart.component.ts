@@ -9,6 +9,7 @@ import { TransactionChartService } from './services/transaction-chart.service';
   selector: 'transaction-chart-dashboard',
   standalone: true,
   templateUrl: './transaction-chart.component.html',
+  styleUrl: './transaction-chart.component.css',
   imports: [TransactionChartRowComponent, TransactionChartHeaderComponent],
   providers: [TransactionChartService]
 })
@@ -30,7 +31,7 @@ export class TransactionChartComponent implements OnInit {
       this.title = data.title;
       this.description = data.description;
       this.rows = data.rows;
-      console.log(this.rows);
+      //console.log(this.rows);
     });
   }
   
