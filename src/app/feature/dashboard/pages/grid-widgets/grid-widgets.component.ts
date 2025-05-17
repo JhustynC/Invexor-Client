@@ -2,6 +2,7 @@ import { Component, EventEmitter, HostListener } from '@angular/core';
 import { TransactionChartComponent } from '../../components/transaction-chart/transaction-chart.component';
 import { TransactionsGraphComponent } from '../../components/transactions-graph/transactions-graph.component';
 import { TopCategoriesComponent } from '../../components/top-categories/top-categories.component';
+import { ItemChartComponent } from '../../components/item-chart/item-chart.component';
 import {
   CompactType,
   DisplayGrid,
@@ -27,14 +28,14 @@ interface ItemByType extends GridsterItem {
 
 @Component({
   selector: 'grid-layout-dashboard',
-
+  templateUrl: './grid-widgets.component.html',
   imports: [GridsterComponent,
     GridsterItemComponent,
     TransactionChartComponent,
     TransactionsGraphComponent,
-    TopCategoriesComponent
+    TopCategoriesComponent,
+    ItemChartComponent
   ],
-  templateUrl: './grid-widgets.component.html',
   styles: `
   ::ng-deep .custom-gridster {
     background-color: #111827 !important;
