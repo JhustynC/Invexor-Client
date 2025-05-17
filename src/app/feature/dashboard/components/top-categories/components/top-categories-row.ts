@@ -36,14 +36,14 @@ export class TopCategoriesRowComponent implements OnInit {
                         data: [this.value()],
                         borderRadius: Number.MAX_VALUE,
                         borderSkipped: false,
-                        barThickness: 24
+                        barPercentage: 0.3
                     },
                     {
                         backgroundColor: '#D9D9D9',
                         data: [this.maxValue()],
                         borderRadius: Number.MAX_VALUE,
                         borderSkipped: false,
-                        barThickness: 24
+                        barPercentage: 0.3
                     }
                     
                 ]
