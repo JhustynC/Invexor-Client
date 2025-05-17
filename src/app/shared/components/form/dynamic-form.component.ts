@@ -1,19 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'dynamic-form-shared',
   templateUrl: './dynamic-form.component.html',
-  imports: [ CommonModule, ReactiveFormsModule ]
+  imports: [CommonModule, ReactiveFormsModule],
 })
-
 export class DynamicFormComponent {
- formulario: FormGroup;
+  //! DON'T USE THIS FORM IS A PROTOTYPE
+
+  formulario: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.formulario = this.fb.group({
-      campos: this.fb.array([]) // Inicialmente sin campos
+      campos: this.fb.array([]), // Inicialmente sin campos
     });
   }
 

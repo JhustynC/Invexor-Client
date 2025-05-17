@@ -1,13 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DynamicFormComponent } from '../../../../shared/components/form/dynamic-form.component';
+import { Component } from '@angular/core';
 import { TableCompositionComponent } from '../../../../shared/components/table-composition/table-composition.component';
-import { TableComponent } from '../../../../shared/components/table-composition/table/table.component';
 
 @Component({
   selector: 'branchs-entities-manager',
   imports: [TableCompositionComponent],
   templateUrl: './branchs.component.html',
-  styleUrls: ['./branchs.component.css']
+  styleUrls: ['./branchs.component.css'],
 })
 export default class BranchsComponent {
   sucursales = [

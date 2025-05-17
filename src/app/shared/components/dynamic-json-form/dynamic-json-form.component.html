@@ -1,0 +1,46 @@
+<div class="json-form-container">
+  <h2>Dynamic JSON Form</h2>
+  <form (submit)="$event.preventDefault()"
+        (ngSubmit)="onSubmit()">
+    @for(field of fields(); track $index){
+    <label class="floating-label mt-5">
+      <input [type]="field.type"
+             [(ngModel)]="fields()[$index].value"
+             name="field-{{$index}}"
+             class="input input-sm"
+             placeholder="{{ field.label }}:" />
+      <span>{{ field.label }}</span>
+    </label>
+    <button type="button"
+            (click)="removeField($index)"
+            class="btn btn-danger">Eliminar</button>
+    }
+    <!-- <div *ngFor="let field of fields() as f; let i = index">
+    </div> -->
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+  <h3>Agregar campo</h3>
+  <form (submit)="addField(); $event.preventDefault();">
+    <input type="text"
+           placeholder="Etiqueta"
+           [(ngModel)]="newFieldLabel"
+           name="newFieldLabel"
+           required />
+    <select [(ngModel)]="newFieldType"
+            name="newFieldType">
+      <option value="text">Texto</option>
+      <option value="number">Número</option>
+      <option value="date">Fecha</option>
+    </select>
+    <button type="submit">Agregar</button>
+  </form>
+  <hr>
+  
+  <button (click)="saveToLocalStorage()"
+          class="btn btn-primary">Guardar</button>
+  <button (click)="resetForm()"
+          class="btn btn-secondary">Resetear</button>
+  <pre>{{ fields() | json }}</pre>
+</div>
