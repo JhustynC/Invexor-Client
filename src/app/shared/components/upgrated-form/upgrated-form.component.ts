@@ -43,8 +43,8 @@ export class UpgratedFormComponent implements AfterViewInit {
     const url = this.jsonFormDataUrl();
     if (url) {
       this.fetchJsonService.fetchJsonData(url).subscribe({
-        next: (data) => this.jsonFormData.set(data),
-        error: (err) => console.error('Error cargando JSON:', err),
+        next: (data: JsonFormData) => this.jsonFormData.set(data),
+        error: (err) => console.error('Error cargando JSON:', err)
       });
     }
   }
@@ -100,7 +100,6 @@ export class UpgratedFormComponent implements AfterViewInit {
         disabled: control.disabled ?? false
       }, validatorsToAdd);
     }
-
     this.myForm = this.formBuilder.group(group);
   }
 
@@ -109,8 +108,8 @@ export class UpgratedFormComponent implements AfterViewInit {
 
   onSubmit() {
     console.log('Form valid:', this.myForm.valid);
-    console.log('Form values:', this.myForm.value);
-    this.submitFormValues.emit(this.myForm.value);
+    console.log('Form values:', this.myForm.getRawValue());
+    this.submitFormValues.emit(this.myForm.getRawValue());
   }
 
   //* Para añadir un nuevo campo al formulario
