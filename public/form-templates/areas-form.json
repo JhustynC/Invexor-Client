@@ -1,0 +1,59 @@
+{
+  "controls": [
+    {
+      "name": "nombre",
+      "label": "Name",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 10
+      }
+    },
+    {
+      "name": "sucursal",
+      "label": "Select a branch",
+      "value": "",
+      "type": "select",
+      "validators": {
+        "required": false
+      },
+      "selectOptions": [
+        { "label": "Sucursal A", "value": "SA" },
+        { "label": "Sucursal B", "value": "SB" },
+        { "label": "Sucursal C", "value": "SC" },
+        { "label": "Sucursal D", "value": "SD" }
+      ]
+    },
+    {
+      "name": "telefono",
+      "label": "Phone",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 5
+      }
+    },
+    {
+      "name": "estado",
+      "label": "Select a state",
+      "value": "",
+      "type": "select",
+      "validators": {
+        "required": false
+      },
+      "selectOptions": [
+        { "label": "Activo", "value": "Activo" },
+        { "label": "Inactivo", "value": "Inactivo" }
+      ]
+    },
+    {
+      "name": "description",
+      "label": "Description",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    }
+  ]
+}

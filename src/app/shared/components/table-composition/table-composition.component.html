@@ -14,8 +14,8 @@
                 [columnNames]="columnNames()"
                 [rowsPerPage]="rowsPerPage()"
                 [currentPage]="currentPage()"
-                class="table-fixed"
-                (editRowEvent)="handleEditRow($event)" />
+                (selectedRow)="selectedRow.emit($event)"
+                class="table-fixed" />
 
   <!--* Paginación -->
   <table-pagination [data]="filteredData()"
