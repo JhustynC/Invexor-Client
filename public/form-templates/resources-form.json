@@ -1,0 +1,42 @@
+{
+  "controls": [
+    {
+      "name": "id",
+      "label": "ID",
+      "value": "",
+      "type": "text",
+      "disabled": true,
+      "validators": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "medida",
+      "label": "Measure",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 4
+      }
+    },
+    {
+      "name": "moneda",
+      "label": "Currency",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 4
+      }
+    },
+    {
+      "name": "description",
+      "label": "Description",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    }
+  ]
+}

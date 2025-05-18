@@ -60,7 +60,7 @@
       ]
     },
     {
-      "name": "description",
+      "name": "descripcion",
       "label": "Description",
       "value": "",
       "type": "textarea",
