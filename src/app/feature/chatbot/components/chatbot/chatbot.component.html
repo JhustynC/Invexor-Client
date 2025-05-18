@@ -1,0 +1,43 @@
+<!-- Botón flotante del chatbot -->
+<div id="chat-toggle"
+     (click)="openChatbot()"
+     class="fixed bottom-[65px] lg:bottom-5 right-3 lg:right-5 z-[999] w-[60px] h-[60px] border border-white rounded-full bg-[#111827] grid place-content-center hover:bg-[#374151] cursor-pointer transition">
+  <img src="bot-img.svg"
+       alt="bot-image"
+       class="h-8">
+</div>
+
+<!--* Contenedor del chat (oculto por defecto) -->
+<div id="chat-box"
+     #chatMessages
+     class="border-1 border-white fixed bottom-[135px] right-3 lg:bottom-[85px] lg:right-[50px] z-[998] w-[300px] max-h-[400px] bg-[#111827] rounded-2xl shadow-lg flex flex-col overflow-hidden">
+
+  <!--? Encabezado del chat -->
+  <div class="bg-[#1f2937] text-white px-4 py-2 font-semibold text-lg">
+    Chatbot
+  </div>
+
+  <!--? Cuerpo del chat -->
+  <div id="chat-messages"
+       class="flex-1 p-4 overflow-y-scroll text-white space-y-2 text-sm ">
+
+    @for(msg of messages; track $index){
+    <chat-message [from]="msg.from"
+                  [message]="msg.message"
+                  [time]="msg.time"
+                  [side]="msg.side">
+    </chat-message>
+    }
+  </div>
+  <!--? Input para enviar mensaje -->
+  <div class="flex border-t border-gray-700">
+    <input type="text"
+           id="chat-input"
+           [(ngModel)]="message"
+           name="message"
+           placeholder="Escribe un mensaje..."
+           class="flex-1 p-2 text-white text-sm focus:outline-none">
+    <button (click)="sendMessage()"
+            class="bg-blue-600 text-white px-4">Enviar</button>
+  </div>
+</div>

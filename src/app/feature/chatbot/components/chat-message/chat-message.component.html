@@ -1,0 +1,16 @@
+<div class="chat"
+     [class.chat-start]="side()==='start'"
+     [class.chat-end]="side()==='end'">
+  <div class="chat-image avatar">
+    <div class="w-10 rounded-full">
+      <img alt="Tailwind CSS chat bubble component"
+           src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp" />
+    </div>
+  </div>
+  <div class="chat-header">
+    {{from()}}
+    <time class="text-xs opacity-50">{{time()}}</time>
+  </div>
+  <div class="chat-bubble">{{message()}}</div>
+  <div class="chat-footer opacity-50">{{messageState?.()}}</div>
+</div>
