@@ -14,6 +14,7 @@
                 [columnNames]="columnNames()"
                 [rowsPerPage]="rowsPerPage()"
                 [currentPage]="currentPage()"
+                (selectedRow)="selectedRow.emit($event)"
                 class="table-fixed" />
 
   <!--* Paginación -->

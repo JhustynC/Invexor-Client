@@ -17,6 +17,7 @@ export class TableCompositionComponent {
 
   //* Definición de las propiedades de salida
   addButtonClickedOutput = output<void>();
+  selectedRow = output<any>();
 
   //* Definición de las propiedades de entrada
   inputData = input<any[]>([]);

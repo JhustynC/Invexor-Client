@@ -1,5 +1,5 @@
 import { TitleCasePipe } from '@angular/common';
-import { Component, input, OnInit, signal } from '@angular/core';
+import { Component, input, OnInit, output, signal } from '@angular/core';
 
 @Component({
   selector: 'table-shared',
@@ -37,4 +37,5 @@ export class TableComponent {
   data = input<any[]>();
   rowsPerPage = input<number>(5);
   currentPage = input<number>(1);
+  selectedRow = output<any>();
 }

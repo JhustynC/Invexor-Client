@@ -127,9 +127,7 @@ export default class GridLayoutComponent {
       { cols: 2, rows: 1, y: 0, x: 0, type: 'Graph'},
       { cols: 2, rows: 2, y: 0, x: 2, hasContent: true, type: 'LastTransactions'},
       { cols: 1, rows: 1, y: 0, x: 4, type: 'Items'},
-      { cols: 1, rows: 1, y: 2, x: 5, type: 'TopCategories'},
-      { cols: 1, rows: 1, y: 1, x: 0},
-      { cols: 1, rows: 1, y: 1, x: 0}
+      { cols: 2, rows: 1, y: 2, x: 5, type: 'TopCategories'}
     ];
   }
 
