@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { JsonFormData } from '../../../shared/components/json-form-v2/jsonFormDataV2.interface';
 import { JsonFormComponentV2 } from "../../../shared/components/json-form-v2/json-form-v2.component";
+import { ProfileComponent } from "../../profile/pages/profile.component";
 
 @Component({
   selector: 'app-reports',
-  imports: [JsonFormComponentV2],
+  imports: [JsonFormComponentV2, ProfileComponent],
   templateUrl: './reports.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,26 +1,32 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ChangeDetectorRef} from '@angular/core';
 import { EnterImgComponent } from '../../../../shared/components/enter-img/enter-img.component';
 import { SubListComponent } from '../../../../shared/components/sub-list/sub-list.component';
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 import { JsonFormData } from '../../../../shared/interfaces/form.interface';
 import { JsonPipe } from '@angular/common';
 import { TableCompositionComponent } from "../../../../shared/components/table-composition/table-composition.component";
+import { UpgratedFormComponent } from '../../../../shared/components/upgrated-form/upgrated-form.component';
 
 @Component({
   selector: 'app-users',
-  imports: [ModalComponent, JsonPipe, TableCompositionComponent, SubListComponent, EnterImgComponent],
+  imports: [ModalComponent, JsonPipe, TableCompositionComponent, SubListComponent, EnterImgComponent, UpgratedFormComponent],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class UsersComponent {
   showModal = signal<boolean>(false);
+  openPopup = signal<boolean>(false);
   showTable = true;
   modalValues = signal(undefined);
+  selectedTableUser = signal<any>(undefined);
 
-  //editedRowData: any;
+  // atributos de custom properties o cargos
+  atributes:string[]= [];
 
   onModalFormValues(event: any) {
+
+    event['atributes'] = this.atributes;
     this.modalValues.set(event);
     this.onShowModal();
     this.onShowTable();
@@ -30,7 +36,8 @@ export default class UsersComponent {
   }
 
   subListOptions(event: Set<string>) {
-    console.log(event);
+    this.atributes = [...event];
+    console.log("Lista de opciones", event);
   }
 
   onEnterImg(event: string | ArrayBuffer | null) {
@@ -45,16 +52,36 @@ export default class UsersComponent {
     this.showModal.update((prev) => !prev);
   }
 
-  /*handleEditFromIntermediate(rowData: any) {
-    console.log('Abuelo recibió datos de edición:', rowData);
-    this.editedRowData = rowData;
-    // Realiza las acciones necesarias con los datos de edición
-  }*/
+  // Acciones de poup al editar un usuario
+  togglePopup() {
+    this.selectedTableUser.set(undefined);
+    this.openPopup.update((prev) => !prev);
+  }
 
   // Añade al usuario a la lista
   addUser(new_user: any) {
     //this.usuarios.push(new_user);
     this.usuarios = [...this.usuarios, new_user];
+    this.openPopup.update((prev) => !prev);
+  }
+
+  editUser(event: any) {
+    this.selectedTableUser.set(event);
+    this.openPopup.update((prev) => !prev);
+  }
+
+  updateUser(event: any) {
+    //this.usuarios[this.usuarios.findIndex((usuario) => usuario.ID === event.ID)] = event;
+    const index = this.usuarios.findIndex((usuario) => usuario.ID === event.ID);
+    console.log("Indice del usuario seleccionado", index);
+    if (index !== -1) {
+      this.usuarios[index] = event;
+      this.usuarios = [...this.usuarios];
+    }
+    
+    console.log(this.usuarios);
+    this.selectedTableUser.set(undefined);
+    this.openPopup.update((prev) => !prev);
   }
 
     usuarios = [
@@ -80,5 +107,8 @@ export default class UsersComponent {
     {'ID': 20, 'Nombre': 'Cristina Paredes', 'Email': 'cristina.paredes@email.com', 'Activo': 'Sí'},
     {'ID': 21, 'Nombre': 'Cristina Paredes', 'Email': 'cristina.paredes@email.com', 'Activo': 'Sí', 'Ciudad': 'Cuenca'},
 
-]
+  ]
+  constructor(private cdr: ChangeDetectorRef){
+
+  }
 }

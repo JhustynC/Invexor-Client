@@ -1,0 +1,41 @@
+<div class="info-profile">
+  <div class="info-profile__text">
+    <p>Nombre de usuario</p>
+    <hr>
+    <h1>Mario Casas</h1>
+
+    <p>ID</p>
+    <hr>
+    <h1>123456</h1>
+
+
+    <p>Último Ingreso</p>
+    <hr>
+    <h1>12/03/2025</h1>
+
+  </div>
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg"
+             width="24"
+             height="24"
+             viewBox="0 0 24 24">
+          <path fill="currentColor"
+                d="M12 3c-4.963 0-9 4.038-9 9s4.037 9 9 9s9-4.038 9-9s-4.037-9-9-9m0 16c-3.859 0-7-3.14-7-7s3.141-7 7-7s7 3.14 7 7s-3.141 7-7 7m.707-7l2.646-2.646a.5.5 0 0 0 0-.707a.5.5 0 0 0-.707 0L12 11.293L9.354 8.646a.5.5 0 0 0-.707.707L11.293 12l-2.646 2.646a.5.5 0 0 0 .707.708L12 12.707l2.646 2.646a.5.5 0 1 0 .708-.706z" />
+    </svg>
+  </div>
+    
+</div>
+
+<label for="cars">Bienes a mi cargo:</label>
+<select id="cars" name="cars" (change)="onOptionChange()">
+    <option value="areas">Mis áreas</option>
+    <option value="branches">Mis brances</option>
+    <option value="resources">Mis recursos</option>
+    <option value="items">Mis items</option>
+</select>
+
+
+<table-composition-shared [columnNames]="['id', 'sucursal', 'nombre', 'telefono', 'estado']"
+  [inputData]="areas"
+  [rowsPerPage]="15">
+</table-composition-shared>
