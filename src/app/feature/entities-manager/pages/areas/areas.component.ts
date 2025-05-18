@@ -52,7 +52,11 @@ export default class AreasComponent {
   }
 
   updateArea(event: any) {
-    this.areas[this.areas.findIndex((area) => area.id === event.id)] = event;
+    const idx = this.areas.findIndex((area) => area.id === event.id);
+    if (idx !== -1) {
+      this.areas[idx] = event;
+      this.areas = [...this.areas]; // <-- This triggers Angular to refresh the view
+    }
     console.log(this.areas);
     this.selectedTableArea.set(undefined);
     this.openPopup.update((prev) => !prev);
