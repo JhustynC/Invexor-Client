@@ -4,19 +4,22 @@
 
   <table-composition-shared [columnNames]="['sucursal', 'nombre', 'telefono', 'estado']"
     [inputData]="areas"
-    [rowsPerPage]="15">
+    [rowsPerPage]="15"
+    (addButtonClickedOutput)="togglePopup()">
   </table-composition-shared>
 
 </div>
 
-
-<!-- <json-form [jsonFormDataUrl]="'/form-templates/form.json'">
+@if (openPopup()) {
+  
+<json-form [jsonFormDataUrl]="'/form-templates/form.json'">
   <div class="overflow-hidden  my-5">
     <div class="overflow-y-scroll h-[250px] my-5">
       <table-composition-shared [columnNames]="['nombre', 'ciudad', 'telefono', 'estado']"
-                                [inputData]="sucursales"
+                                [inputData]="areas"
                                 [rowsPerPage]="15" />
     </div>
     <hr>
   </div>
-</json-form> -->
+</json-form>
+}

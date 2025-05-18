@@ -15,6 +15,10 @@ import { TableCompositionComponent } from '../../../../shared/components/table-c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AreasComponent {
+
+  
+  openPopup = signal<boolean>(false);
+
   areas = [
     { sucursal: "Sucursal A", nombre: "Area A", telefono: "07-1234567", estado: "Activa" },
     { sucursal: "Sucursal B", nombre: "Area B", telefono: "02-7654321", estado: "Inactiva" },
@@ -34,6 +38,10 @@ export default class AreasComponent {
     { sucursal: "Sucursal P", nombre: "Area P", telefono: "05-3344556", estado: "Activa" },
     { sucursal: "Sucursal Q", nombre: "Area Q", telefono: "06-4455667", estado: "Activa" }
   ];
+
+  togglePopup() {
+    this.openPopup.update((prev) => !prev);
+  }
   /* sucursales = [
     {
       nombre: 'Sucursal A',
