@@ -10,6 +10,7 @@ export class TableFilterbarComponent implements OnInit {
   columnNames = input<string[]>();
   sortField = input<string | null>(null);
   sortDirection = input<string>();
+  showAddButton = input<boolean>(true);
 
   onSearchOutput = output<string>();
   onSortChangeOutput = output<string>();

@@ -24,6 +24,7 @@ export class TableCompositionComponent {
   inputData = input<any[]>([]);
   rowsPerPage = input<number>(5);
   columnNames = input<string[]>([]);
+  showAddButton = input<boolean>(true);
 
   //* Definición de las propiedades internas
   currentPage = signal(1);
