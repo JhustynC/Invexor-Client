@@ -19,10 +19,10 @@
         "required": false
       },
       "selectOptions": [
-        { "label": "Sucursal A", "value": "SA" },
-        { "label": "Sucursal B", "value": "SB" },
-        { "label": "Sucursal C", "value": "SC" },
-        { "label": "Sucursal D", "value": "SD" }
+        { "label": "Sucursal A", "value": "Sucursal A" },
+        { "label": "Sucursal B", "value": "Sucursal B" },
+        { "label": "Sucursal C", "value": "Sucursal C" },
+        { "label": "Sucursal D", "value": "Sucursal D" }
       ]
     },
     {
@@ -44,8 +44,8 @@
         "required": false
       },
       "selectOptions": [
-        { "label": "Activo", "value": "Activo" },
-        { "label": "Inactivo", "value": "Inactivo" }
+        { "label": "Activa", "value": "Activa" },
+        { "label": "Inactiva", "value": "Inactiva" }
       ]
     },
     {

@@ -1,0 +1,130 @@
+/* Estilo general del formulario */
+.form {
+  color: #fafafa;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #293650;
+  border-radius: 5px;
+  box-shadow: 0 8px 24px rgba(58, 57, 57, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Grupo de cada campo */
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Etiquetas */
+.add-field-form label,
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Campos de entrada */
+.add-field-form input,
+.form-group input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.add-field-form input:focus,
+.form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+/* Estilo si hay error */
+.form-group input.invalid {
+  border-color: #dc3545;
+  /* background-color: #fff5f5; */
+}
+
+/* Mensajes de error */
+.error-message {
+  margin-top: 0.5rem;
+  color: #dc3545;
+  font-size: 0.875rem;
+  /* background-color: #fcebea; */
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Botón de envío */
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #f97316;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+button[type="submit"]:disabled {
+  background-color: #a76d44;
+  cursor: not-allowed;
+}
+
+.add-field-form {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+
+  select {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+    background-color: #293650;
+  }
+
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #111827;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
+  button[type="submit"]:disabled {
+    background-color: #a76d44;
+    cursor: not-allowed;
+  }
+}
+.select-form-control {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border 0.3s, box-shadow 0.3s;
+  background-color: #293650;
+}
