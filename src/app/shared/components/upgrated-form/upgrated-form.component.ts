@@ -14,9 +14,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { JsonFormControl, JsonFormData } from '../../interfaces/form.interface';
+import { JsonFormControl, JsonFormData } from './form-interface';
+//import { JsonFormControl, JsonFormData } from '../../interfaces/form.interface';
 import { input } from '@angular/core';
-import { FetchJsonService } from '../json-form/fetch-json.service';
+import { FetchJsonService } from './upgrated-form.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -59,19 +60,7 @@ export class UpgratedFormComponent implements AfterViewInit {
 
     for (const control of controls) {
       const validatorsToAdd = [];
-/* 
-      if (control.type === 'select') {
-        
-        control.selectOptions = control.selectOptions?.map((option) => ({
-          ...option,
-          selected: option.label === this.editableData()?.[control.name]
-        }));
-        console.log(control.selectOptions);
-      }
-      else { */
-        
         control.value = this.editableData()?.[control.name] ?? control.value;
-      //}
 
       for (const [key, value] of Object.entries(control.validators ?? {})) {
         switch (key) {
@@ -106,10 +95,10 @@ export class UpgratedFormComponent implements AfterViewInit {
         }
       }
 
-      group[control.name] = this.formBuilder.control(
-        control.value ?? '',
-        validatorsToAdd
-      );
+      group[control.name] = this.formBuilder.control({
+        value: control.value ?? '',
+        disabled: control.disabled ?? false
+      }, validatorsToAdd);
     }
 
     this.myForm = this.formBuilder.group(group);
@@ -140,6 +129,7 @@ export class UpgratedFormComponent implements AfterViewInit {
       label: this.newFieldLabel,
       type: this.newFieldType,
       value: '',
+      disabled: false,
       validators: { required: true },
       selectOptions: [],
     };

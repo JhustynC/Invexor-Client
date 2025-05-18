@@ -1,13 +1,24 @@
 {
   "controls": [
     {
+      "name": "id",
+      "label": "ID",
+      "value": "",
+      "type": "text",
+      "disabled": true,
+      "validators": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
       "name": "nombre",
       "label": "Name",
       "value": "",
       "type": "text",
       "validators": {
         "required": true,
-        "minLength": 10
+        "minLength": 4
       }
     },
     {

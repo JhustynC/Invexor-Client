@@ -40,17 +40,26 @@ export default class AreasComponent {
     { id: "A17", sucursal: "Sucursal Q", nombre: "Area Q", telefono: "06-4455667", estado: "Activa", description: "Area de ventas" }
   ];
 
-  togglePopup() {
-    this.openPopup.update((prev) => !prev);
-  }
-
   editArea(event: any) {
     this.selectedTableArea.set(event);
-    this.togglePopup();
+    this.openPopup.update((prev) => !prev);
   }
 
   addArea(event: any) {
     this.areas = [...this.areas, event];
-    this.togglePopup();
+    console.log(this.areas);
+    this.openPopup.update((prev) => !prev);
+  }
+
+  updateArea(event: any) {
+    this.areas[this.areas.findIndex((area) => area.id === event.id)] = event;
+    console.log(this.areas);
+    this.selectedTableArea.set(undefined);
+    this.openPopup.update((prev) => !prev);
+  }
+
+  togglePopup() {
+    this.selectedTableArea.set(undefined);
+    this.openPopup.update((prev) => !prev);
   }
 }
