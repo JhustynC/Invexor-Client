@@ -3,6 +3,7 @@ import { SidebarLayoutComponent } from './components/sidebar/sidebar-layout.comp
 import { HeaderLayoutComponent } from './components/header/header-layout.component';
 import { RouterOutlet } from '@angular/router';
 import { ProgressbarComponent } from '../../shared/components/progressbar/progressbar.component';
+import { ChatbotComponent } from "../../feature/chatbot/components/chatbot/chatbot.component";
 
 @Component({
   selector: 'invexor-layout',
@@ -12,7 +13,8 @@ import { ProgressbarComponent } from '../../shared/components/progressbar/progre
     HeaderLayoutComponent,
     RouterOutlet,
     ProgressbarComponent,
-  ],
+    ChatbotComponent
+],
   styles: `
 
   .responsive-padding{
