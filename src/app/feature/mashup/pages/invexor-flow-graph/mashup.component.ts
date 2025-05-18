@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, ElementRef, ViewChild, HostListener } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  ViewChild,
+  HostListener,
+} from '@angular/core';
 import ForceGraph3D, { ForceGraph3DInstance } from '3d-force-graph';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import * as THREE from 'three';
@@ -6,14 +12,13 @@ import * as THREE from 'three';
 @Component({
   selector: 'mashup-feature',
   templateUrl: './mashup.component.html',
-  styleUrls: ['./mashup.component.css']
+  styleUrls: ['./mashup.component.css'],
 })
 export default class MashupComponent implements AfterViewInit {
   @ViewChild('graphContainer', { static: false }) graphContainer?: ElementRef;
 
   graphInstance?: ForceGraph3DInstance;
   renderGraph = true;
-
 
   @HostListener('window:resize')
   onResize() {
@@ -32,7 +37,6 @@ export default class MashupComponent implements AfterViewInit {
   async ngAfterViewInit(): Promise<void> {
     await this.initGraph();
   }
-
 
   // toggleGraph() {
   //   this.renderGraph = !this.renderGraph;
@@ -111,7 +115,6 @@ export default class MashupComponent implements AfterViewInit {
     this.graphInstance.postProcessingComposer().addPass(bloomPass);
   }
 
-
   private getContainerSize(): { width: number; height: number } {
     const padding = 32; // 2rem (espacio alrededor)
     const maxWidth = 1000;
@@ -120,7 +123,7 @@ export default class MashupComponent implements AfterViewInit {
     let width = window.innerWidth - padding * 2;
     let height = window.innerHeight - padding * 2;
 
-    // En móviles: mantener carta con padding
+    //? En móviles: mantener card con padding
     if (window.innerWidth <= 800) {
       width = Math.min(width, 400);
       height = Math.min(height, 400);
