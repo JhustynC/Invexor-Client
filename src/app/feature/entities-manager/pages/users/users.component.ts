@@ -18,6 +18,8 @@ export default class UsersComponent {
   showTable = true;
   modalValues = signal(undefined);
 
+  //editedRowData: any;
+
   onModalFormValues(event: any) {
     this.modalValues.set(event);
     this.onShowModal();
@@ -42,6 +44,12 @@ export default class UsersComponent {
   onShowModal() {
     this.showModal.update((prev) => !prev);
   }
+
+  /*handleEditFromIntermediate(rowData: any) {
+    console.log('Abuelo recibió datos de edición:', rowData);
+    this.editedRowData = rowData;
+    // Realiza las acciones necesarias con los datos de edición
+  }*/
 
   // Añade al usuario a la lista
   addUser(new_user: any) {

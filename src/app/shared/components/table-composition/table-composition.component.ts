@@ -17,6 +17,7 @@ export class TableCompositionComponent {
 
   //* Definición de las propiedades de salida
   addButtonClickedOutput = output<void>();
+  editHandleRowEvent = output<void>();
 
   //* Definición de las propiedades de entrada
   inputData = input<any[]>([]);
@@ -88,6 +89,10 @@ export class TableCompositionComponent {
 
     this.sortField.set(field);
     this.sortDirection.set('asc');
+  }
+
+  handleEditRow(row: any) {
+    this.editHandleRowEvent.emit(row);
   }
 
   onFilterBarAddClicked() {

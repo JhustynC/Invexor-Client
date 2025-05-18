@@ -5,7 +5,8 @@
       <table-composition-shared [columnNames]="['ID', 'Nombre', 'Email', 'Activo']"
                                 [inputData]="usuarios"
                                 [rowsPerPage]="15"
-                                (addButtonClickedOutput)="onShowModal()"></table-composition-shared>
+                                (addButtonClickedOutput)="onShowModal()"
+                                (editHandleRowEvent)="onShowModal()"></table-composition-shared>
 
   </div>
 }
@@ -43,7 +44,7 @@
     </modal-form>
     <table-composition-shared [columnNames]="['nombre', 'ciudad', 'telefono', 'estado']"
                                 [inputData]="usuarios"
-                                [rowsPerPage]="15" />
+                                [rowsPerPage]="8" />
 
     <!--? Forma de consumir los valores de las sub-list -->
     <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>

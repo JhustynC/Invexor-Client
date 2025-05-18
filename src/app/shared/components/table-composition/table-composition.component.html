@@ -9,12 +9,13 @@
                     (sortDirectionOutput)="toggleSortDirection()"
                     (addButonClicked)="onFilterBarAddClicked()"></table-filterbar>
 
-  <!--* Tabla -->
+  <!--* Tabla --> 
   <table-shared [data]="paginatedData()"
                 [columnNames]="columnNames()"
                 [rowsPerPage]="rowsPerPage()"
                 [currentPage]="currentPage()"
-                class="table-fixed" />
+                class="table-fixed"
+                (editRowEvent)="handleEditRow($event)" />
 
   <!--* Paginación -->
   <table-pagination [data]="filteredData()"

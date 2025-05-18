@@ -29,7 +29,7 @@
           <div class="dropdown dropdown-start">
             <div tabindex="0"
                  role="button"
-                 class="btn btn-ghost btn-circle">
+                 class="btn btn-ghost btn-circle button-edit-delete">
               <div>
                 <svg xmlns="http://www.w3.org/2000/svg"
                      width="24"
@@ -42,7 +42,7 @@
             </div>
             <ul tabindex="0"
                 class="menu menu-sm dropdown-content bg-[#293650] z-1 mt-1 w-fit p-2 shadow">
-              <li><a class="text-success">Edit</a></li>
+              <li><a class="text-success" (click)="editRow(row)">Edit</a></li>
               <li><a class="text-error">Delete</a></li>
             </ul>
           </div>
