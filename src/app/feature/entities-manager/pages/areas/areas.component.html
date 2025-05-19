@@ -1,11 +1,11 @@
-<div class="mb-[60px] overflow-hidden p-6">
+<div class="mb-[60px] overflow-hidden p-5 pb-8">
 
   <table-composition-shared [columnNames]="['id', 'sucursal', 'padre', 'nombre', 'telefono', 'estado']"
-    [inputData]="areas"
-    [rowsPerPage]="15"
-    (addButtonClickedOutput)="togglePopup()"
-    (selectedEditRow)="editArea($event)"
-    (selectedInfoRow)="toggleCustomProperties()">
+                            [inputData]="areas"
+                            [rowsPerPage]="15"
+                            (addButtonClickedOutput)="togglePopup()"
+                            (selectedEditRow)="editArea($event)"
+                            (selectedInfoRow)="toggleCustomProperties()">
   </table-composition-shared>
   @if (openPopup()) {
   <div class="absolute inset-0 z-50 overflow-y-scroll">
@@ -16,11 +16,11 @@
     <div class="relative z-20 p-4 modal-container">
       <p>Registro de áreas</p>
       <upgrated-form [jsonFormDataUrl]="'/form-templates/areas-form.json'"
-        [showCancelButton]="true"
-        (cancelButtonOutput)="togglePopup()"
-        (submitFormValues)="selectedTableArea() === undefined ? addArea($event) : updateArea($event)"
-        [editableData]="selectedTableArea()">
-      </upgrated-form>    
+                     [showCancelButton]="true"
+                     (cancelButtonOutput)="togglePopup()"
+                     (submitFormValues)="selectedTableArea() === undefined ? addArea($event) : updateArea($event)"
+                     [editableData]="selectedTableArea()">
+      </upgrated-form>
     </div>
   </div>
   }
@@ -31,15 +31,14 @@
 
     <!-- Contenedor del modal -->
     <div class="relative bg-[#293650] text-[#FAFAFA] h-2/3 w-2/3 z-20 p-4 overflow-y-scroll">
-      <table-composition-shared
-        [columnNames]="['id', 'nombre', 'ciudad', 'telefono', 'estado']"
-        [inputData]="areas"
-        [rowsPerPage]="15"
-        [showAddButton]="false">
+      <table-composition-shared [columnNames]="['id', 'nombre', 'ciudad', 'telefono', 'estado']"
+                                [inputData]="areas"
+                                [rowsPerPage]="15"
+                                [showAddButton]="false">
       </table-composition-shared>
       <button type="button"
-            class="btn btn-primary ml-auto"
-            (click)="toggleCustomProperties()">
+              class="btn btn-primary ml-auto"
+              (click)="toggleCustomProperties()">
         Cerrar
       </button>
     </div>

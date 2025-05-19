@@ -1,4 +1,4 @@
-<div class="mb-[60px] p-6">
+<div class="mb-[60px] p-5 pb-8">
 
   <table-composition-shared
     [columnNames]="['id', 'nombre', 'ciudad', 'telefono', 'estado']"
@@ -22,7 +22,7 @@
         (cancelButtonOutput)="togglePopup()"
         (submitFormValues)="selectedTableBranch() === undefined ? addBranch($event) : updateBranch($event)"
         [editableData]="selectedTableBranch()">
-      </upgrated-form>    
+      </upgrated-form>
     </div>
   </div>
   }
