@@ -25,12 +25,12 @@
   </div>
   }
   @if (openCustomProperties()) {
-  <div class="absolute inset-0 z-50  flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 z-50 overflow-hidden grid">
     <!-- Fondo que se adapta al contenido scrollable -->
-    <div class="fixed w-full h-full bg-black opacity-95 z-10"></div>
+    <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
 
     <!-- Contenedor del modal -->
-    <div class="relative bg-[#293650] text-[#FAFAFA] h-2/3 w-2/3 z-20 p-4 overflow-y-scroll">
+    <div class="relative bg-[#293650] text-[#FAFAFA] h-2/3 w-2/3 z-20 p-4 overflow-y-scroll self-center justify-self-center">
       <table-composition-shared
         [columnNames]="['id', 'nombre', 'ciudad', 'telefono', 'estado']"
         [inputData]="areas"
