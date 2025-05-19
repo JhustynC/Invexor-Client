@@ -14,12 +14,20 @@
     background-color: #293650;
     width: 80%;
     height: 40%;
-    gap: 10;
+    gap: 1px;
+    border-radius: 20px;
 }
 
 .layout__laguage, .layout__theme, .layout__activity, .layout__dates{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: start;
+    align-items: center;
+    width: 80%;
+    height: 60%;
     }
+
+.layout p{
+    width: 45%;
+}
 
