@@ -1,6 +1,16 @@
 {
   "controls": [
     {
+      "name": "ID",
+      "label": "ID:",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
       "name": "Nombre",
       "label": "Nombre:",
       "value": "",
