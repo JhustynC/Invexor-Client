@@ -3,6 +3,7 @@ import GridLayoutComponent from './dashboard/pages/grid-widgets/grid-widgets.com
 import ReportsComponent from './reports/pages/reports.component';
 import MashupComponent from './mashup/pages/invexor-flow-graph/mashup.component';
 import { ProfileComponent } from './profile/pages/profile.component';
+import { SettingsComponent } from './settings/settings.component';
 
 export const featureRoutes: Routes = [
   {
@@ -36,6 +37,11 @@ export const featureRoutes: Routes = [
     component: ProfileComponent,
     data: { breadcrumb: 'Profile' },
   },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    data: { breadcrumb: 'Settings' },
+  }
 ];
 
 export default featureRoutes;
