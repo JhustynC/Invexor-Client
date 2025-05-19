@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { ChangeDetectorRef, Component, NgModule } from '@angular/core';
 import { TableCompositionComponent } from "../../../shared/components/table-composition/table-composition.component";
 
 @Component({
@@ -42,15 +42,15 @@ export class ProfileComponent {
   onOptionChange() {
     switch (this.selectedOption) {
       case 'areas':
-        this.currentData = this.areas;
-        this.currentColumns = this.columnNamesAreas;
+        this.currentData = [...this.areas];
+        this.currentColumns = [...this.columnNamesAreas];
         break;
       case 'branches':
-        this.currentData = this.branches;
-        this.currentColumns = this.columnNamesBranches;
+        this.currentData = [...this.branches];
+        this.currentColumns = [...this.columnNamesBranches];
         break;
       case 'resources':
-        this.currentData = this.resources;
+        this.currentData = [...this.resources];
         this.currentColumns = this.columnNamesResources;
         break;
       case 'items':
@@ -62,7 +62,11 @@ export class ProfileComponent {
         this.currentColumns = [];
         break;
     }
+    console.log(this.currentData);
+    this.cdr.detectChanges();
   }
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
 
 }
