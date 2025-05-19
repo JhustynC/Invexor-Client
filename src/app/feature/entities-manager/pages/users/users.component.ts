@@ -76,23 +76,28 @@ selectedTableUser = signal<any>(undefined);
 
   onShowModal() {
     this.showModal.update((prev) => !prev);
+    console.log('Scroll bloqueado');
     //? Bloqueo del scroll del layout
     this.layoutService.bloquearScroll();
   }
 
   onCloseModal() {
     this.showModal.update((prev) => !prev);
+
+    console.log('Modal cerrado');
     //? Permitir scroll del layout
     this.layoutService.permitirScroll();
   }
 
   onShowInfo(){
     this.showCustomProperties.update((prev) => !prev);
+    console.log('Scroll bloqueado');
     this.layoutService.bloquearScroll();
   }
 
   onCloseInfo(){
     this.showCustomProperties.update((prev) => !prev);
+    console.log('Scroll desbloqueado');
     this.layoutService.permitirScroll();
   }
 
@@ -110,6 +115,7 @@ selectedTableUser = signal<any>(undefined);
 
   editUser(event: any) {
     this.selectedTableUser.set(event);
+    this.layoutService.bloquearScroll();
     this.openPopup.update((prev) => !prev);
   }
 
@@ -119,6 +125,8 @@ selectedTableUser = signal<any>(undefined);
     console.log('Usuario seleccionado', event);
     //console.log('Usuario seleccionado', );
     this.transformarObjeto(event)
+    console.log('Se debería bloquear el scroll');
+    this.layoutService.bloquearScroll();
     this.showCustomProperties.update((prev) => !prev);
   }
 
