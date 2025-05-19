@@ -8,34 +8,35 @@
 
       <!--<app-dashboard-element></app-dashboard-element>-->
       @switch (item.type) {
-        @case ('LastTransactions') {
-          <transaction-chart-dashboard></transaction-chart-dashboard>
-        }
-        @case ('Graph') {
-          <div class="w-full h-full max-h-[400px] sm:max-h-[600px] p-4" style="background-color: #D1D5DB; color: black;">
-            <div class="flex flex-row justify-between">
-              <span class="justify-self-left text-2xl font-bold">Transactions</span>
-              <select class="gridster-item-content select w-1/4 rounded-full"
-                [contentEditable]="true">
-                <option>Months</option>
-                <option>Years</option>
-              </select>
-            </div>
-            <transactions-graph-dashboard></transactions-graph-dashboard>
-          </div>
-        }
-        @case ('TopCategories') {
-          <div class="w-full h-full max-h-[400px] sm:max-h-[600px] p-4" style="background-color: #FEAD95; color: black;">
-            <span class="justify-self-left text-2xl font-bold">Top Categories</span>
-            <top-categories-dashboard></top-categories-dashboard>
-          </div>
-        }
-        @case ('Items'){
-          <app-item-chart></app-item-chart>
-        }
-        @default {
-          <p>Default content.</p>
-        }
+      @case ('LastTransactions') {
+      <transaction-chart-dashboard></transaction-chart-dashboard>
+      }
+      @case ('Graph') {
+      <div class="w-full h-full max-h-[400px] sm:max-h-[600px] p-4"
+           style="background-color: #D1D5DB; color: black;">
+        <div class="flex flex-row justify-between">
+          <span class="justify-self-left text-2xl font-bold">Transactions</span>
+          <select class="select gridster-item-content w-1/4 bg-[#D1D5DB] border-1 border-black">
+            <option>Months</option>
+            <option>Years</option>
+          </select>
+        </div>
+        <transactions-graph-dashboard></transactions-graph-dashboard>
+      </div>
+      }
+      @case ('TopCategories') {
+      <div class="w-full h-full max-h-[400px] sm:max-h-[600px] p-4"
+           style="background-color: #FEAD95; color: black;">
+        <span class="justify-self-left text-2xl font-bold">Top Categories</span>
+        <top-categories-dashboard></top-categories-dashboard>
+      </div>
+      }
+      @case ('Items'){
+      <app-item-chart></app-item-chart>
+      }
+      @default {
+      <p>Default content.</p>
+      }
       }
 
 
