@@ -36,7 +36,7 @@ export default class UsersComponent {
   openPopup = signal<boolean>(false);
   showTable = true;
   modalValues = signal(undefined);
-  selectedTableUser = signal<any>(undefined);
+selectedTableUser = signal<any>(undefined);
 
   cancelButtonInfoClicked = output<void>();
   showCancelButtonInfoClicked = input<void>();
