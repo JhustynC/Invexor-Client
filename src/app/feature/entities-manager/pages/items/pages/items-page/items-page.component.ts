@@ -107,7 +107,7 @@ export default class ItemsPageComponent {
 
   updateUser(event: any) {
     //this.usuarios[this.usuarios.findIndex((usuario) => usuario.ID === event.ID)] = event;
-    const index = this.items.findIndex((item) => item.sku === event.sku);
+    const index = this.items.findIndex((item) => item.SKU === event.sku);
     console.log('Indice del usuario seleccionado', index);
     if (index !== -1) {
       this.items[index] = event;
