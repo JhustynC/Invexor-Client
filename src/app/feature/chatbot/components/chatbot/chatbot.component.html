@@ -10,7 +10,7 @@
 <!--* Contenedor del chat (oculto por defecto) -->
 <div id="chat-box"
      #chatMessages
-     class="border-1 border-white fixed bottom-[135px] right-3 lg:bottom-[85px] lg:right-[50px] z-[998] w-[300px] max-h-[400px] bg-[#111827] rounded-2xl shadow-lg flex flex-col overflow-hidden">
+     class="border-1 border-white fixed bottom-[135px] right-3 lg:bottom-[85px] lg:right-[50px] z-[998] w-[300px] max-h-[400px] bg-[#111827] rounded-2xl shadow-lg flex flex-col overflow-hidden h-[300px]">
 
   <!--? Encabezado del chat -->
   <div class="bg-[#1f2937] text-white px-4 py-2 font-semibold text-lg">
@@ -19,7 +19,7 @@
 
   <!--? Cuerpo del chat -->
   <div id="chat-messages"
-       class="flex-1 p-4 overflow-y-scroll text-white space-y-2 text-sm ">
+       class="flex-1 p-4 overflow-y-scroll text-white space-y-2 text-sm h-[200px]">
 
     @for(msg of messages; track $index){
     <chat-message [from]="msg.from"
@@ -36,7 +36,8 @@
            [(ngModel)]="message"
            name="message"
            placeholder="Escribe un mensaje..."
-           class="flex-1 p-2 text-white text-sm focus:outline-none">
+           class="flex-1 p-2 text-white text-sm focus:outline-none"
+           (keydown.enter)="sendMessage()">
     <button (click)="sendMessage()"
             class="bg-blue-600 text-white px-4">Enviar</button>
   </div>
