@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgModule } from '@angular/core';
+import { Component, NgModule, signal } from '@angular/core';
 import { TableCompositionComponent } from "../../../shared/components/table-composition/table-composition.component";
 
 @Component({
@@ -10,63 +10,64 @@ import { TableCompositionComponent } from "../../../shared/components/table-comp
 
 export class ProfileComponent {
   selectedOption: string = 'areas';
-  areas = [
+  areas = signal([
     { id: 1, sucursal: 'Matriz', nombre: 'Área A', telefono: '123-456-7890', estado: 'Activo' },
     { id: 2, sucursal: 'Sucursal 1', nombre: 'Área B', telefono: '987-654-3210', estado: 'Inactivo' },
     // ... más datos de áreas
-  ];
-  branches = [
+  ]);
+  branches = signal([
     { id: 101, nombre: 'Branch X', direccion: 'Calle Falsa 123', gerente: 'Carlos López', activo: true },
     { id: 102, nombre: 'Branch Y', direccion: 'Avenida Siempre Viva 742', gerente: 'Ana Vargas', activo: false },
     // ... más datos de branches
-  ];
-  resources = [
+  ]);
+  resources = signal([
     { codigo: 'R-001', tipo: 'Servidor', descripcion: 'Servidor Principal', ubicacion: 'Rack 1', disponible: true },
     { codigo: 'R-002', tipo: 'Impresora', descripcion: 'Impresora Láser', ubicacion: 'Oficina 2', disponible: false },
     // ... más datos de recursos
-  ];
-  items = [
+  ]);
+  items = signal([
     { codigo: 'I-001', nombre: 'Escritorio', cantidad: 10, precio: 150.00, enStock: true },
     { codigo: 'I-002', nombre: 'Silla de oficina', cantidad: 25, precio: 75.50, enStock: true },
     // ... más datos de items
-  ];
+  ]);
 
-  columnNamesAreas = ['id', 'sucursal', 'nombre', 'telefono', 'estado'];
-  columnNamesBranches = ['id', 'nombre', 'direccion', 'gerente', 'activo'];
-  columnNamesResources = ['codigo', 'tipo', 'descripcion', 'ubicacion', 'disponible'];
-  columnNamesItems = ['codigo', 'nombre', 'cantidad', 'precio', 'enStock'];
+  columnNamesAreas = signal<string[]>(['id', 'sucursal', 'nombre', 'telefono', 'estado']);
+  columnNamesBranches = signal<string[]>(['id', 'nombre', 'direccion', 'gerente', 'activo']);
+  columnNamesResources = signal<string[]>(['codigo', 'tipo', 'descripcion', 'ubicacion', 'disponible']);
+  columnNamesItems = signal<string[]>(['codigo', 'nombre', 'cantidad', 'precio', 'enStock']);
 
-  currentData: any[] = this.areas; // Datos iniciales
-  currentColumns: string[] = this.columnNamesAreas; // Columnas iniciales
 
-  onOptionChange() {
-    switch (this.selectedOption) {
+  currentData = signal<any>(this.areas()); // Datos iniciales
+  currentColumns = signal(this.columnNamesAreas()); // Columnas iniciales
+
+  onOptionChange(event: any) {
+
+    //console.log('Opción seleccionada:', event);
+    const selectedValue = (event.target as HTMLSelectElement).value;
+  console.log(selectedValue);
+    switch (selectedValue) {
       case 'areas':
-        this.currentData = [...this.areas];
-        this.currentColumns = [...this.columnNamesAreas];
+        this.currentData.set(this.areas());
+        this.currentColumns.set(this.columnNamesAreas());
         break;
       case 'branches':
-        this.currentData = [...this.branches];
-        this.currentColumns = [...this.columnNamesBranches];
+        this.currentData.set(this.branches());
+        this.currentColumns.set(this.columnNamesBranches());
         break;
       case 'resources':
-        this.currentData = [...this.resources];
-        this.currentColumns = this.columnNamesResources;
+        this.currentData.set(this.resources());
+        this.currentColumns.set(this.columnNamesResources());
         break;
       case 'items':
-        this.currentData = this.items;
-        this.currentColumns = this.columnNamesItems;
+        this.currentData.set(this.items());
+        this.currentColumns.set(this.columnNamesItems());
         break;
       default:
-        this.currentData = [];
-        this.currentColumns = [];
+        this.currentData.set([]); // Si no hay opción válida, vaciar los datos
+        this.currentColumns.set([]); // Vaciar las columnas
         break;
     }
-    console.log(this.currentData);
-    this.cdr.detectChanges();
   }
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
 
 }

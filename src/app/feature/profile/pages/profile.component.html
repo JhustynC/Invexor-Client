@@ -23,14 +23,14 @@
 
   <div class="table">
     <label for="cars">Bienes a mi cargo:</label>
-    <select id="cars" name="cars" (change)="onOptionChange()">
+    <select id="cars" name="cars" (change)="onOptionChange($event)">
         <option value="areas">Mis áreas</option>
         <option value="branches">Mis brances</option>
         <option value="resources">Mis recursos</option>
         <option value="items">Mis items</option>
     </select>
-    <table-composition-shared [columnNames]="currentColumns"
-      [inputData]="currentData"
+    <table-composition-shared [columnNames]="currentColumns()"
+      [inputData]="currentData()"
       [rowsPerPage]="5">
     </table-composition-shared>
   </div>
