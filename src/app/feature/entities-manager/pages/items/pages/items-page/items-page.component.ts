@@ -1,19 +1,31 @@
-import { ChangeDetectionStrategy, Component, inject, input, output, signal } from '@angular/core';
-import { TableCompositionComponent } from "../../../../../../shared/components/table-composition/table-composition.component";
-import { ModalComponent } from "../../../../../../shared/components/modal/modal.component";
-import { SubListComponent } from "../../../../../../shared/components/sub-list-v2/sub-list.component";
-import { EnterImgComponent } from "../../../../../../shared/components/enter-img/enter-img.component";
-import { UpgratedFormComponent } from "../../../../../../shared/components/upgrated-form/upgrated-form.component";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
+import { TableCompositionComponent } from '../../../../../../shared/components/table-composition/table-composition.component';
+import { ModalComponent } from '../../../../../../shared/components/modal/modal.component';
+import { SubListComponent } from '../../../../../../shared/components/sub-list-v2/sub-list.component';
+import { EnterImgComponent } from '../../../../../../shared/components/enter-img/enter-img.component';
+import { UpgratedFormComponent } from '../../../../../../shared/components/upgrated-form/upgrated-form.component';
 import { LayoutService } from '../../../../../../layout/invexor-layout/services/layout.service';
 
 @Component({
   selector: 'app-items-page',
-  imports: [TableCompositionComponent, ModalComponent, SubListComponent, EnterImgComponent, UpgratedFormComponent],
+  imports: [
+    TableCompositionComponent,
+    ModalComponent,
+    SubListComponent,
+    EnterImgComponent,
+    UpgratedFormComponent,
+  ],
   templateUrl: './items-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ItemsPageComponent {
-
   showCustomProperties = signal<boolean>(false);
   showModal = signal<boolean>(false);
   openPopup = signal<boolean>(false);
@@ -24,7 +36,7 @@ export default class ItemsPageComponent {
   cancelButtonInfoClicked = output<void>();
   showCancelButtonInfoClicked = input<void>();
 
-  infoData: any[] = []
+  infoData: any[] = [];
 
   // atributos de custom properties o cargos
   atributes: string[] = [];
@@ -54,8 +66,8 @@ export default class ItemsPageComponent {
   }
 
   onShowTable() {
-  this.showTable = !this.showTable;
-}
+    this.showTable = !this.showTable;
+  }
 
   onShowModal() {
     this.showModal.update((prev) => !prev);
@@ -69,12 +81,12 @@ export default class ItemsPageComponent {
     this.layoutService.permitirScroll();
   }
 
-  onShowInfo(){
+  onShowInfo() {
     this.showCustomProperties.update((prev) => !prev);
     this.layoutService.bloquearScroll();
   }
 
-  onCloseInfo(){
+  onCloseInfo() {
     this.showCustomProperties.update((prev) => !prev);
     this.layoutService.permitirScroll();
   }
@@ -97,17 +109,16 @@ export default class ItemsPageComponent {
   }
 
   infoUser(event: any) {
-
     //
     console.log('Usuario seleccionado', event);
     //console.log('Usuario seleccionado', );
-    this.transformarObjeto(event)
+    this.transformarObjeto(event);
     this.showCustomProperties.update((prev) => !prev);
   }
 
   updateUser(event: any) {
     //this.usuarios[this.usuarios.findIndex((usuario) => usuario.ID === event.ID)] = event;
-    const index = this.items.findIndex((item) => item.sku === event.sku);
+    const index = this.items.findIndex((item) => item.SKU === event.sku);
     console.log('Indice del usuario seleccionado', index);
     if (index !== -1) {
       this.items[index] = event;
@@ -121,34 +132,34 @@ export default class ItemsPageComponent {
   emitCancelButtonClicked() {
     this.cancelButtonInfoClicked.emit();
   }
-  
-  transformarObjeto(obj: any): any[] {
-  const resultado: any[] = [];
 
-  for (const clave in obj) {
-    if (clave === "attributes" && Array.isArray(obj[clave])) {
-      obj[clave].forEach((valor: string, indice: number) => {
-        resultado.push({
-          ID: `Attribute ${indice + 1}`,
-          Valor: valor,
-          Fecha: "---",
+  transformarObjeto(obj: any): any[] {
+    const resultado: any[] = [];
+
+    for (const clave in obj) {
+      if (clave === 'attributes' && Array.isArray(obj[clave])) {
+        obj[clave].forEach((valor: string, indice: number) => {
+          resultado.push({
+            ID: `Attribute ${indice + 1}`,
+            Valor: valor,
+            Fecha: '---',
+          });
         });
-      });
-    } else {
-      resultado.push({
-        ID: clave,
-        Valor: String(obj[clave]),
-        Fecha: "---",
-      });
+      } else {
+        resultado.push({
+          ID: clave,
+          Valor: String(obj[clave]),
+          Fecha: '---',
+        });
+      }
     }
+    console.log('Objeto transformado:', resultado);
+    this.infoData = resultado;
+    return resultado;
   }
-  console.log('Objeto transformado:', resultado);
-  this.infoData = resultado;
-  return resultado;
-}
-items = [
-  {SKU: '001', Nombre: 'Item 1', Descripcion: 'Descripción del item 1'}, 
-  {SKU: '002', Nombre: 'Item 2', Descripcion: 'Descripción del item 2'},
-  {SKU: '003', Nombre: 'Item 3', Descripcion: 'Descripción del item 3'},
-]
+  items = [
+    { SKU: '001', Nombre: 'Item 1', Descripcion: 'Descripción del item 1' },
+    { SKU: '002', Nombre: 'Item 2', Descripcion: 'Descripción del item 2' },
+    { SKU: '003', Nombre: 'Item 3', Descripcion: 'Descripción del item 3' },
+  ];
 }
