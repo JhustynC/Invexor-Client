@@ -1,61 +1,101 @@
-.layout{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* Estilos base */
+.layout {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #111827;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.info-profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #293650;
+  border-radius: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1000px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.info-profile__text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  justify-content: center;
+}
+
+.info-profile__text > h1 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  color: #ffffff;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+.info-profile__text > p {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: #ffffff;
+  margin: 0;
+}
+
+.info-profile__img {
+  flex-shrink: 0;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-profile__img > img {
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+  border-radius: 50%;
+}
+
+.table {
+  margin-top: 10px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 800px) {
+  .info-profile {
+    flex-direction: column-reverse;
     align-items: center;
-    background-color: #111827;
     width: 100%;
-    height: 100vh;
-}
+  }
 
-.info-profile{
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #293650;
-    border-radius: 20px;
+  .info-profile__text {
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
 
-    width: 70%;
-    height: 50%;
-}
+    p,
+    h1 {
+      width: 100%;
+      text-align: center;
+    }
+  }
 
-.info-profile__text{
-    display: flex;
-    flex-direction: column;
+  .info-profile__img {
     width: 100%;
     justify-content: center;
-    padding-left: 40px;
-}
+    margin-bottom: 20px;
+  }
 
-.info-profile__text > h1{
-    font-size: 25px;
-    color: #ffffff;
+  .info-profile__img > img {
+    width: 50%;
+    max-width: 150px;
+  }
 }
-
-.info-profile__text > p{
-    font-size: 18px;
-    color: #ffffff;
-}
-
-.info-profile__img{
-    width: 100%;
-    height: 60%;
-    display: flex;
-    justify-content: center;
-    padding-right: 40px;
-}
-
-.table > select{
-    background-color: #293650;
-    margin-left: 15px;
-    border-radius: 20px;
-}
-
-.table{
-    margin-top: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-

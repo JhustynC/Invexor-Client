@@ -1,5 +1,5 @@
-<div class="layout">
-  <div class="info-profile">
+<div class="layout mb-[70px]">
+  <div class="info-profile mb-5">
     <div class="info-profile__text">
       <p>Nombre de usuario</p>
       <hr>
@@ -16,22 +16,31 @@
 
     </div>
     <div class="info-profile__img">
-      <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" class="avatar">
+      <img src="https://www.w3schools.com/howto/img_avatar.png"
+           alt="Avatar"
+           class="avatar">
     </div>
-      
+
   </div>
 
   <div class="table">
-    <label for="cars">Bienes a mi cargo:</label>
-    <select id="cars" name="cars" (change)="onOptionChange($event)">
-        <option value="areas">Mis áreas</option>
-        <option value="branches">Mis brances</option>
-        <option value="resources">Mis recursos</option>
-        <option value="items">Mis items</option>
+    <label for="cars"
+           class="text-[1.4rem]">Tipo de bienes: </label>
+    <select id="cars"
+            name="cars"
+            (change)="onOptionChange($event)"
+            class="select w-fit">
+      <option value="areas">Mis áreas</option>
+      <option value="branches">Mis brances</option>
+      <option value="resources">Mis recursos</option>
+      <option value="items">Mis items</option>
     </select>
+
+    <hr class="my-3">
+
     <table-composition-shared [columnNames]="currentColumns()"
-      [inputData]="currentData()"
-      [rowsPerPage]="5">
+                              [inputData]="currentData()"
+                              [rowsPerPage]="5">
     </table-composition-shared>
   </div>
 </div>
