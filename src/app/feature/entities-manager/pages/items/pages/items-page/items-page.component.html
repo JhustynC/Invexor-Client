@@ -1,90 +1,90 @@
 <!--@if(!showModal()){ -->
-<div class="mb-[60px] overflow-hidden p-5 pb-8">
-  <table-composition-shared [columnNames]="['SKU', 'Nombre', 'Description']"
-                            [inputData]="items"
-                            [rowsPerPage]="15"
-                            (addButtonClickedOutput)="onShowModal()"
-                            (selectedEditRow)="editUser($event)"
-                            (selectedInfoRow)="infoUser($event)"></table-composition-shared>
-</div>
+<div class="mb-[60px] p-5 pb-8">
+    <table-composition-shared [columnNames]="['SKU', 'Nombre', 'Description']"
+                              [inputData]="items"
+                              [rowsPerPage]="15"
+                              (addButtonClickedOutput)="onShowModal()"
+                              (selectedEditRow)="editUser($event)"
+                              (selectedInfoRow)="infoUser($event)"></table-composition-shared>
 
-@if(showModal()){
-<!--! TODO ESTE CODIGO ES NECESARIO PARA MOSTRAR **BIEN** EL MODAL -->
-<div class="absolute inset-0 z-50 overflow-y-scroll">
-  <!-- Fondo que se adapta al contenido scrollable -->
-  <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
 
-  <!-- Contenedor del modal -->
-  <div class="relative z-20 p-4 modal-container">
-    <modal-form [showCancelButton]="true"
-                [jsonFormDataUrl]="'./form-templates/items-form.json'"
-                (cancelButtonOutput)="onCloseModal()"
-                (modalFormValues)="onModalFormValues($event)"
-                class="p-4">
+  @if(showModal()){
+  <!--! TODO ESTE CODIGO ES NECESARIO PARA MOSTRAR **BIEN** EL MODAL -->
+  <div class="absolute inset-0 z-50 overflow-y-scroll">
+    <!-- Fondo que se adapta al contenido scrollable -->
+    <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
 
-      <div class="flex flex-col items-center justify-center w-[100%] h-[100%] gap-5 overflow-hidden">
-        <!--? Forma de consumir los valores de las sub-list -->
-        <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>
+    <!-- Contenedor del modal -->
+    <div class="relative z-20 p-4 modal-container">
+      <modal-form [showCancelButton]="true"
+                  [jsonFormDataUrl]="'./form-templates/items-form.json'"
+                  (cancelButtonOutput)="onCloseModal()"
+                  (modalFormValues)="onModalFormValues($event)">
 
-        <enter-img (previewUrlOutput)="onEnterImg($event)"></enter-img>
-      </div>
-    </modal-form>
-  </div>
-</div>
-<!--! TODO ESTE CODIGO ES NECESARIO PARA MOSTRAR **BIEN** EL MODAL -->
-}
-
-@if (openPopup()) {
-<div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-  <div class="rounded-lg shadow-lg p-2 max-w-lg w-full max-h-[80vh] overflow-y-scroll scrollbar-none">
-    <upgrated-form [jsonFormDataUrl]="'/form-templates/items-form.json'"
-                   [showCancelButton]="true"
-                   (cancelButtonOutput)="togglePopup()"
-                   (submitFormValues)="selectedTableUser() === undefined ? addUser($event) : updateUser($event)"
-                   [editableData]="selectedTableUser()">
-      <div class="overflow-hidden  my-5">
-        <p>Cargos</p>
-        <!--<div class="overflow-y-scroll h-[250px] my-5">
-            <table-composition-shared [columnNames]="['nombre', 'ciudad', 'telefono', 'estado']"
-                                      [inputData]="usuarios"
-                                      [rowsPerPage]="15" />
-          </div> -->
-        <div class="flex flex-col items-center justify-center w-[100%] h-[100%] gap-5">
+        <div class="flex flex-col items-center justify-center w-[100%] h-[100%] gap-5 overflow-hidden">
           <!--? Forma de consumir los valores de las sub-list -->
-          <sub-list (selectedOptionsOutput)="subListOptions($event)"
-                    [initialSelectedOptions]="selectedTableUser()?.atributes"></sub-list>
+          <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>
 
           <enter-img (previewUrlOutput)="onEnterImg($event)"></enter-img>
         </div>
+      </modal-form>
+    </div>
+  </div>
+  <!--! TODO ESTE CODIGO ES NECESARIO PARA MOSTRAR **BIEN** EL MODAL -->
+  }
 
-        <hr>
-        <hr>
+  @if (openPopup()) {
+  <div class="absolute inset-0 z-50 overflow-y-scroll">
+    <!-- Fondo que se adapta al contenido scrollable -->
+    <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
+    <div class="relative z-20 p-4 modal-container">
+      <upgrated-form [jsonFormDataUrl]="'/form-templates/items-form.json'"
+                    [showCancelButton]="true"
+          (cancelButtonOutput)="togglePopup()"
+                    (submitFormValues)="selectedTableUser() === undefined ? addUser($event) : updateUser($event)"
+                    [editableData]="selectedTableUser()">
+        <div class="overflow-hidden  my-5">
+          <p>Atributos</p>
+          <div class="flex flex-col items-center justify-center w-[100%] h-[100%] gap-5">
+            <!--? Forma de consumir los valores de las sub-list -->
+            <sub-list (selectedOptionsOutput)="subListOptions($event)"
+                      [initialSelectedOptions]="selectedTableUser()?.atributes"></sub-list>
+
+            <enter-img (previewUrlOutput)="onEnterImg($event)"></enter-img>
+          </div>
+
+          <hr>
+          <hr>
+        </div>
+      </upgrated-form>
       </div>
-    </upgrated-form>
   </div>
-</div>
-}
+  
+  }
 
 
-@if(showCustomProperties()){
-<div class="absolute inset-0 z-50 overflow-y-scroll">
-  <!-- Fondo que se adapta al contenido scrollable -->
-  <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
+  @if(showCustomProperties()){
+  <div class="absolute inset-0 z-50 overflow-y-scroll">
+    <!-- Fondo que se adapta al contenido scrollable -->
+    <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
 
-  <!-- Contenedor del modal -->
-  <div class="relative z-20 p-4 modal-container bg-[#11233B]">
+    <!-- Contenedor del modal -->
+    <div class="relative bg-[#293650] text-[#FAFAFA] h-2/3 lg:w-2/3 w-4/5 z-20 p-4 overflow-y-scroll self-center justify-self-center">
+      <div class="h-[90%] overflow-y-scroll">
+        <table-composition-shared [columnNames]="['ID', 'Valor', 'Fecha']"
+                                  [inputData]="infoData"
+                                  [rowsPerPage]="15"
+                                  [showAddButton]="false">
+        </table-composition-shared>
+      </div>
 
-    <table-composition-shared [columnNames]="['ID', 'Valor', 'Fecha']"
-                              [inputData]="infoData"
-                              [rowsPerPage]="15"
-                              [showAddButton]="false"></table-composition-shared>
-
-    <button type="button"
-            [hidden]="showCancelButtonInfoClicked()"
-            class="btn btn-primary ml-auto"
-            (click)="onCloseInfo()">
-      Salir
-    </button>
+      <button type="button"
+              [hidden]="showCancelButtonInfoClicked()"
+              class="btn btn-primary ml-auto"
+              (click)="onCloseInfo()">
+        Salir
+      </button>
+    </div>
   </div>
+  }
 </div>
-}
