@@ -1,29 +1,28 @@
-
 <!--@if(!showModal()){ -->
-  <div class="mb-[60px] overflow-hidden">
+<div class="mb-[60px] overflow-hidden">
 
-      <table-composition-shared [columnNames]="['ID', 'Nombre', 'Email', 'Activo']"
-                                [inputData]="usuarios"
-                                [rowsPerPage]="15"
-                                (addButtonClickedOutput)="onShowModal()"
-                                (selectedRow)="editUser($event)"></table-composition-shared>
-  </div>
+  <table-composition-shared [columnNames]="['ID', 'Nombre', 'Email', 'Activo']"
+                            [inputData]="usuarios"
+                            [rowsPerPage]="15"
+                            (addButtonClickedOutput)="onShowModal()"
+                            (selectedRow)="editUser($event)"></table-composition-shared>
+</div>
 <!--}-->
 
 
 <!-- <div class="w-full h-full flex flex-col items-center justify-center gap-6 p-6 bg-gray-100 dark:bg-gray-900"> -->
 
-  <!-- Botón -->
+<!-- Botón -->
 <!--  <button (click)="onShowModal()"
           class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-md transition duration-200">
     Mostrar Modal
   </button> -->
 
-  <!-- Visualización JSON -->
+<!-- Visualización JSON -->
 <!--  <div
        class="border border-yellow-500 border-dashed rounded-md bg-yellow-50 p-4 text-left text-sm font-mono text-gray-800 dark:bg-yellow-900 dark:text-yellow-100 dark:border-yellow-400 overflow-auto+">
     <pre>{{ modalValues() | json }}</pre> -->
-    <!-- <pre>{{ fields() | json }}</pre> -->
+<!-- <pre>{{ fields() | json }}</pre> -->
 <!--  </div> -->
 
 <!--</div>-->
@@ -40,22 +39,24 @@
                 [jsonFormDataUrl]="'./form-templates/add-users-form.json'"
                 (cancelButtonOutput)="onShowModal()"
                 (modalFormValues)="onModalFormValues($event)">
-    </modal-form>
-    
-    <div class="flex flex-col items-center justify-center w-[100%] h-[100%] gap-5">
-            <!--? Forma de consumir los valores de las sub-list -->
-            <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>
 
-            <enter-img (previewUrlOutput)="onEnterImg($event)"></enter-img>
-    </div>
+      <div class="flex flex-col items-center justify-center w-[100%] h-[100%] gap-5">
+        <!--? Forma de consumir los valores de las sub-list -->
+        <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>
+
+        <enter-img (previewUrlOutput)="onEnterImg($event)"></enter-img>
+      </div>
+    </modal-form>
+
+
     
     <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>
     <enter-img (previewUrlOutput)="onEnterImg($event)"></enter-img>
 
     <table-composition-shared [columnNames]="['nombre', 'ciudad', 'telefono', 'estado']"
-                                [inputData]="usuarios"
-                                [rowsPerPage]="8" />
-                         
+                              [inputData]="usuarios"
+                              [rowsPerPage]="8" />
+
   </div>
 </div>
 <!--! TODO ESTE CODIGO ES NECESARIO PARA MOSTRAR **BIEN** EL MODAL -->
@@ -63,37 +64,31 @@
 
 @if (openPopup()) {
 
-  <div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-    <div class="rounded-lg shadow-lg p-2 max-w-lg w-full max-h-[80vh] overflow-y-scroll scrollbar-none">
-      <upgrated-form [jsonFormDataUrl]="'/form-templates/edit-users-form.json'"
-        [showCancelButton]="true"
-        (cancelButtonOutput)="togglePopup()"
-        (submitFormValues)="selectedTableUser() === undefined ? addUser($event) : updateUser($event)"
-        [editableData]="selectedTableUser()">
-        <div class="overflow-hidden  my-5">
-          <p>Cargos</p>
-          <!--<div class="overflow-y-scroll h-[250px] my-5">
+<div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+  <div class="rounded-lg shadow-lg p-2 max-w-lg w-full max-h-[80vh] overflow-y-scroll scrollbar-none">
+    <upgrated-form [jsonFormDataUrl]="'/form-templates/edit-users-form.json'"
+                   [showCancelButton]="true"
+                   (cancelButtonOutput)="togglePopup()"
+                   (submitFormValues)="selectedTableUser() === undefined ? addUser($event) : updateUser($event)"
+                   [editableData]="selectedTableUser()">
+      <div class="overflow-hidden  my-5">
+        <p>Cargos</p>
+        <!--<div class="overflow-y-scroll h-[250px] my-5">
             <table-composition-shared [columnNames]="['nombre', 'ciudad', 'telefono', 'estado']"
                                       [inputData]="usuarios"
                                       [rowsPerPage]="15" />
           </div> -->
-          <div class="flex flex-col items-center justify-center w-[100%] h-[100%] gap-5">
-            <!--? Forma de consumir los valores de las sub-list -->
-            <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>
+        <div class="flex flex-col items-center justify-center w-[100%] h-[100%] gap-5">
+          <!--? Forma de consumir los valores de las sub-list -->
+          <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>
 
-            <enter-img (previewUrlOutput)="onEnterImg($event)"></enter-img>
-          </div>
-
-          <hr>
-          <hr>
+          <enter-img (previewUrlOutput)="onEnterImg($event)"></enter-img>
         </div>
-      </upgrated-form>
-    </div>
+
+        <hr>
+        <hr>
+      </div>
+    </upgrated-form>
   </div>
-   
-
-
+</div>
 }
-
-
-
