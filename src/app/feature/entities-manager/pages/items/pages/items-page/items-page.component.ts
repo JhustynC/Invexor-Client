@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import { ChangeDetectionStrategy, Component, inject, input, output, signal } from '@angular/core';
-import { TableCompositionComponent } from "../../../../../../shared/components/table-composition/table-composition.component";
-import { ModalComponent } from "../../../../../../shared/components/modal/modal.component";
-import { SubListComponent } from "../../../../../../shared/components/sub-list/sub-list.component";
-import { EnterImgComponent } from "../../../../../../shared/components/enter-img/enter-img.component";
-import { UpgratedFormComponent } from "../../../../../../shared/components/upgrated-form/upgrated-form.component";
-=======
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,7 +11,6 @@ import { ModalComponent } from '../../../../../../shared/components/modal/modal.
 import { SubListComponent } from '../../../../../../shared/components/sub-list-v2/sub-list.component';
 import { EnterImgComponent } from '../../../../../../shared/components/enter-img/enter-img.component';
 import { UpgratedFormComponent } from '../../../../../../shared/components/upgrated-form/upgrated-form.component';
->>>>>>> 724e1361307c4b22f38ae1117b962dac361f5464
 import { LayoutService } from '../../../../../../layout/invexor-layout/services/layout.service';
 
 @Component({
