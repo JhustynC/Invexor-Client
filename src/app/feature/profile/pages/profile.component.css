@@ -47,15 +47,8 @@
     padding-right: 40px;
 }
 
-.table > select{
-    background-color: #293650;
-    margin-left: 15px;
-    border-radius: 20px;
-}
-
 .table{
     margin-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
 }
-
