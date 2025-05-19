@@ -19,7 +19,9 @@ export class TableCompositionComponent {
   addButtonClickedOutput = output<void>();
   editHandleRowEvent = output<void>();
   infoHandleRowEvent = output<void>();
-  selectedRow = output<any>();
+  selectedEditRow = output<any>();
+  selectedInfoRow = output<any>();
+
 
   //* Definición de las propiedades de entrada
   inputData = input<any[]>([]);
@@ -97,6 +99,9 @@ export class TableCompositionComponent {
   handleInfoRow(row: any) {
     this.infoHandleRowEvent.emit(row);
   }
+
+  handleRow(row: any) {}
+  
 
   handleEditRow(row: any) {
     this.editHandleRowEvent.emit(row);

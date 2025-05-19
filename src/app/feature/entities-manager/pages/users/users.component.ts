@@ -4,6 +4,8 @@ import {
   signal,
   ChangeDetectorRef,
   inject,
+  output,
+  input,
 } from '@angular/core';
 import { EnterImgComponent } from '../../../../shared/components/enter-img/enter-img.component';
 import { SubListComponent } from '../../../../shared/components/sub-list/sub-list.component';
@@ -36,6 +38,11 @@ export default class UsersComponent {
   modalValues = signal(undefined);
   selectedTableUser = signal<any>(undefined);
 
+  cancelButtonInfoClicked = output<void>();
+  showCancelButtonInfoClicked = input<void>();
+
+  infoData: any[] = []
+
   // atributos de custom properties o cargos
   atributes: string[] = [];
 
@@ -46,8 +53,9 @@ export default class UsersComponent {
   onModalFormValues(event: any) {
     event['atributes'] = this.atributes;
     this.modalValues.set(event);
-    this.onShowModal();
-    this.onShowTable();
+    //this.onShowModal();
+    this.onCloseModal();
+    //this.onShowTable();
     console.log('Desde otro componente', event);
     this.addUser(this.modalValues());
     console.log('Usuarios:', this.usuarios);
@@ -63,8 +71,8 @@ export default class UsersComponent {
   }
 
   onShowTable() {
-    this.showTable = !this.showTable;
-  }
+  this.showTable = !this.showTable;
+}
 
   onShowModal() {
     this.showModal.update((prev) => !prev);
@@ -75,6 +83,16 @@ export default class UsersComponent {
   onCloseModal() {
     this.showModal.update((prev) => !prev);
     //? Permitir scroll del layout
+    this.layoutService.permitirScroll();
+  }
+
+  onShowInfo(){
+    this.showCustomProperties.update((prev) => !prev);
+    this.layoutService.bloquearScroll();
+  }
+
+  onCloseInfo(){
+    this.showCustomProperties.update((prev) => !prev);
     this.layoutService.permitirScroll();
   }
 
@@ -95,6 +113,15 @@ export default class UsersComponent {
     this.openPopup.update((prev) => !prev);
   }
 
+  infoUser(event: any) {
+
+    //
+    console.log('Usuario seleccionado', event);
+    //console.log('Usuario seleccionado', );
+    this.transformarObjeto(event)
+    this.showCustomProperties.update((prev) => !prev);
+  }
+
   updateUser(event: any) {
     //this.usuarios[this.usuarios.findIndex((usuario) => usuario.ID === event.ID)] = event;
     const index = this.usuarios.findIndex((usuario) => usuario.ID === event.ID);
@@ -108,7 +135,34 @@ export default class UsersComponent {
     this.selectedTableUser.set(undefined);
     this.openPopup.update((prev) => !prev);
   }
+  emitCancelButtonClicked() {
+    this.cancelButtonInfoClicked.emit();
+  }
+  
+  transformarObjeto(obj: any): any[] {
+  const resultado: any[] = [];
 
+  for (const clave in obj) {
+    if (clave === "attributes" && Array.isArray(obj[clave])) {
+      obj[clave].forEach((valor: string, indice: number) => {
+        resultado.push({
+          ID: `Attribute ${indice + 1}`,
+          Valor: valor,
+          Fecha: "---",
+        });
+      });
+    } else {
+      resultado.push({
+        ID: clave,
+        Valor: String(obj[clave]),
+        Fecha: "---",
+      });
+    }
+  }
+  console.log('Objeto transformado:', resultado);
+  this.infoData = resultado;
+  return resultado;
+}
   usuarios = [
     {
       ID: 1,
@@ -238,5 +292,6 @@ export default class UsersComponent {
       Ciudad: 'Cuenca',
     },
   ];
+
   constructor(private cdr: ChangeDetectorRef) {}
 }

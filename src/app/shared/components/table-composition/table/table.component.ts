@@ -37,5 +37,7 @@ export class TableComponent {
   data = input<any[]>();
   rowsPerPage = input<number>(5);
   currentPage = input<number>(1);
-  selectedRow = output<any>();
+  selectedEditRow = output<any>();
+  selectedInfoRow = output<any>();
+
 }
