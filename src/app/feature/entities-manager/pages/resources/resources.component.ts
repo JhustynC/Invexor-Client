@@ -17,6 +17,7 @@ export default class ResourcesComponent {
   openPopup = signal<boolean>(false);
   formData = signal<any>(undefined);
   selectedTableResource = signal<any>(undefined);
+  openCustomProperties = signal<boolean>(false);
 
   layoutService = inject(LayoutService);
 
@@ -83,6 +84,11 @@ export default class ResourcesComponent {
 
   subListOptions(event: Set<string>) {
     console.log(event);
+  }
+
+  toggleCustomProperties() {
+    this.openCustomProperties.update((prev) => !prev);
+    this.openCustomProperties() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
   /* subListOptions(event: Set<string>) {

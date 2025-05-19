@@ -5,7 +5,8 @@
     [inputData]="resources"
     [rowsPerPage]="15"
     (addButtonClickedOutput)="togglePopup()"
-    (selectedRow)="editResource($event)">
+    (selectedEditRow)="editResource($event)"
+    (selectedInfoRow)="toggleCustomProperties()">
   </table-composition-shared>
 
   @if (openPopup()) {
@@ -31,6 +32,27 @@
           <hr>
         </div>
       </upgrated-form>    
+    </div>
+  </div>
+  }
+  @if (openCustomProperties()) {
+  <div class="absolute inset-0 z-50  flex items-center justify-center overflow-hidden">
+    <!-- Fondo que se adapta al contenido scrollable -->
+    <div class="fixed w-full h-full bg-black opacity-95 z-10"></div>
+
+    <!-- Contenedor del modal -->
+    <div class="relative bg-[#293650] text-[#FAFAFA] h-2/3 w-2/3 z-20 p-4 overflow-y-scroll">
+      <table-composition-shared
+        [columnNames]="['id', 'nombre', 'ciudad', 'telefono', 'estado']"
+        [inputData]="resources"
+        [rowsPerPage]="15"
+        [showAddButton]="false">
+      </table-composition-shared>
+      <button type="button"
+            class="btn btn-primary ml-auto"
+            (click)="toggleCustomProperties()">
+        Cerrar
+      </button>
     </div>
   </div>
   }
