@@ -1,11 +1,12 @@
-<div class="mb-[60px]">
+<div class="mb-[60px] p-6">
 
   <table-composition-shared
     [columnNames]="['id', 'nombre', 'ciudad', 'telefono', 'estado']"
     [inputData]="sucursales"
     [rowsPerPage]="15"
     (addButtonClickedOutput)="togglePopup()"
-    (selectedRow)="editBranch($event)">
+    (selectedEditRow)="editBranch($event)"
+    (selectedInfoRow)="toggleCustomProperties($event)">
   </table-composition-shared>
 
   @if (openPopup()) {
@@ -22,6 +23,21 @@
         (submitFormValues)="selectedTableBranch() === undefined ? addBranch($event) : updateBranch($event)"
         [editableData]="selectedTableBranch()">
       </upgrated-form>    
+    </div>
+  </div>
+  }
+  @if (openCustomProperties()) {
+  <div class="absolute inset-0 z-50 overflow-y-scroll">
+    <!-- Fondo que se adapta al contenido scrollable -->
+    <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
+
+    <!-- Contenedor del modal -->
+    <div class="relative z-20 p-4 modal-container">
+    <table-composition-shared
+      [columnNames]="['id', 'nombre', 'ciudad', 'telefono', 'estado']"
+      [inputData]="sucursales"
+      [rowsPerPage]="15">
+    </table-composition-shared>
     </div>
   </div>
   }
