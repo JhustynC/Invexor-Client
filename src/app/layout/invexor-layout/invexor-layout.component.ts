@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, signal } from '@angular/core';
 import { SidebarLayoutComponent } from './components/sidebar/sidebar-layout.component';
 import { HeaderLayoutComponent } from './components/header/header-layout.component';
 import { RouterOutlet } from '@angular/router';
@@ -31,6 +31,10 @@ import { CommonModule } from '@angular/common';
   `,
 })
 export default class InvexorLayoutComponent {
+  currentTitle = signal('');
+
+  
+
   scrollBloqueado = false;
   constructor(private ui: LayoutService) {
     this.ui.scroll$.subscribe((valor) => (this.scrollBloqueado = valor));

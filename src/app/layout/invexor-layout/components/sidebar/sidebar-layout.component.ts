@@ -5,6 +5,7 @@ import {
   HostListener,
   inject,
   OnInit,
+  output,
   ViewChild,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -16,6 +17,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   imports: [RouterLink, RouterLinkActive],
 })
 export class SidebarLayoutComponent {
+  currentOptionTitle = output<string>();
+
+  currentOptionTitleFn(value: string) {
+    this.currentOptionTitle.emit(value);
+  }
+
   //TODO: Create a MenuOption Component and Interface to make the sidebar dyanmic
 
   @ViewChild('sidebar') sidebar!: ElementRef<HTMLElement>;
