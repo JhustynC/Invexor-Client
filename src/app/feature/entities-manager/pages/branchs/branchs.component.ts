@@ -12,6 +12,7 @@ import { LayoutService } from '../../../../layout/invexor-layout/services/layout
 export default class BranchsComponent{
 
   openPopup = signal<boolean>(false);
+  openCustomProperties = signal<boolean>(false);
   formData = signal<any>(undefined);
   selectedTableBranch = signal<any>(undefined);
   layoutService = inject(LayoutService);
@@ -174,5 +175,11 @@ export default class BranchsComponent{
     this.selectedTableBranch.set(undefined);
     this.openPopup.update((prev) => !prev);
     this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
+  }
+
+  toggleCustomProperties(event: any) {
+    console.log(event);
+    this.openCustomProperties.update((prev) => !prev);
+    this.openCustomProperties() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 }
