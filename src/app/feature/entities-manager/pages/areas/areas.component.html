@@ -9,8 +9,12 @@
     (selectedRow)="editArea($event)">
   </table-composition-shared>
   @if (openPopup()) {
-  <div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-    <div class="rounded-lg shadow-lg max-w-lg w-full max-h-[80vh] overflow-y-scroll scrollbar-none">
+  <div class="absolute inset-0 z-50 overflow-y-scroll">
+    <!-- Fondo que se adapta al contenido scrollable -->
+    <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
+
+    <!-- Contenedor del modal -->
+    <div class="relative z-20 p-4 modal-container">
       <p>Registro de áreas</p>
       <upgrated-form [jsonFormDataUrl]="'/form-templates/areas-form.json'"
         [showCancelButton]="true"

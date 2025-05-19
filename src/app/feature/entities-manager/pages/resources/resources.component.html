@@ -9,15 +9,19 @@
   </table-composition-shared>
 
   @if (openPopup()) {
-  <div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-    <div class="rounded-lg shadow-lg max-w-lg w-full max-h-[80vh] overflow-y-scroll scrollbar-none">
+  <div class="absolute inset-0 z-50 overflow-y-scroll">
+    <!-- Fondo que se adapta al contenido scrollable -->
+    <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
+
+    <!-- Contenedor del modal -->
+    <div class="relative z-20 p-4 modal-container">
       <p>Registro de recursos</p>
       <upgrated-form [jsonFormDataUrl]="'/form-templates/resources-form.json'"
         [showCancelButton]="true"
         (cancelButtonOutput)="togglePopup()"
         (submitFormValues)="selectedTableResource() === undefined ? addResource($event) : updateResource($event)"
         [editableData]="selectedTableResource()">
-        <div class="overflow-hidden  my-5">
+        <div class="flex justify-center overflow-hidden  my-5">
           <p>Tipo</p>
           <div class="overflow-y-scroll h-[250px] my-5">
             <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>

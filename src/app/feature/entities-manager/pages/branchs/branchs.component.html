@@ -1,4 +1,4 @@
-<div class="mb-[60px] overflow-hidden">
+<div class="mb-[60px]">
 
   <table-composition-shared
     [columnNames]="['id', 'nombre', 'ciudad', 'telefono', 'estado']"
@@ -9,8 +9,12 @@
   </table-composition-shared>
 
   @if (openPopup()) {
-  <div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-    <div class="rounded-lg shadow-lg max-w-lg w-full max-h-[80vh] overflow-y-scroll scrollbar-none">
+  <div class="absolute inset-0 z-50 overflow-y-scroll">
+    <!-- Fondo que se adapta al contenido scrollable -->
+    <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
+
+    <!-- Contenedor del modal -->
+    <div class="relative z-20 p-4 modal-container">
       <p>Registro de sucursales</p>
       <upgrated-form [jsonFormDataUrl]="'/form-templates/branchs-form.json'"
         [showCancelButton]="true"
@@ -20,10 +24,11 @@
         <div class="overflow-hidden  my-5">
           <p>Sub areas</p>
           <div class="overflow-y-scroll h-[250px] my-5">
-            <table-composition-shared [columnNames]="['nombre', 'telefono', 'estado']"
-                                      [inputData]="sucursales"
-                                      [rowsPerPage]="15"
-                                      [showAddButton]="false"/>
+            <table-composition-shared
+              [columnNames]="['nombre', 'telefono', 'estado']"
+              [inputData]="sucursales"
+              [rowsPerPage]="15"
+              [showAddButton]="false"/>
           </div>
           <hr>
         </div>
