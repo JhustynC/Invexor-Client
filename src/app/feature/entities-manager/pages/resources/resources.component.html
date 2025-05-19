@@ -1,11 +1,11 @@
-<div class="mb-[60px] overflow-hidden p-6">
+<div class="mb-[60px] overflow-hidden p-5 pb-8">
 
-  <table-composition-shared
-    [columnNames]="['id', 'tipo', 'medida', 'moneda', 'descripcion']"
-    [inputData]="resources"
-    [rowsPerPage]="15"
-    (addButtonClickedOutput)="togglePopup()"
-    (selectedRow)="editResource($event)">
+  <table-composition-shared [columnNames]="['id', 'tipo', 'medida', 'moneda', 'descripcion']"
+                            [inputData]="resources"
+                            [rowsPerPage]="15"
+                            (addButtonClickedOutput)="togglePopup()"
+                            (selectedEditRow)="editResource($event)"
+                            (selectedInfoRow)="toggleCustomProperties()">
   </table-composition-shared>
 
   @if (openPopup()) {
@@ -17,20 +17,39 @@
     <div class="relative z-20 p-4 modal-container">
       <p>Registro de recursos</p>
       <upgrated-form [jsonFormDataUrl]="'/form-templates/resources-form.json'"
-        [showCancelButton]="true"
-        (cancelButtonOutput)="togglePopup()"
-        (submitFormValues)="selectedTableResource() === undefined ? addResource($event) : updateResource($event)"
-        [editableData]="selectedTableResource()">
+                     [showCancelButton]="true"
+                     (cancelButtonOutput)="togglePopup()"
+                     (submitFormValues)="selectedTableResource() === undefined ? addResource($event) : updateResource($event)"
+                     [editableData]="selectedTableResource()">
         <div class="flex justify-center overflow-hidden  my-5">
           <p>Tipo</p>
           <div class="overflow-y-scroll h-[250px] my-5">
-            <sub-list
-              [headerText]="'Tipo de recurso'"
-              (selectedOptionsOutput)="subListOptions($event)"></sub-list>
+            <sub-list [headerText]="'Tipo de recurso'"
+                      (selectedOptionsOutput)="subListOptions($event)"></sub-list>
           </div>
           <hr>
         </div>
-      </upgrated-form>    
+      </upgrated-form>
+    </div>
+  </div>
+  }
+  @if (openCustomProperties()) {
+  <div class="absolute inset-0 z-50  flex items-center justify-center overflow-hidden">
+    <!-- Fondo que se adapta al contenido scrollable -->
+    <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
+
+    <!-- Contenedor del modal -->
+    <div class="relative bg-[#293650] text-[#FAFAFA] h-2/3 w-2/3 z-20 p-4 overflow-y-scroll">
+      <table-composition-shared [columnNames]="['id', 'nombre', 'ciudad', 'telefono', 'estado']"
+                                [inputData]="resources"
+                                [rowsPerPage]="15"
+                                [showAddButton]="false">
+      </table-composition-shared>
+      <button type="button"
+              class="btn btn-primary ml-auto"
+              (click)="toggleCustomProperties()">
+        Cerrar
+      </button>
     </div>
   </div>
   }

@@ -21,6 +21,7 @@ export default class AreasComponent {
   openPopup = signal<boolean>(false);
   formData = signal<any>(undefined);
   selectedTableArea = signal<any>(undefined);
+  openCustomProperties = signal<boolean>(false);
 
   layoutService = inject(LayoutService);
 
@@ -81,5 +82,10 @@ export default class AreasComponent {
 
   selectedOptions(event: any) {
     console.log(event);
+  }
+
+  toggleCustomProperties() {
+    this.openCustomProperties.update((prev) => !prev);
+    this.openCustomProperties() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 }

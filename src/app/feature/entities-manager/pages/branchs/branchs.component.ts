@@ -177,8 +177,7 @@ export default class BranchsComponent{
     this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
-  toggleCustomProperties(event: any) {
-    console.log(event);
+  toggleCustomProperties() {
     this.openCustomProperties.update((prev) => !prev);
     this.openCustomProperties() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
