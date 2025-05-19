@@ -1,33 +1,160 @@
-:host{
-    display: flex;
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #293650;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 90%;
+  max-width: 600px;
+  color: white;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(8px);
+}
+
+.layout__laguage,
+.layout__theme,
+.layout__activity,
+.layout__dates {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.layout p {
+  flex: 1;
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+/* Inputs y selects */
+.select,
+.fieldinput {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  background-color: white;
+  color: black;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+  max-width: 180px;
+}
+
+.select {
+  width: 50%;
+}
+
+.select:hover,
+.fieldinput:hover {
+  transform: scale(1.01);
+}
+
+/* Toggle estilo pro */
+.toggle {
+  appearance: none;
+  width: 80px;
+  height: 25px;
+  background: white;
+  border-radius: 25px;
+  position: relative;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle::before {
+  content: "";
+  position: absolute;
+  /* top: 2.5px; */
+  /* left: 3px; */
+  /* width: 20px; */
+  height: 20px;
+  background: #cc5f0f;
+  border-radius: 50%;
+  transition: transform 0.3s linear;
+}
+
+.toggle:checked {
+  background: #363636;
+}
+
+.toggle:checked::before {
+  transform: translateX(18px);
+}
+
+/* Botón personalizado */
+.btn-primary {
+  background-color: #cc5f0f;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(204, 95, 15, 0.4);
+}
+
+.btn-primary:hover {
+  background-color: #e97a2c;
+  transform: scale(1.05);
+}
+
+/* Responsive: optimizar para pantallas pequeñas */
+@media (max-width: 480px) {
+  .layout {
+    padding: 1.5rem 1rem;
+    width: 95%;
+  }
+
+  .layout__laguage,
+  .layout__theme,
+  .layout__activity,
+  .layout__dates {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .layout p {
+    font-size: 0.95rem;
+    font-weight: 500;
+    width: 100%;
+  }
+
+  .toggle:checked::before {
+    transform: translateX(125px);
+  }
+
+  .select,
+  .fieldinput,
+  .btn-primary,
+  .toggle {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .toggle {
+    align-self: flex-start;
+  }
+
+  .btn-primary {
+    padding: 0.6rem;
+    text-align: center;
+  }
 }
-
-.layout{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-self: center;
-    background-color: #293650;
-    width: 80%;
-    height: 40%;
-    gap: 1px;
-    border-radius: 20px;
-}
-
-.layout__laguage, .layout__theme, .layout__activity, .layout__dates{
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-    width: 80%;
-    height: 60%;
-    }
-
-.layout p{
-    width: 45%;
-}
-
