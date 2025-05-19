@@ -24,7 +24,9 @@
         <div class="flex justify-center overflow-hidden  my-5">
           <p>Tipo</p>
           <div class="overflow-y-scroll h-[250px] my-5">
-            <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>
+            <sub-list
+              [headerText]="'Tipo de recurso'"
+              (selectedOptionsOutput)="subListOptions($event)"></sub-list>
           </div>
           <hr>
         </div>

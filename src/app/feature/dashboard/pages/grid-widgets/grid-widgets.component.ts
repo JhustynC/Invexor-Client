@@ -107,6 +107,7 @@ export default class GridLayoutComponent {
       ignoreMarginInRow: false,
       draggable: {
         enabled: true,
+        ignoreContentClass: 'gridster-item-content',
       },
       resizable: {
         enabled: true,
@@ -124,10 +125,10 @@ export default class GridLayoutComponent {
     };
 
     this.dashboard = [
-      { cols: 2, rows: 1, y: 0, x: 0, type: 'Graph'},
-      { cols: 2, rows: 2, y: 0, x: 2, hasContent: true, type: 'LastTransactions'},
-      { cols: 1, rows: 1, y: 0, x: 4, type: 'Items'},
-      { cols: 2, rows: 1, y: 2, x: 5, type: 'TopCategories'}
+      { cols: 1, rows: 1, y: 0, x: 0, type: 'Items'},
+      { cols: 3, rows: 1, y: 0, x: 1, hasContent: true, type: 'Graph'},
+      { cols: 2, rows: 2, y: 0, x: 4, type: 'TopCategories'},
+      { cols: 2, rows: 2, y: 2, x: 5, type: 'LastTransactions'}
     ];
   }
 

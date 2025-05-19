@@ -1,4 +1,4 @@
-import { Component, OnInit, output, signal } from '@angular/core';
+import { Component, input, OnInit, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -28,6 +28,8 @@ export class SubListComponent {
   selectedOptionsOutput = output<Set<string>>();
   clickedAddItem = signal<boolean>(false);
   newItem = signal<string>('');
+  showButton = input<boolean>(true);
+  headerText = input<string>('Custom properties');
 
   toggleSelection(option: string) {
     if (this.selectedOptions.has(option)) {

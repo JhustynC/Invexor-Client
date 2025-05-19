@@ -1,17 +1,6 @@
 {
   "controls": [
     {
-      "name": "id",
-      "label": "ID",
-      "value": "",
-      "type": "text",
-      "disabled": true,
-      "validators": {
-        "required": true,
-        "minLength": 1
-      }
-    },
-    {
       "name": "medida",
       "label": "Measure",
       "value": "",

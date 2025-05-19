@@ -37,6 +37,21 @@
       ]
     },
     {
+      "name": "padre",
+      "label": "Select patern area",
+      "value": "",
+      "type": "select",
+      "validators": {
+        "required": false
+      },
+      "selectOptions": [
+        { "label": "Area A", "value": "Area A" },
+        { "label": "Area B", "value": "Area B" },
+        { "label": "Area C", "value": "Area C" },
+        { "label": "Area D", "value": "Area D" }
+      ]
+    },
+    {
       "name": "telefono",
       "label": "Phone",
       "value": "",

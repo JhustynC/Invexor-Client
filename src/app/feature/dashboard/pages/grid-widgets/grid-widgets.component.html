@@ -12,10 +12,11 @@
           <transaction-chart-dashboard></transaction-chart-dashboard>
         }
         @case ('Graph') {
-          <div class="w-full h-full max-h-[400px] sm:max-h-[600px]" style="background-color: #D1D5DB; color: black;">
-            <div class="flex flex-row justify-between p-2">
+          <div class="w-full h-full max-h-[400px] sm:max-h-[600px] p-4" style="background-color: #D1D5DB; color: black;">
+            <div class="flex flex-row justify-between">
               <span class="justify-self-left text-2xl font-bold">Transactions</span>
-              <select class="select w-1/4 rounded-full" style="background-color: #A5A4A4;">
+              <select class="gridster-item-content select w-1/4 rounded-full"
+                [contentEditable]="true">
                 <option>Months</option>
                 <option>Years</option>
               </select>
@@ -24,7 +25,7 @@
           </div>
         }
         @case ('TopCategories') {
-          <div class="w-full h-full max-h-[400px] sm:max-h-[600px]" style="background-color: #FEAD95; color: black;">
+          <div class="w-full h-full max-h-[400px] sm:max-h-[600px] p-4" style="background-color: #FEAD95; color: black;">
             <span class="justify-self-left text-2xl font-bold">Top Categories</span>
             <top-categories-dashboard></top-categories-dashboard>
           </div>

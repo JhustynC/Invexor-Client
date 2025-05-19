@@ -21,17 +21,6 @@
         (cancelButtonOutput)="togglePopup()"
         (submitFormValues)="selectedTableBranch() === undefined ? addBranch($event) : updateBranch($event)"
         [editableData]="selectedTableBranch()">
-        <div class="overflow-hidden  my-5">
-          <p>Sub areas</p>
-          <div class="overflow-y-scroll h-[250px] my-5">
-            <table-composition-shared
-              [columnNames]="['nombre', 'telefono', 'estado']"
-              [inputData]="sucursales"
-              [rowsPerPage]="15"
-              [showAddButton]="false"/>
-          </div>
-          <hr>
-        </div>
       </upgrated-form>    
     </div>
   </div>

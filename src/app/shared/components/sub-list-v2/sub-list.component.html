@@ -1,7 +1,9 @@
 <div class="dropdown-container">
   <div class="header">
-    <span>Custom properties</span>
-    <i (click)="clickedAddItem.set(!clickedAddItem())">
+    <span>{{headerText()}}</span>
+    <i
+      [hidden]="!showButton()"
+      (click)="clickedAddItem.set(!clickedAddItem())">
       <svg xmlns="http://www.w3.org/2000/svg"
            width="24"
            height="24"
