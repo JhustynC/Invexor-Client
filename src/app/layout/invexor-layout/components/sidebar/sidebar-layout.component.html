@@ -19,6 +19,7 @@
     </li>
     <li routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        (click)="currentOptionTitleFn('Dashboard')"
         class="tooltip tooltip-right"
         data-tip="dashboard">
       <a routerLink="/client/dashboard">
@@ -58,20 +59,26 @@
       <ul class="sub-menu">
         <div>
           <li routerLinkActive="active"
+              (click)="currentOptionTitleFn('Branchs')"
               [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/client/entities-manager/branchs">Branchs</a></li>
           <li routerLinkActive="active"
+              (click)="currentOptionTitleFn('Areas')"
               [routerLinkActiveOptions]="{exact: true}"><a routerLink="/client/entities-manager/areas">Areas</a></li>
           <li routerLinkActive="active"
+              (click)="currentOptionTitleFn('Items')"
               [routerLinkActiveOptions]="{exact: true}"><a routerLink="/client/entities-manager/items">Items</a></li>
           <li routerLinkActive="active"
+              (click)="currentOptionTitleFn('Resources')"
               [routerLinkActiveOptions]="{exact: true}"><a routerLink="/client/entities-manager/resources">Resources</a></li>
           <li routerLinkActive="active"
+              (click)="currentOptionTitleFn('Users')"
               [routerLinkActiveOptions]="{exact: true}"><a routerLink="/client/entities-manager/users">Users</a></li>
         </div>
       </ul>
     </li>
     <li routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        (click)="currentOptionTitleFn('Reports')"
         class="tooltip tooltip-right"
         data-tip="reports">
       <a routerLink="/client/reports">
@@ -90,6 +97,7 @@
 
     <li routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        (click)="currentOptionTitleFn('Mashup')"
         class="tooltip tooltip-right"
         data-tip="mashup">
       <a routerLink="/client/mashup">

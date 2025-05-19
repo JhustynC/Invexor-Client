@@ -5,41 +5,44 @@
                  class="custom-gridster-item"> <!--p-2 es el padding-->
     <div class="w-full h-full overflow-auto scrollbar-custom flex flex-col">
       <!--<transaction-chart-dashboard class="w-full h-full max-h-[400px] sm:max-h-[600px]"></transaction-chart-dashboard>-->
-      
+
       <!--<app-dashboard-element></app-dashboard-element>-->
       @switch (item.type) {
-        @case ('LastTransactions') {
-          <transaction-chart-dashboard></transaction-chart-dashboard>
-        }
-        @case ('Graph') {
-          <div class="w-full h-full max-h-[400px] sm:max-h-[600px]" style="background-color: #D1D5DB; color: black;">
-            <div class="flex flex-row justify-between p-2">
-              <span class="justify-self-left text-2xl font-bold">Transactions</span>
-              <select class="select w-1/4 rounded-full" style="background-color: #A5A4A4;">
-                <option>Months</option>
-                <option>Years</option>
-              </select>
-            </div>
-            <transactions-graph-dashboard></transactions-graph-dashboard>
-          </div>
-        }
-        @case ('TopCategories') {
-          <div class="w-full h-full max-h-[400px] sm:max-h-[600px]" style="background-color: #FEAD95; color: black;">
-            <span class="justify-self-left text-2xl font-bold">Top Categories</span>
-            <top-categories-dashboard></top-categories-dashboard>
-          </div>
-        }
-        @case ('Items'){
-          <app-item-chart></app-item-chart>
-        }
-        @default {
-          <p>Default content.</p>
-        }
+      @case ('LastTransactions') {
+      <transaction-chart-dashboard></transaction-chart-dashboard>
+      }
+      @case ('Graph') {
+      <div class="gridster-item-content w-full h-full max-h-[400px] sm:max-h-[600px]"
+           style="background-color: #D1D5DB; color: black;">
+        <div class="flex flex-row justify-between p-2">
+          <span class="justify-self-left text-2xl font-bold">Transactions</span>
+          <select class="select w-1/4 rounded-full"
+                  style="background-color: #A5A4A4;">
+            <option>Months</option>
+            <option>Years</option>
+          </select>
+        </div>
+        <transactions-graph-dashboard></transactions-graph-dashboard>
+      </div>
+      }
+      @case ('TopCategories') {
+      <div class="w-full h-full max-h-[400px] sm:max-h-[600px]"
+           style="background-color: #FEAD95; color: black;">
+        <span class="justify-self-left text-2xl font-bold">Top Categories</span>
+        <top-categories-dashboard></top-categories-dashboard>
+      </div>
+      }
+      @case ('Items'){
+      <app-item-chart></app-item-chart>
+      }
+      @default {
+      <p>Default content.</p>
+      }
       }
 
-      
+
     </div>
-    
+
   </gridster-item>
   }
 </gridster>

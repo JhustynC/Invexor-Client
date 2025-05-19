@@ -1,8 +1,8 @@
 <div class="flex flex-row h-screen w-full">
-  <sidebar-layout></sidebar-layout>
+  <sidebar-layout (currentOptionTitle)="currentTitle.set($event)"></sidebar-layout>
   <main class="flex flex-col flex-1">
     <progressbar-shared></progressbar-shared>
-    <header-layout></header-layout>
+    <header-layout [currentTitle]="currentTitle()"></header-layout>
     <!-- Aquí va el scroll -->
     <div class="relative bg-[#111827] overflow-auto flex-1 responsive-padding"
          [ngClass]="{

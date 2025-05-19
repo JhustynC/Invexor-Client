@@ -11,6 +11,7 @@ import {
   GridsterConfig,
   GridsterItem,
   GridsterItemComponent,
+  GridsterItemComponentInterface,
   GridType,
   PushDirections,
   Resizable,
@@ -29,12 +30,13 @@ interface ItemByType extends GridsterItem {
 @Component({
   selector: 'grid-layout-dashboard',
   templateUrl: './grid-widgets.component.html',
-  imports: [GridsterComponent,
+  imports: [
+    GridsterComponent,
     GridsterItemComponent,
     TransactionChartComponent,
     TransactionsGraphComponent,
     TopCategoriesComponent,
-    ItemChartComponent
+    ItemChartComponent,
   ],
   styles: `
   ::ng-deep .custom-gridster {
@@ -106,7 +108,9 @@ export default class GridLayoutComponent {
       emptyCellDragMaxRows: 50,
       ignoreMarginInRow: false,
       draggable: {
+
         enabled: true,
+        ignoreContentClass: 'gridster-item-content',
       },
       resizable: {
         enabled: true,
@@ -120,15 +124,46 @@ export default class GridLayoutComponent {
       displayGrid: DisplayGrid.None,
       disableWindowResize: false,
       disableWarnings: false,
-      scrollToNewItems: false
+      scrollToNewItems: false,
     };
 
     this.dashboard = [
-      { cols: 2, rows: 1, y: 0, x: 0, type: 'Graph'},
-      { cols: 2, rows: 2, y: 0, x: 2, hasContent: true, type: 'LastTransactions'},
-      { cols: 1, rows: 1, y: 0, x: 4, type: 'Items'},
-      { cols: 2, rows: 1, y: 2, x: 5, type: 'TopCategories'}
+      { cols: 2, rows: 1, y: 0, x: 0, hasContent: true, type: 'Graph' },
+      {
+        cols: 2,
+        rows: 2,
+        y: 0,
+        x: 2,
+        hasContent: true,
+        type: 'LastTransactions',
+      },
+      { cols: 1, rows: 1, y: 0, x: 4, type: 'Items' },
+      { cols: 2, rows: 1, y: 2, x: 5, type: 'TopCategories' },
     ];
+  }
+
+  static eventStart(
+    item: GridsterItem,
+    itemComponent: GridsterItemComponentInterface,
+    event: MouseEvent
+  ): void {
+    console.info('eventStart', item, itemComponent, event);
+  }
+
+  static eventStop(
+    item: GridsterItem,
+    itemComponent: GridsterItemComponentInterface,
+    event: MouseEvent
+  ): void {
+    console.info('eventStop', item, itemComponent, event);
+  }
+
+  static overlapEvent(
+    source: GridsterItem,
+    target: GridsterItem,
+    grid?: import('angular-gridster2').GridsterComponentInterface
+  ): void {
+    console.log('overlap', source, target, grid);
   }
 
   static itemChange(item: any, itemComponent: any) {

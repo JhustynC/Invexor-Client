@@ -1,15 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { JsonFormData } from '../../../shared/components/json-form-v2/jsonFormDataV2.interface';
-import { JsonFormComponentV2 } from "../../../shared/components/json-form-v2/json-form-v2.component";
-import { ProfileComponent } from "../../profile/pages/profile.component";
+import { JsonFormComponentV2 } from '../../../shared/components/json-form-v2/json-form-v2.component';
+import { ProfileComponent } from '../../profile/pages/profile.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer'; // Make sure this path is correct and ng2-pdf-viewer is installed
 
 @Component({
   selector: 'app-reports',
-  imports: [JsonFormComponentV2, ProfileComponent],
+  standalone: true,
+  imports: [PdfViewerModule],
   templateUrl: './reports.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ReportsComponent {
+  pdfSrc = 'http://localhost:4200/example.pdf';
+
   formData: JsonFormData = {
     title: 'Formulario de Usuario',
     description: 'Porfavor llena el formulario con tu información',
@@ -21,8 +25,11 @@ export default class ReportsComponent {
         placeholder: 'Enter your username',
         validators: {
           required: true,
-          minLength: { value: 3, message: 'Username must be at least 3 characters' }
-        }
+          minLength: {
+            value: 3,
+            message: 'Username must be at least 3 characters',
+          },
+        },
       },
       {
         name: 'email',
@@ -31,22 +38,23 @@ export default class ReportsComponent {
         placeholder: 'Enter your email',
         validators: {
           required: 'Email is required',
-          email: true
-        }
+          email: true,
+        },
       },
       {
         name: 'userType',
         label: 'User Type',
         type: 'select',
-        selectOptions: [  // Changed from 'options' to 'selectOptions'
+        selectOptions: [
+          // Changed from 'options' to 'selectOptions'
           { value: 'admin', label: 'Administrator' },
-          { value: 'user', label: 'Regular User' }
+          { value: 'user', label: 'Regular User' },
         ],
         validators: {
-          required: true
-        }
-      }
-    ]
+          required: true,
+        },
+      },
+    ],
   };
 
   onFormSubmit(formData: any) {
@@ -56,4 +64,4 @@ export default class ReportsComponent {
   onCancel() {
     console.log('Form cancelled');
   }
- }
+}
