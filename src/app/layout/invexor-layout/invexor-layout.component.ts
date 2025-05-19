@@ -3,7 +3,9 @@ import { SidebarLayoutComponent } from './components/sidebar/sidebar-layout.comp
 import { HeaderLayoutComponent } from './components/header/header-layout.component';
 import { RouterOutlet } from '@angular/router';
 import { ProgressbarComponent } from '../../shared/components/progressbar/progressbar.component';
-import { ChatbotComponent } from "../../feature/chatbot/components/chatbot/chatbot.component";
+import { ChatbotComponent } from '../../feature/chatbot/components/chatbot/chatbot.component';
+import { LayoutService } from './services/layout.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'invexor-layout',
@@ -13,8 +15,9 @@ import { ChatbotComponent } from "../../feature/chatbot/components/chatbot/chatb
     HeaderLayoutComponent,
     RouterOutlet,
     ProgressbarComponent,
-    ChatbotComponent
-],
+    ChatbotComponent,
+    CommonModule,
+  ],
   styles: `
 
   .responsive-padding{
@@ -28,10 +31,13 @@ import { ChatbotComponent } from "../../feature/chatbot/components/chatbot/chatb
   `,
 })
 export default class InvexorLayoutComponent {
+  scrollBloqueado = false;
+  constructor(private ui: LayoutService) {
+    this.ui.scroll$.subscribe((valor) => (this.scrollBloqueado = valor));
+  }
+
   @HostListener('window:beforeunload', ['$event'])
   updateView() {
     window.dispatchEvent(new Event('resize'));
   }
-
-  constructor() {}
 }

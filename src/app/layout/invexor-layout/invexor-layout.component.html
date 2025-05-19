@@ -3,7 +3,12 @@
   <main class="flex flex-col flex-1">
     <progressbar-shared></progressbar-shared>
     <header-layout></header-layout>
-    <div class="relative bg-[#111827] overflow-auto flex-1 responsive-padding">
+    <!-- Aquí va el scroll -->
+    <div class="relative bg-[#111827] overflow-auto flex-1 responsive-padding"
+         [ngClass]="{
+      'overflow-hidden': scrollBloqueado,
+      'overflow-auto': !scrollBloqueado
+    }">
       <router-outlet></router-outlet>
     </div>
     <chatbot></chatbot>

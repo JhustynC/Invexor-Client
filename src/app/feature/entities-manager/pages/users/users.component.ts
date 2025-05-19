@@ -3,6 +3,7 @@ import {
   Component,
   signal,
   ChangeDetectorRef,
+  inject,
 } from '@angular/core';
 import { EnterImgComponent } from '../../../../shared/components/enter-img/enter-img.component';
 import { SubListComponent } from '../../../../shared/components/sub-list/sub-list.component';
@@ -11,6 +12,7 @@ import { JsonFormData } from '../../../../shared/interfaces/form.interface';
 import { JsonPipe } from '@angular/common';
 import { TableCompositionComponent } from '../../../../shared/components/table-composition/table-composition.component';
 import { UpgratedFormComponent } from '../../../../shared/components/upgrated-form/upgrated-form.component';
+import { LayoutService } from '../../../../layout/invexor-layout/services/layout.service';
 
 @Component({
   selector: 'app-users',
@@ -34,6 +36,16 @@ export default class UsersComponent {
 
   // atributos de custom properties o cargos
   atributes: string[] = [];
+
+  layoutService = inject(LayoutService);
+
+  abrirModal() {
+    this.layoutService.bloquearScroll();
+  }
+
+  cerrarModal() {
+    this.layoutService.permitirScroll();
+  }
 
   onModalFormValues(event: any) {
     event['atributes'] = this.atributes;
@@ -60,6 +72,12 @@ export default class UsersComponent {
 
   onShowModal() {
     this.showModal.update((prev) => !prev);
+    this.abrirModal();
+  }
+
+  onCloseModal() {
+    this.showModal.update((prev) => !prev);
+    this.cerrarModal();
   }
 
   // Acciones de poup al editar un usuario
