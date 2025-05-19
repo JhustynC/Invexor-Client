@@ -37,15 +37,9 @@ export default class UsersComponent {
   // atributos de custom properties o cargos
   atributes: string[] = [];
 
+  //? Service to use with modal
+  //! Evitar doble scroll
   layoutService = inject(LayoutService);
-
-  abrirModal() {
-    this.layoutService.bloquearScroll();
-  }
-
-  cerrarModal() {
-    this.layoutService.permitirScroll();
-  }
 
   onModalFormValues(event: any) {
     event['atributes'] = this.atributes;
@@ -72,12 +66,14 @@ export default class UsersComponent {
 
   onShowModal() {
     this.showModal.update((prev) => !prev);
-    this.abrirModal();
+    //? Bloqueo del scroll del layout
+    this.layoutService.bloquearScroll();
   }
 
   onCloseModal() {
     this.showModal.update((prev) => !prev);
-    this.cerrarModal();
+    //? Permitir scroll del layout
+    this.layoutService.permitirScroll();
   }
 
   // Acciones de poup al editar un usuario

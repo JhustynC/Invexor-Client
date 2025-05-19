@@ -7,15 +7,15 @@ export const featureRoutes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'dashboard',
-    component: GridLayoutComponent
+    component: GridLayoutComponent,
   },
   {
     path: 'reports',
-    component: ReportsComponent
+    component: ReportsComponent,
   },
   {
     path: 'entities-manager',
@@ -23,7 +23,7 @@ export const featureRoutes: Routes = [
   },
   {
     path: 'mashup',
-    component: MashupComponent
+    component: MashupComponent,
   },
 ];
 
