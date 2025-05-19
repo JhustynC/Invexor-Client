@@ -1,11 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   signal,
 } from '@angular/core';
 import { JsonFormComponent } from '../../../../shared/components/json-form/json-form.component';
 import { TableCompositionComponent } from '../../../../shared/components/table-composition/table-composition.component';
 import { UpgratedFormComponent } from '../../../../shared/components/upgrated-form/upgrated-form.component';
+import { LayoutService } from '../../../../layout/invexor-layout/services/layout.service';
 
 @Component({
   selector: 'areas-entites-manager',
@@ -19,6 +21,12 @@ export default class AreasComponent {
   openPopup = signal<boolean>(false);
   formData = signal<any>(undefined);
   selectedTableArea = signal<any>(undefined);
+
+  layoutService = inject(LayoutService);
+
+  ngOnDestroy() {
+    this.layoutService.permitirScroll();
+  }
 
   areas = [
     { id: "A1", sucursal: "Sucursal A", nombre: "Area A", telefono: "07-1234567", estado: "Activa", description: "Area de ventas" },
@@ -43,12 +51,14 @@ export default class AreasComponent {
   editArea(event: any) {
     this.selectedTableArea.set(event);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
   addArea(event: any) {
     this.areas = [...this.areas, event];
     console.log(this.areas);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
   updateArea(event: any) {
@@ -60,10 +70,12 @@ export default class AreasComponent {
     console.log(this.areas);
     this.selectedTableArea.set(undefined);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
   togglePopup() {
     this.selectedTableArea.set(undefined);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 }

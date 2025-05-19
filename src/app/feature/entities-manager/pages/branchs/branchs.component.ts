@@ -15,11 +15,8 @@ export default class BranchsComponent{
   formData = signal<any>(undefined);
   selectedTableBranch = signal<any>(undefined);
   layoutService = inject(LayoutService);
-/* 
-  ngOnInit() {
-    this.layoutService.permitirScroll();
-  } */
- ngOnDestroy() {
+
+  ngOnDestroy() {
     this.layoutService.permitirScroll();
   }
 
@@ -146,15 +143,18 @@ export default class BranchsComponent{
   ];
 
   editBranch(event: any) {
+    
     this.selectedTableBranch.set(event);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
   addBranch(event: any) {
-
+    
     this.sucursales = [...this.sucursales, event];
     console.log(this.sucursales);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
   updateBranch(event: any) {
@@ -166,12 +166,13 @@ export default class BranchsComponent{
     console.log(this.sucursales);
     this.selectedTableBranch.set(undefined);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
   togglePopup() {
-    if (!this.openPopup()) this.layoutService.bloquearScroll();
-    else this.layoutService.permitirScroll();
+    
     this.selectedTableBranch.set(undefined);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 }

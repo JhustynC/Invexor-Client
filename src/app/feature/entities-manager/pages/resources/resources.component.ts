@@ -50,12 +50,14 @@ export default class ResourcesComponent {
   editResource(event: any) {
     this.selectedTableResource.set(event);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
   addResource(event: any) {
     this.resources = [...this.resources, event];
     console.log(this.resources);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
   updateResource(event: any) {
@@ -69,11 +71,13 @@ export default class ResourcesComponent {
     console.log(this.resources);
     this.selectedTableResource.set(undefined);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
   togglePopup() {
     this.selectedTableResource.set(undefined);
     this.openPopup.update((prev) => !prev);
+    this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
   subListOptions(event: Set<string>) {
