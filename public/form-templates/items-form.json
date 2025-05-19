@@ -1,0 +1,44 @@
+{
+  "controls": [
+    {
+      "name": "SKU",
+      "label": "SKU:",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "Nombre",
+      "label": "Nombre:",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "Description",
+      "label": "Description",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": false,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "Proveedor",
+      "label": "Proveedor:",
+      "value": "",
+      "type": "text",
+      "validators": {
+          "required": true,
+          "minLength": 1
+      }
+    }
+  ]
+}
