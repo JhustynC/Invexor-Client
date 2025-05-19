@@ -69,7 +69,8 @@
           </div> -->
         <div class="flex flex-col items-center justify-center w-[100%] h-[100%] gap-5">
           <!--? Forma de consumir los valores de las sub-list -->
-          <sub-list (selectedOptionsOutput)="subListOptions($event)"></sub-list>
+          <sub-list (selectedOptionsOutput)="subListOptions($event)"
+                    [initialSelectedOptions]="selectedTableUser()?.atributes"></sub-list>
 
           <enter-img (previewUrlOutput)="onEnterImg($event)"></enter-img>
         </div>
@@ -80,4 +81,17 @@
     </upgrated-form>
   </div>
 </div>
+}
+
+
+@if(showCustomProperties()){
+  <div class="absolute inset-0 z-50 overflow-y-scroll">
+    <!-- Fondo que se adapta al contenido scrollable -->
+    <div class="fixed w-full h-full bg-gray-500 opacity-50 z-10"></div>
+
+    <!-- Contenedor del modal -->
+    <div class="relative z-20 p-4 modal-container">
+      <table-composition-shared></table-composition-shared>
+    </div>
+  </div>
 }

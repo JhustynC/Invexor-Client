@@ -18,6 +18,7 @@ export class TableCompositionComponent {
   //* Definición de las propiedades de salida
   addButtonClickedOutput = output<void>();
   editHandleRowEvent = output<void>();
+  infoHandleRowEvent = output<void>();
   selectedRow = output<any>();
 
   //* Definición de las propiedades de entrada
@@ -91,6 +92,10 @@ export class TableCompositionComponent {
 
     this.sortField.set(field);
     this.sortDirection.set('asc');
+  }
+
+  handleInfoRow(row: any) {
+    this.infoHandleRowEvent.emit(row);
   }
 
   handleEditRow(row: any) {
