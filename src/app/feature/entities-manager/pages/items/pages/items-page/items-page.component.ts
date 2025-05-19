@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import { ChangeDetectionStrategy, Component, inject, input, output, signal } from '@angular/core';
-import { TableCompositionComponent } from "../../../../../../shared/components/table-composition/table-composition.component";
-import { ModalComponent } from "../../../../../../shared/components/modal/modal.component";
-import { SubListComponent } from "../../../../../../shared/components/sub-list/sub-list.component";
-import { EnterImgComponent } from "../../../../../../shared/components/enter-img/enter-img.component";
-import { UpgratedFormComponent } from "../../../../../../shared/components/upgrated-form/upgrated-form.component";
-=======
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,7 +11,6 @@ import { ModalComponent } from '../../../../../../shared/components/modal/modal.
 import { SubListComponent } from '../../../../../../shared/components/sub-list-v2/sub-list.component';
 import { EnterImgComponent } from '../../../../../../shared/components/enter-img/enter-img.component';
 import { UpgratedFormComponent } from '../../../../../../shared/components/upgrated-form/upgrated-form.component';
->>>>>>> 724e1361307c4b22f38ae1117b962dac361f5464
 import { LayoutService } from '../../../../../../layout/invexor-layout/services/layout.service';
 
 @Component({
@@ -127,11 +118,7 @@ export default class ItemsPageComponent {
 
   updateUser(event: any) {
     //this.usuarios[this.usuarios.findIndex((usuario) => usuario.ID === event.ID)] = event;
-<<<<<<< HEAD
-    const index = this.items.findIndex((item) => item.SKU === event.SKU);
-=======
     const index = this.items.findIndex((item) => item.SKU === event.sku);
->>>>>>> 724e1361307c4b22f38ae1117b962dac361f5464
     console.log('Indice del usuario seleccionado', index);
     if (index !== -1) {
       this.items[index] = event;
@@ -170,21 +157,9 @@ export default class ItemsPageComponent {
     this.infoData = resultado;
     return resultado;
   }
-<<<<<<< HEAD
-  console.log('Objeto transformado:', resultado);
-  this.infoData = resultado;
-  return resultado;
-}
-items = [
-  {SKU: '001', Nombre: 'Item 1', Description: 'Descripción del item 1'}, 
-  {SKU: '002', Nombre: 'Item 2', Description: 'Descripción del item 2'},
-  {SKU: '003', Nombre: 'Item 3', Description: 'Descripción del item 3'},
-]
-=======
   items = [
     { SKU: '001', Nombre: 'Item 1', Descripcion: 'Descripción del item 1' },
     { SKU: '002', Nombre: 'Item 2', Descripcion: 'Descripción del item 2' },
     { SKU: '003', Nombre: 'Item 3', Descripcion: 'Descripción del item 3' },
   ];
->>>>>>> 724e1361307c4b22f38ae1117b962dac361f5464
 }
