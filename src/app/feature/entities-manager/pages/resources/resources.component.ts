@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { DynamicJsonFormComponent } from '../../../../shared/components/dynamic-json-form/dynamic-json-form.component';
 import { EnterImgComponent } from '../../../../shared/components/enter-img/enter-img.component';
-import { SubListComponent } from '../../../../shared/components/sub-list/sub-list.component';
+//import { SubListComponent } from '../../../../shared/components/sub-list/sub-list.component';
 import { TableCompositionComponent } from '../../../../shared/components/table-composition/table-composition.component';
 import { UpgratedFormComponent } from '../../../../shared/components/upgrated-form/upgrated-form.component';
 import { LayoutService } from '../../../../layout/invexor-layout/services/layout.service';
+import { SubListComponent } from '../../../../shared/components/sub-list-v2/sub-list.component';
 
 @Component({
   selector: 'app-resources',
