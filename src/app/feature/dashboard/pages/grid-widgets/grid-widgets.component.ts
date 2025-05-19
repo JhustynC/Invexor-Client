@@ -108,10 +108,8 @@ export default class GridLayoutComponent {
       emptyCellDragMaxRows: 50,
       ignoreMarginInRow: false,
       draggable: {
-
         enabled: true,
-        ignoreContentClass: 'gridster-item-content',
-        ignoreContentClass: 'gridster-item-content',
+        ignoreContentClass: 'gridster-item-content'
       },
       resizable: {
         enabled: true,
