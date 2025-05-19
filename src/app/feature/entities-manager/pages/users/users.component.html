@@ -1,5 +1,5 @@
 <!--@if(!showModal()){ -->
-<div class="mb-[60px] overflow-hidden">
+<div class="mb-[60px] overflow-hidden p-5">
 
   <table-composition-shared [columnNames]="['ID', 'Nombre', 'Email', 'Activo']"
                             [inputData]="usuarios"
@@ -74,8 +74,8 @@
 
     <!-- Contenedor del modal -->
     <div class="relative z-20 p-4 modal-container bg-[#11233B]">
-      
-      <table-composition-shared 
+
+      <table-composition-shared
         [columnNames]="['ID', 'Valor', 'Fecha']"
         [inputData]="infoData"
         [rowsPerPage]="15"
