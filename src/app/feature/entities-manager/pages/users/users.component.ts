@@ -28,6 +28,8 @@ import { LayoutService } from '../../../../layout/invexor-layout/services/layout
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class UsersComponent {
+
+  showCustomProperties = signal<boolean>(false);
   showModal = signal<boolean>(false);
   openPopup = signal<boolean>(false);
   showTable = true;
@@ -86,7 +88,6 @@ export default class UsersComponent {
   addUser(new_user: any) {
     //this.usuarios.push(new_user);
     this.usuarios = [...this.usuarios, new_user];
-    this.openPopup.update((prev) => !prev);
   }
 
   editUser(event: any) {
