@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { TableCompositionComponent } from '../../../../../../shared/components/table-composition/table-composition.component';
 import { ModalComponent } from '../../../../../../shared/components/modal/modal.component';
-import { SubListComponent } from '../../../../../../shared/components/sub-list-v2/sub-list.component';
+import { SubListComponent } from '../../../../../../shared/components/sub-list/sub-list.component';
 import { EnterImgComponent } from '../../../../../../shared/components/enter-img/enter-img.component';
 import { UpgratedFormComponent } from '../../../../../../shared/components/upgrated-form/upgrated-form.component';
 import { LayoutService } from '../../../../../../layout/invexor-layout/services/layout.service';
