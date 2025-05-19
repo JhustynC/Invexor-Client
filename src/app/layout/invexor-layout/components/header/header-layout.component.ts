@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink, TitleCasePipe],
 })
 export class HeaderLayoutComponent implements OnInit {
-  currentTitle = input<string>('hola');
+  currentTitle = input<string | null>(null);
 
   constructor() {}
 
