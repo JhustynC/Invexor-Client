@@ -58,10 +58,21 @@
   </div>
 </div>
 
-<div class="breadcrumbs text-sm pl-3 bg-[#111827]">
+<div class="breadcrumbs text-sm pl-3 bg-[#111827] text-white font-bold">
   <ul>
-    <li><a>Home</a></li>
-    <li><a>Documents</a></li>
-    <li>Add Document</li>
+    @for(breadcrumb of breadcrumbs; track breadcrumb.label){
+    <li>
+      @if(!$last){
+      <ng-container>
+        <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
+      </ng-container>
+      }
+      @else{
+      <ng-container>
+        {{ breadcrumb.label }}
+      </ng-container>
+      }
+    </li>
+    }
   </ul>
 </div>

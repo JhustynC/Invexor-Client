@@ -9,27 +9,33 @@ export const featureRoutes: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
+    data: { breadcrumb: 'Dashboard' },
   },
   {
     path: 'dashboard',
     component: GridLayoutComponent,
+    data: { breadcrumb: 'Dashboard' },
   },
   {
     path: 'reports',
     component: ReportsComponent,
+    data: { breadcrumb: 'Reports' },
   },
   {
     path: 'entities-manager',
     loadChildren: () => import('./entities-manager/entities-manager.routes'),
+    data: { breadcrumb: 'Entities-Manager' },
   },
   {
     path: 'mashup',
     component: MashupComponent,
+    data: { breadcrumb: 'Mashup' },
   },
   {
     path: 'profile',
-    component: ProfileComponent
-  }
+    component: ProfileComponent,
+    data: { breadcrumb: 'Profile' },
+  },
 ];
 
 export default featureRoutes;

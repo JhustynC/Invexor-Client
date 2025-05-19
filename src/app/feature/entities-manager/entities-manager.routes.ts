@@ -9,22 +9,31 @@ export const entitiesManagerRoutes: Routes = [
   {
     path: 'branchs',
     component: BranchsComponent,
+    data: { breadcrumb: 'Branchs' },
   },
   {
     path: 'areas',
     component: AreasComponent,
+    data: { breadcrumb: 'Areas' },
   },
   {
     path: 'items',
     component: ItemsPageComponent,
+    data: { breadcrumb: 'Items' },
   },
   {
     path: 'resources',
     component: ResourcesComponent,
+    data: { breadcrumb: 'Resources' },
   },
   {
     path: 'users',
     component: UsersComponent,
+    data: { breadcrumb: 'Users' },
+  },
+  {
+    path: '**',
+    redirectTo: 'branchs',
   },
 ];
 

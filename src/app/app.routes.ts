@@ -9,11 +9,13 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     pathMatch: 'full',
+    data: { breadcrumb: 'Login' },
   },
   {
     path: 'client',
     component: InvexorLayoutComponent,
     loadChildren: () => import('./feature/invexor.routes'),
+    data: { breadcrumb: 'Client' },
     //canActivate: [authGuard],
   },
   {
