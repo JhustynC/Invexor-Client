@@ -14,7 +14,7 @@ export const routes: Routes = [
     path: 'client',
     component: InvexorLayoutComponent,
     loadChildren: () => import('./feature/invexor.routes'),
-    canActivate: [authGuard],
+    //canActivate: [authGuard],
   },
   {
     path: 'not-found',

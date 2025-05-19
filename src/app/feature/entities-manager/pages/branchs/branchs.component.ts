@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TableCompositionComponent } from '../../../../shared/components/table-composition/table-composition.component';
 import { UpgratedFormComponent } from '../../../../shared/components/upgrated-form/upgrated-form.component';
+import { LayoutService } from '../../../../layout/invexor-layout/services/layout.service';
 
 @Component({
   selector: 'branchs-entities-manager',
@@ -8,11 +9,19 @@ import { UpgratedFormComponent } from '../../../../shared/components/upgrated-fo
   templateUrl: './branchs.component.html',
   styleUrls: ['./branchs.component.css'],
 })
-export default class BranchsComponent {
+export default class BranchsComponent{
 
   openPopup = signal<boolean>(false);
   formData = signal<any>(undefined);
   selectedTableBranch = signal<any>(undefined);
+  layoutService = inject(LayoutService);
+/* 
+  ngOnInit() {
+    this.layoutService.permitirScroll();
+  } */
+ ngOnDestroy() {
+    this.layoutService.permitirScroll();
+  }
 
   sucursales = [
     {
@@ -142,6 +151,7 @@ export default class BranchsComponent {
   }
 
   addBranch(event: any) {
+
     this.sucursales = [...this.sucursales, event];
     console.log(this.sucursales);
     this.openPopup.update((prev) => !prev);
@@ -159,6 +169,8 @@ export default class BranchsComponent {
   }
 
   togglePopup() {
+    if (!this.openPopup()) this.layoutService.bloquearScroll();
+    else this.layoutService.permitirScroll();
     this.selectedTableBranch.set(undefined);
     this.openPopup.update((prev) => !prev);
   }
