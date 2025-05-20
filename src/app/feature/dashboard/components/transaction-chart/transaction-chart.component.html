@@ -1,20 +1,18 @@
-
-
 <div class="layout">
-    <header>
-        <app-transaction-chart-header [title]="title" [description]="description"></app-transaction-chart-header>
-    </header>
-    <main>
-        
-        @for (item of rows; track $index) {
-            <transaction-chart-row class="row" 
-            [date]="item.date" 
-            [date_hour]="item.date_hour" 
-            [id]="item.id" 
-            [type]="item.type">
+  <header>
+    <app-transaction-chart-header [title]="title"
+                                  [description]="description"></app-transaction-chart-header>
+  </header>
+  <main class="overflow-y-scroll">
 
-            </transaction-chart-row>
-        }
-    </main>
+    @for (item of rows; track $index) {
+    <transaction-chart-row class="row"
+                           [date]="item.date"
+                           [date_hour]="item.date_hour"
+                           [id]="item.id"
+                           [type]="item.type">
+
+    </transaction-chart-row>
+    }
+  </main>
 </div>
-  

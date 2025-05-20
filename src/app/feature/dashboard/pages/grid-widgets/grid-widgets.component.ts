@@ -16,6 +16,7 @@ import {
   PushDirections,
   Resizable,
 } from 'angular-gridster2';
+import { TopCategoriesV2Component } from "../../components/top-categories-v2/top categories v2.component";
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -25,6 +26,7 @@ interface Safe extends GridsterConfig {
 
 interface ItemByType extends GridsterItem {
   type?: string;
+  bgColor?: string;
 }
 
 @Component({
@@ -35,9 +37,10 @@ interface ItemByType extends GridsterItem {
     GridsterItemComponent,
     TransactionChartComponent,
     TransactionsGraphComponent,
-    TopCategoriesComponent,
+    // TopCategoriesComponent,
     ItemChartComponent,
-  ],
+    TopCategoriesV2Component
+],
   styles: `
   ::ng-deep .custom-gridster {
     background-color: #111827 !important;
@@ -109,7 +112,7 @@ export default class GridLayoutComponent {
       ignoreMarginInRow: false,
       draggable: {
         enabled: true,
-        ignoreContentClass: 'gridster-item-content'
+        ignoreContentClass: 'gridster-item-content',
       },
       resizable: {
         enabled: true,
@@ -127,10 +130,32 @@ export default class GridLayoutComponent {
     };
 
     this.dashboard = [
-      { cols: 1, rows: 1, y: 0, x: 0, type: 'Items'},
-      { cols: 3, rows: 1, y: 0, x: 1, hasContent: true, type: 'Graph'},
-      { cols: 2, rows: 2, y: 0, x: 4, type: 'TopCategories'},
-      { cols: 2, rows: 2, y: 2, x: 5, type: 'LastTransactions'}
+      { cols: 1, rows: 1, y: 0, x: 0, type: 'Items', bgColor: '#8F96D1' },
+      {
+        cols: 3,
+        rows: 1,
+        y: 0,
+        x: 1,
+        hasContent: true,
+        type: 'Graph',
+        bgColor: '#D1D5DB',
+      },
+      {
+        cols: 2,
+        rows: 2,
+        y: 0,
+        x: 4,
+        type: 'TopCategories',
+        bgColor: '#FEAD95',
+      },
+      {
+        cols: 2,
+        rows: 2,
+        y: 2,
+        x: 5,
+        type: 'LastTransactions',
+        bgColor: '#8F96D1',
+      },
     ];
   }
 

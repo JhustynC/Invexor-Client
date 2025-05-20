@@ -1,78 +1,85 @@
-import { Component, ElementRef, input, OnInit, ViewChild } from "@angular/core";
-import { Chart, ChartConfiguration, registerables } from "chart.js";
+import { Component, ElementRef, input, OnInit, ViewChild } from '@angular/core';
+import { Chart, ChartConfiguration, registerables } from 'chart.js';
 
 @Component({
-    selector: 'top-categories-row',
-    templateUrl: './top-categories-row.html',
-    standalone: true
+  selector: 'top-categories-row',
+  templateUrl: './top-categories-row.html',
+  standalone: true,
 })
 export class TopCategoriesRowComponent implements OnInit {
-    category = input.required<string>();
-    maxValue = input.required<number>();
-    value = input.required<number>();
+  category = input.required<string>();
+  maxValue = input.required<number>();
+  value = input.required<number>();
+  resizeObserver!: ResizeObserver;
 
-    @ViewChild('myChart', {static: true}) chartRef!: ElementRef<HTMLCanvasElement>;
-    chart: Chart | undefined;
+  @ViewChild('myChart', { static: true })
+  chartRef!: ElementRef<HTMLCanvasElement>;
+  chart: Chart | undefined;
 
-    constructor() {
+  constructor() {
+    Chart.register(...registerables);
+  }
 
-        Chart.register(...registerables);
-    }
+  ngOnInit(): void {
+    this.chart = new Chart(this.chartRef.nativeElement, this.chartConfig());
+    this.resizeObserver = new ResizeObserver(() => {
+      this.chart?.resize();
+    });
+    this.resizeObserver.observe(this.chartRef.nativeElement.parentElement!);
+  }
 
-    ngOnInit(): void {
-        
-        this.chart = new Chart(this.chartRef.nativeElement, this.chartConfig());
-    }
+  ngOnDestroy(): void {
+    this.resizeObserver?.disconnect();
+    this.chart?.destroy();
+  }
 
-    chartConfig(): ChartConfiguration<'bar'> {
-
-        return {
-            type: 'bar',
-            data: {
-                labels: [this.category()],
-                datasets: [
-                    {
-                        backgroundColor: '#F97316',
-                        data: [this.value()],
-                        borderRadius: Number.MAX_VALUE,
-                        borderSkipped: false,
-                        barPercentage: 0.3
-                    },
-                    {
-                        backgroundColor: '#D9D9D9',
-                        data: [this.maxValue()],
-                        borderRadius: Number.MAX_VALUE,
-                        borderSkipped: false,
-                        barPercentage: 0.3
-                    }
-                    
-                ]
+  chartConfig(): ChartConfiguration<'bar'> {
+    return {
+      type: 'bar',
+      data: {
+        labels: [this.category()],
+        datasets: [
+          {
+            backgroundColor: '#F97316',
+            data: [this.value()],
+            borderRadius: Number.MAX_VALUE,
+            borderSkipped: false,
+            barPercentage: 0.3,
+          },
+          {
+            backgroundColor: '#D9D9D9',
+            data: [this.maxValue()],
+            borderRadius: Number.MAX_VALUE,
+            borderSkipped: false,
+            barPercentage: 0.3,
+          },
+        ],
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            display: false,
+            grid: {
+              display: false,
             },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    x: {
-                        display: false,
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        display: false,
-                        grid: {
-                            display: false
-                        },
-                        stacked: true
-                    }
-                }
-            }
-        }
-    }
+          },
+          y: {
+            display: false,
+            grid: {
+              display: false,
+            },
+            stacked: false,
+          },
+        },
+      },
+    };
+  }
 }

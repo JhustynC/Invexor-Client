@@ -1,12 +1,13 @@
-<div class="flex flex-row items-center gap-2 w-full relative">
-    <div class="basis-1/10 pl-2">
-        <p>{{category()}}</p>
-    </div>
-    <div class="w-full basis-8/10">
-        <canvas #myChart class="max-h-[90px] w-full h-[90px]"></canvas>
-    </div>
-    <div>l</div>
-    <div class="basis-1/10">
-        <p>{{value()}}</p>
-    </div>
+<div class="flex flex-row items-center gap-2 w-full">
+  <!-- <div class="pl-2 min-w-[80px] shrink-0">
+    <p class="truncate">{{category()}}</p>
+  </div> -->
+  <div class="flex-1 h-[60px]">
+    <canvas #myChart
+            class="w-full h-full"></canvas>
+  </div>
+  <!-- <span class="shrink-0">|</span>
+  <div class="min-w-[50px] shrink-0 text-right pr-2">
+    <p>{{value()}}</p>
+  </div> -->
 </div>
