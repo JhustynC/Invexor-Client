@@ -4,7 +4,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration } from 'chart.js';
 
 @Component({
-  selector: 'top-categories-v2',
+  selector: 'top-categories-dashboard',
   templateUrl: './top categories v2.component.html',
   imports: [CommonModule, BaseChartDirective],
   styles: `
@@ -21,7 +21,7 @@ import { ChartConfiguration } from 'chart.js';
     }
   `,
 })
-export class TopCategoriesV2Component {
+export class TopCategoriesComponent {
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: true,
     indexAxis: 'y',

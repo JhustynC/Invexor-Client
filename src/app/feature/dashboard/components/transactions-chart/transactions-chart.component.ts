@@ -4,9 +4,10 @@ import { TransactionsGraphService } from './services/transactions-graph.service'
 import { TransactionStatistics } from './Dtos/transaction-statistics';
 import { BaseChartDirective } from 'ng2-charts';
 
+//? Solucion para el responsive en el dashboard: estilos del chart-container
 @Component({
-  selector: 'transactions-graph-dashboard',
-  templateUrl: './transactions-graph.component.html',
+  selector: 'transactions-chart-dashboard',
+  templateUrl: './transactions-chart.component.html',
   imports: [BaseChartDirective],
   styles: `
     .chart-container {
@@ -25,7 +26,7 @@ import { BaseChartDirective } from 'ng2-charts';
     }
   `,
 })
-export class TransactionsGraphComponent {
+export class TransactionsChartComponent {
   ngOnInit() {}
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {

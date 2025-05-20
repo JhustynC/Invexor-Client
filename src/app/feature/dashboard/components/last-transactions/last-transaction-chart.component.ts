@@ -6,14 +6,14 @@ import { TransactionChartHeaderComponent } from './components/transaction-chart-
 //import { TransactionChartService } from '../../services/transaction-chart.service';
 import { TransactionChartService } from './services/transaction-chart.service';
 @Component({
-  selector: 'transaction-chart-dashboard',
+  selector: 'last-transaction-chart-dashboard',
   standalone: true,
-  templateUrl: './transaction-chart.component.html',
-  styleUrl: './transaction-chart.component.css',
+  templateUrl: './last-transaction-chart.component.html',
+  styleUrl: './last-transaction-chart.component.css',
   imports: [TransactionChartRowComponent, TransactionChartHeaderComponent],
   providers: [TransactionChartService],
 })
-export class TransactionChartComponent implements OnInit {
+export class LastTransactionChartComponent implements OnInit {
   title = 'Last transactions';
   description = '';
   rows: any[] = [];

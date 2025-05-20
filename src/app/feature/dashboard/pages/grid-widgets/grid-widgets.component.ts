@@ -1,8 +1,4 @@
 import { Component, EventEmitter, HostListener } from '@angular/core';
-import { TransactionChartComponent } from '../../components/transaction-chart/transaction-chart.component';
-import { TransactionsGraphComponent } from '../../components/transactions-graph/transactions-graph.component';
-import { TopCategoriesComponent } from '../../components/top-categories/top-categories.component';
-import { ItemChartComponent } from '../../components/item-chart/item-chart.component';
 import {
   CompactType,
   DisplayGrid,
@@ -16,7 +12,10 @@ import {
   PushDirections,
   Resizable,
 } from 'angular-gridster2';
-import { TopCategoriesV2Component } from "../../components/top-categories-v2/top categories v2.component";
+import { LastTransactionChartComponent } from '../../components/last-transactions/last-transaction-chart.component';
+import { TransactionsChartComponent } from '../../components/transactions-chart/transactions-chart.component';
+import { TotalItemChartComponent } from '../../components/total-items/total-items-chart.component';
+import { TopCategoriesComponent } from '../../components/top-categories-chart/top categories v2.component';
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -35,12 +34,11 @@ interface ItemByType extends GridsterItem {
   imports: [
     GridsterComponent,
     GridsterItemComponent,
-    TransactionChartComponent,
-    TransactionsGraphComponent,
-    // TopCategoriesComponent,
-    ItemChartComponent,
-    TopCategoriesV2Component
-],
+    LastTransactionChartComponent,
+    TransactionsChartComponent,
+    TotalItemChartComponent,
+    TopCategoriesComponent,
+  ],
   styles: `
   ::ng-deep .custom-gridster {
     background-color: #111827 !important;
