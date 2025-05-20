@@ -1,26 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Chart, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration } from 'chart.js';
 
 @Component({
   selector: 'top-categories-v2',
   templateUrl: './top categories v2.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, BaseChartDirective],
   styles: `
-  h2 {
-    margin: 0;
-    font-size: 2rem;
-    font-weight: bold;
-  }
+    h2 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: bold;
+    }
 
-  .subtitle {
-    margin-top: 0;
-    font-size: 0.9rem;
-    color: #4a4a4a;
-  }
+    .subtitle {
+      margin-top: 0;
+      font-size: 0.9rem;
+      color: #4a4a4a;
+    }
   `,
 })
 export class TopCategoriesV2Component {
@@ -56,8 +54,8 @@ export class TopCategoriesV2Component {
         data: [89, 60, 85, 40, 89],
         label: 'Items',
         backgroundColor: ['#F97316'],
-        borderRadius: 10, // Valor en píxeles
-        borderSkipped: false, // Para aplicar el borde redondeado en todos los lados
+        borderRadius: 10, //? Valor en píxeles
+        borderSkipped: false, //? Para aplicar el borde redondeado en todos los lados
       },
     ],
   };

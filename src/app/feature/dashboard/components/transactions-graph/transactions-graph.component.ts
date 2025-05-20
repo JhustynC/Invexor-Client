@@ -1,78 +1,102 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { Chart, ChartConfiguration, registerables } from "chart.js";
-import { TransactionsGraphService } from "./services/transactions-graph.service";
-import { TransactionStatistics } from "./Dtos/transaction-statistics";
+import { Component } from '@angular/core';
+import { ChartConfiguration, ChartType } from 'chart.js';
+import { TransactionsGraphService } from './services/transactions-graph.service';
+import { TransactionStatistics } from './Dtos/transaction-statistics';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
-    selector: 'transactions-graph-dashboard',
-    templateUrl: './transactions-graph.component.html',
-    standalone: true
+  selector: 'transactions-graph-dashboard',
+  templateUrl: './transactions-graph.component.html',
+  imports: [BaseChartDirective],
+  styles: `
+    .chart-container {
+      width: 100%;
+      height: 100%;
+      max-width: 10000px;
+      max-height: 1000px;
+      margin: auto;
+      background: #D1D5DB;
+      border-radius: 15px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  `,
 })
-export class TransactionsGraphComponent implements OnInit {
+export class TransactionsGraphComponent {
+  ngOnInit() {}
 
-    @ViewChild('myChart', {static: true}) chartRef!: ElementRef<HTMLCanvasElement>;
-    xValues: string[] = [];
-    yValues: number[][] = [];
+  public lineChartData: ChartConfiguration<'line'>['data'] = {
+    labels: [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Ago',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dic',
+    ],
+    datasets: [
+      {
+        data: [3, 10, 20, 30, 25, 15, 8, 7, 10, 15, 25, 35],
+        label: 'Transacciones',
+        borderColor: 'rgba(96, 125, 255, 0.6)',
+        // backgroundColor: 'rgba(96, 125, 255, 0.3)',
+        pointBackgroundColor: '#000',
+        pointRadius: 3,
+        fill: true,
+        tension: 0.4,
+      },
+      {
+        data: [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36],
+        label: 'Tendencia',
+        borderColor: 'rgba(255, 0, 0, 0.6)',
+        backgroundColor: 'transparent',
+        pointRadius: 0,
+        borderDash: [5, 5],
+        fill: false,
+      },
+    ],
+  };
 
-    chart: Chart | undefined;
+  public lineChartOptions: ChartConfiguration<'line'>['options'] = {
+    responsive: true,
+    maintainAspectRatio: false,
 
-    constructor(private transactionsGraphService: TransactionsGraphService) {
-        // Register all necessary Chart.js components
-        Chart.register(...registerables);
-    }
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 40,
+        ticks: {
+          stepSize: 10,
+        },
+        grid: {
+          color: '#ccc',
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+    },
+    plugins: {
+      legend: { display: true },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => `${ctx.dataset.label}: ${ctx.raw}`,
+        },
+      },
+    },
+  };
 
-    ngOnInit(): void {
-        this.transactionsGraphService.gettransactionStatisticsByMonth().subscribe({
-            next: (data:TransactionStatistics) => {
-                this.xValues = data.x,
-                this.yValues = data.y
-
-                const chartConfig = this.chartConfig();
-                
-                if (this.chart) this.chart.destroy();
-                // Initialize the chart
-                this.chart = new Chart(this.chartRef.nativeElement, chartConfig);
-            },
-            error: () => {
-                console.error('Error fetching transaction statistics');
-            }
-        });
-        
-    }
-
-    chartConfig(): ChartConfiguration<'line'> {
-        return {
-            type: 'line',
-            data: {
-                labels: this.xValues,
-                datasets: this.yValues.map((yValue) => ({
-                    data: yValue,
-                    borderColor: '#' + Math.floor(Math.random()*16777215).toString(16),
-                    borderWidth: 2,
-                    tension: 0.4,
-                    fill: false
-                }))
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false, // Show legend
-                    },
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                    },
-                },
-            },
-        };
-    }
+  public lineChartLegend = true;
+  public lineChartType: ChartType = 'line';
 }

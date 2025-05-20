@@ -1,14 +1,16 @@
-<div class="w-full min-h-[180px] bg-gray-300 p-4 rounded">
-  <div class="gridster-item-content flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-    <span class="text-2xl font-bold">Transactions</span>
-    <select class="w-full sm:w-1/4 bg-gray-200 border border-black px-2 py-1 rounded">
-      <option>Months</option>
-      <option>Years</option>
+<div class="chart-container">
+  <div class="gridster-item-content flex justify-between items-center">
+    <h2 class="text-[2rem] font-bold">Transactions</h2>
+    <select class="bg-white rounded-2xl h-[30px] px-2">
+      <option value="year">Year</option>
+      <option value="month">Month</option>
     </select>
   </div>
-
-  <div class="w-full">
-    <canvas #myChart
-            class="w-full min-h-40"></canvas>
-  </div>
+  <canvas baseChart
+          [data]="lineChartData"
+          [plugins]="[]"
+          [options]="lineChartOptions"
+          [type]="'line'"
+          [legend]="lineChartLegend">
+  </canvas>
 </div>
