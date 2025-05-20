@@ -128,14 +128,14 @@ export default class GridLayoutComponent {
     };
 
     this.dashboard = [
-      { cols: 1, rows: 1, y: 0, x: 0, type: 'Items', bgColor: '#8F96D1' },
+      { cols: 1, rows: 1, y: 0, x: 0, type: 'TotalItems', bgColor: '#8F96D1' },
       {
         cols: 3,
         rows: 1,
         y: 0,
         x: 1,
         hasContent: true,
-        type: 'Graph',
+        type: 'TransactionsChart',
         bgColor: '#D1D5DB',
       },
       {
