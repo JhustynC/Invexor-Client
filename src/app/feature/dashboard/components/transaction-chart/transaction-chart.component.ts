@@ -14,7 +14,7 @@ import { TransactionChartService } from './services/transaction-chart.service';
   providers: [TransactionChartService],
 })
 export class TransactionChartComponent implements OnInit {
-  title = '';
+  title = 'Last transactions';
   description = '';
   rows: any[] = [];
 
