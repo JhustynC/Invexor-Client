@@ -1,13 +1,16 @@
-<div class="card">
-  <h2>Top Categories</h2>
-  <p class="subtitle">Categories with more items</p>
+<div class="overflow-hidden">
+  <header>
+    <h2 class="text-[2rem] font-extrabold">Top Categories</h2>
+    <p class="text-[0.9rem] text-[#4a4a4a]">Categories with more items</p>
+  </header>
 
-  <canvas baseChart
-          [data]="barChartData"
-          [plugins]="[]"
-          [options]="barChartOptions"
-          [legend]="true"
-          [type]="'bar'">
-  </canvas>
-
+  <main class="overflow-auto">
+    <canvas baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [legend]="true"
+      [type]="'bar'"
+      class="overflow-y-scroll mt-5">
+    </canvas>
+  </main>
 </div>

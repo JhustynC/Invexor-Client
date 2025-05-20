@@ -7,19 +7,6 @@ import { ChartConfiguration } from 'chart.js';
   selector: 'top-categories-dashboard',
   templateUrl: './top categories v2.component.html',
   imports: [CommonModule, BaseChartDirective],
-  styles: `
-    h2 {
-      margin: 0;
-      font-size: 2rem;
-      font-weight: bold;
-    }
-
-    .subtitle {
-      margin-top: 0;
-      font-size: 0.9rem;
-      color: #4a4a4a;
-    }
-  `,
 })
 export class TopCategoriesComponent {
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {

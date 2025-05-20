@@ -143,7 +143,7 @@ export default class GridLayoutComponent {
         rows: 2,
         y: 0,
         x: 4,
-        type: 'TopCategories',
+        type: 'TopCategoriesChart',
         bgColor: '#FEAD95',
       },
       {
