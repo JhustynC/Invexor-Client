@@ -12,19 +12,19 @@
       }
       @case ('TransactionsChart') {
       <!--? El padding ayuda a no generar el scroll -->
-      <div class="h-[100%] pb-12 p-4 bg-[#D1D5DB] text-black">
+      <div class="bg-[#D1D5DB] text-black h-[100%] pb-12 p-4 ">
         <transactions-chart-dashboard></transactions-chart-dashboard>
       </div>
       }
       @case ('TopCategoriesChart') {
-      <div class="h-full p-4 text-black bg-[#FEAD95]">
+      <div class="bg-[#FEAD95] p-4 text-black ">
         <top-categories-dashboard></top-categories-dashboard>
       </div>
       }
       @case ('TotalItems'){
-      <!-- <div class="bg-[#8F96D1"> -->
-      <total-items-chart-dashboard></total-items-chart-dashboard>
-      <!-- </div> -->
+      <div class="bg-[#8F96D1] p-4 h-full">
+        <total-items-chart-dashboard></total-items-chart-dashboard>
+      </div>
       }
       @default {
       <p>Default content.</p>
