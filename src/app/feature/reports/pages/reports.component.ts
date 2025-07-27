@@ -7,7 +7,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer'; // Make sure this path is corr
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [PdfViewerModule],
+  imports: [PdfViewerModule, JsonFormComponentV2],
   templateUrl: './reports.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
