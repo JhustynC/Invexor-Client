@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, inject, ChangeDetectorRef } from '@angular/core';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { TransactionsGraphService } from './services/transactions-graph.service';
 import { TransactionStatistics } from './Dtos/transaction-statistics';
@@ -26,15 +26,43 @@ import { BaseChartDirective } from 'ng2-charts';
     }
   `,
 })
-export class TransactionsChartComponent implements OnInit {
+export class TransactionsChartComponent implements OnInit, AfterViewInit {
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+  
   private transactionsService = inject(TransactionsGraphService);
+  private cdr = inject(ChangeDetectorRef);
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: [],
     datasets: []
   }
 
   ngOnInit() {
-    this.loadTransactionData();
+    // Inicializar con datos vacíos para evitar errores de renderizado
+    this.initializeEmptyChart();
+  }
+
+  ngAfterViewInit() {
+    // Cargar datos después de que la vista esté completamente inicializada
+    setTimeout(() => {
+      this.loadTransactionData();
+    }, 100);
+  }
+
+  private initializeEmptyChart() {
+    this.lineChartData = {
+      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+               'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      datasets: [{
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        label: 'Transacciones',
+        borderColor: 'rgba(96, 125, 255, 0.6)',
+        backgroundColor: 'rgba(96, 125, 255, 0.1)',
+        pointBackgroundColor: '#000',
+        pointRadius: 3,
+        fill: true,
+        tension: 0.4,
+      }]
+    };
   }
 
   private loadTransactionData() {
@@ -115,6 +143,14 @@ export class TransactionsChartComponent implements OnInit {
         (this.lineChartOptions.scales['y'] as any).ticks.stepSize = Math.ceil(yAxisMax / 4);
       }
     }
+
+    // Forzar la actualización del gráfico
+    setTimeout(() => {
+      if (this.chart) {
+        this.chart.update();
+      }
+      this.cdr.detectChanges();
+    }, 50);
   }
   
   private calculateTrendLine(data: number[]): number[] {
@@ -188,6 +224,21 @@ export class TransactionsChartComponent implements OnInit {
   public lineChartOptions: ChartConfiguration<'line'>['options'] = {
     responsive: true,
     maintainAspectRatio: false,
+    resizeDelay: 0, // Reducir delay de resize
+    
+    // Configuración de animaciones para mejor renderizado inicial
+    animation: {
+      duration: 750,
+      easing: 'easeInOutQuart',
+      onComplete: () => {
+        // Forzar una actualización después de la animación inicial
+        setTimeout(() => {
+          if (this.chart) {
+            this.chart.update('none');
+          }
+        }, 50);
+      }
+    },
 
     scales: {
       y: {
@@ -213,6 +264,13 @@ export class TransactionsChartComponent implements OnInit {
           label: (ctx) => `${ctx.dataset.label}: ${ctx.raw}`,
         },
       },
+    },
+    // Configuración adicional para mejorar el renderizado
+    onResize: (chart, size) => {
+      // Forzar actualización cuando se redimensiona
+      setTimeout(() => {
+        chart.update('none');
+      }, 100);
     },
   };
 
