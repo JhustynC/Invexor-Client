@@ -1,14 +1,14 @@
 <div class="layout">
   <header>
-    <app-transaction-chart-header [title]="'Last transactions'"
-                                  [description]="'Basic data of transactions'"></app-transaction-chart-header>
+    <app-transaction-chart-header [title]="title"
+                                  [description]="description"></app-transaction-chart-header>
   </header>
   <main class="overflow-y-scroll">
 
     @for (item of rows; track $index) {
     <transaction-chart-row class="row"
                            [date]="item.date"
-                           [date_hour]="item.date_hour"
+                           [date_hour]="item.date"
                            [id]="item.id"
                            [type]="item.type">
 
