@@ -6,7 +6,8 @@
     [rowsPerPage]="15"
     (addButtonClickedOutput)="togglePopup()"
     (selectedEditRow)="editBranch($event)"
-    (selectedInfoRow)="toggleCustomProperties()">
+    (selectedInfoRow)="toggleCustomProperties()"
+    (selectedDeleteRow)="deleteBranch($event)">
   </table-composition-shared>
 
   @if (openPopup()) {

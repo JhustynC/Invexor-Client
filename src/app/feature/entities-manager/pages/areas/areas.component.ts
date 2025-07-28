@@ -63,6 +63,7 @@ export default class AreasComponent {
           description: area.description,
           id_entity: area.id_entity,
         }));
+        this.areas = [...this.areas];
       },
       error: (error) => {
         console.error('Error fetching areas:', error);

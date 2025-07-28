@@ -39,5 +39,6 @@ export class TableComponent {
   currentPage = input<number>(1);
   selectedEditRow = output<any>();
   selectedInfoRow = output<any>();
+  selectedDeleteRow = output<any>();
 
 }

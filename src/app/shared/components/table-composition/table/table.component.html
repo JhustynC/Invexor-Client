@@ -46,7 +46,8 @@
                    (click)="selectedEditRow.emit(row)">Edit</a></li>
               <li><a class="text-info"
                    (click)="selectedInfoRow.emit(row)">Info</a></li>
-              <li><a class="text-error z-1">Delete</a></li>
+              <li><a class="text-error z-1"
+                   (click)="selectedDeleteRow.emit(row)">Delete</a></li>
             </ul>
           </div>
         </td>

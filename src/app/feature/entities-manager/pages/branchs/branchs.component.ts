@@ -127,6 +127,20 @@ export default class BranchsComponent{
     this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
+  deleteBranch(event: any) {
+    console.log('Deleting branch:', event);
+    this.branchService.deleteBranch(event.id_branch).subscribe({
+      next: () => {
+        // Remove the branch from the local array
+        this.getAllBranches();
+      },
+      error: (error) => {
+        console.error('Error deleting branch:', error);
+        // You might want to show an error message to the user here
+      }
+    })
+  }
+
   togglePopup() {
     
     this.selectedTableBranch.set(undefined);

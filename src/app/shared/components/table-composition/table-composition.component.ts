@@ -2,7 +2,6 @@
 import { Component, input, signal, computed, output } from '@angular/core';
 import { TableComponent } from './table/table.component';
 import { PaginationComponent } from './pagination/table-pagination.component';
-import { TitleCasePipe } from '@angular/common';
 import { TableFilterbarComponent } from './filterbar/table-filterbar.component';
 // ...
 
@@ -21,6 +20,7 @@ export class TableCompositionComponent {
   infoHandleRowEvent = output<void>();
   selectedEditRow = output<any>();
   selectedInfoRow = output<any>();
+  selectedDeleteRow = output<any>();
 
 
   //* Definición de las propiedades de entrada
