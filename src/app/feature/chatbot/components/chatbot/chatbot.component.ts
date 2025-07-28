@@ -1,4 +1,4 @@
-import { AfterViewInit, signal } from '@angular/core';
+import { AfterViewInit, signal, inject } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,30 +7,83 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChatMessageComponent } from '../chat-message/chat-message.component';
+import { GeminiService } from '../../services/gemini.service';
+import { NavigationService } from '../../services/navigation.service';
+import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 export interface ChatMessage {
   from: string;
-  message: string;
+  message: string | SafeHtml;
   time: string;
   side: 'start' | 'end';
 }
 
 @Component({
   selector: 'chatbot',
-  imports: [FormsModule, ChatMessageComponent],
+  imports: [FormsModule, ChatMessageComponent, CommonModule],
   templateUrl: './chatbot.component.html',
+  styleUrls: ['./chatbot.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChatbotComponent implements AfterViewInit {
-  //TODO: Fix scroll to bottom
+export default class ChatbotComponent implements AfterViewInit {
+  private geminiService = inject(GeminiService);
+  private navigationService = inject(NavigationService);
+  private sanitizer = inject(DomSanitizer);
 
   message = signal<string>('');
   messages: ChatMessage[] = [];
+  isLoading = signal<boolean>(false);
+  isApiConfigured = signal<boolean>(false);
 
   @ViewChild('chatMessages') chatMessages!: ElementRef<HTMLElement>;
 
+  constructor() {
+    // Configurar función global para navegación desde HTML inmediatamente
+    (window as any).navigateToPage = (route: string) => {
+      this.navigationService.navigateToPage(route);
+    };
+  }
+
   ngAfterViewInit(): void {
     this.chatMessages.nativeElement.classList.add('hidden');
+    
+    // Verificar si la API de Gemini está configurada
+    this.isApiConfigured.set(this.geminiService.isApiKeyConfigured());
+    
+    // Mensaje de bienvenida
+    this.addWelcomeMessage();
+  }
+
+  private addWelcomeMessage(): void {
+    const time = new Date().toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    let welcomeMessage: string;
+    let fromUser: string;
+
+    if (this.isApiConfigured()) {
+      fromUser = 'Invexor AI';
+      welcomeMessage = '¡Hola! Soy tu asistente virtual de Invexor. Estoy aquí para ayudarte con cualquier consulta sobre el sistema. ¿En qué puedo asistirte? [NAVEGAR:dashboard]';
+    } else {
+      fromUser = 'Sistema';
+      welcomeMessage = '⚠️ API de Gemini no configurada. El chatbot funcionará con respuestas predeterminadas. Puedes ir al [NAVEGAR:dashboard] para explorar el sistema.';
+    }
+
+    // Procesar comandos de navegación en el mensaje de bienvenida
+    const processedMessage = this.navigationService.processNavigationCommands(welcomeMessage);
+    
+    // Sanitizar el HTML para permitir botones seguros
+    const safeMessage = this.sanitizer.bypassSecurityTrustHtml(processedMessage);
+
+    this.messages.push({
+      from: fromUser,
+      message: safeMessage,
+      time,
+      side: 'start',
+    });
   }
 
   openChatbot() {
@@ -42,43 +95,123 @@ export class ChatbotComponent implements AfterViewInit {
   }
 
   sendMessage() {
-    if (!this.message().trim()) return;
+    if (!this.message().trim() || this.isLoading()) return;
 
+    const userMessage = this.message().trim();
     const time = new Date().toLocaleTimeString([], {
       hour: '2-digit',
       minute: '2-digit',
     });
 
-    // Mensaje del usuario
+    // Agregar mensaje del usuario
     this.messages.push({
       from: 'Tú',
-      message: this.message(),
+      message: userMessage,
       time,
       side: 'end',
     });
 
-    const userMessage = this.message;
     this.message.set('');
-
     setTimeout(() => this.scrollToBottom(), 100);
 
-    // Respuesta automática del bot
+    // Mostrar indicador de carga
+    this.isLoading.set(true);
+    this.addTypingIndicator();
+
+    if (this.isApiConfigured()) {
+      // Usar Gemini AI
+      this.sendToGemini(userMessage);
+    } else {
+      // Usar respuestas predeterminadas
+      this.sendFallbackResponse();
+    }
+  }
+
+  private sendToGemini(userMessage: string): void {
+    this.removeTypingIndicator(); // Quitar "Escribiendo..." al iniciar el stream
+    const history = this.geminiService.convertChatHistoryToGemini(this.messages.slice(1, -1));
+
+    const botMessage: ChatMessage = {
+      from: 'Invexor AI',
+      message: '', // Inicia vacío
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      side: 'start',
+    };
+    this.messages.push(botMessage);
+
+    let fullResponse = '';
+    this.geminiService.sendMessage(userMessage, history).subscribe({
+      next: (chunk) => {
+        fullResponse += chunk;
+        this.messages[this.messages.length - 1].message = fullResponse;
+        this.scrollToBottom();
+      },
+      error: (error) => {
+        this.messages[this.messages.length - 1].message = `Error: ${error.message}`;
+        this.isLoading.set(false);
+      },
+      complete: () => {
+        this.isLoading.set(false);
+        const finalMessage = this.messages[this.messages.length - 1];
+        this.processBotResponse(finalMessage);
+      }
+    });
+  }
+
+  private processBotResponse(botMessage: ChatMessage): void {
+    if (typeof botMessage.message === 'string') {
+      const processedMessage = this.navigationService.processNavigationCommands(botMessage.message);
+      botMessage.message = this.sanitizer.bypassSecurityTrustHtml(processedMessage);
+      // Forzar la detección de cambios si es necesario, aunque la asignación directa debería funcionar
+      this.messages = [...this.messages];
+    }
+  }
+
+  private sendFallbackResponse(): void {
     setTimeout(() => {
-      const botReply = this.getRandomBotMessage();
-      const botTime = new Date().toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-      });
+      this.removeTypingIndicator();
+      this.addBotResponse(this.getRandomBotMessage(), 'Bot');
+      this.isLoading.set(false);
+    }, 1500);
+  }
 
-      this.messages.push({
-        from: 'Bot',
-        message: botReply,
-        time: botTime,
-        side: 'start',
-      });
+  private addBotResponse(message: string, from: string): void {
+    this.removeTypingIndicator();
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const processedMessage = this.navigationService.processNavigationCommands(message);
+    const safeMessage = this.sanitizer.bypassSecurityTrustHtml(processedMessage);
 
-      setTimeout(() => this.scrollToBottom(), 100);
-    }, 1000); // 1 segundo después
+    this.messages.push({
+      from,
+      message: safeMessage,
+      time,
+      side: 'start',
+    });
+
+    setTimeout(() => this.scrollToBottom(), 100);
+  }
+
+  private addTypingIndicator(): void {
+    const time = new Date().toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    this.messages.push({
+      from: 'typing-indicator',
+      message: 'Escribiendo...',
+      time,
+      side: 'start',
+    });
+
+    setTimeout(() => this.scrollToBottom(), 100);
+  }
+
+  private removeTypingIndicator(): void {
+    const typingIndex = this.messages.findIndex(msg => msg.from === 'typing-indicator');
+    if (typingIndex !== -1) {
+      this.messages.splice(typingIndex, 1);
+    }
   }
 
   scrollToBottom() {
@@ -90,21 +223,21 @@ export class ChatbotComponent implements AfterViewInit {
 
   getRandomBotMessage(): string {
     const botMessages = [
-      'Hola, ¿en qué puedo ayudarte?',
-      'Estoy aquí para asistirte con tus dudas.',
-      '¿Podrías repetir eso? No lo entendí bien.',
-      'Interesante, cuéntame más.',
-      'Claro, eso tiene sentido.',
-      'Gracias por tu mensaje, lo estoy procesando.',
-      'Estoy aprendiendo constantemente, gracias a ti.',
-      '¿Deseas ayuda con algo técnico o personal?',
-      '¡Qué gusto tener esta conversación contigo!',
-      'Estoy aquí 24/7 por si me necesitas.',
-      'Hmm... déjame pensarlo un segundo.',
-      '¿Te gustaría saber más sobre Angular?',
-      '¡Buen punto! Lo consideraré.',
-      '¿Estás trabajando en algún proyecto interesante?',
-      '¡Eso suena genial!',
+      '¡Hola! Puedo ayudarte a navegar por Invexor. ¿Qué necesitas?',
+      'Ve tu resumen general aquí: [NAVEGAR:dashboard]',
+      'Revisa tus transacciones: [NAVEGAR:transactions]',
+      'Gestiona tu inventario: [NAVEGAR:items]',
+      'Administra recursos: [NAVEGAR:resources]',
+      'Genera reportes: [NAVEGAR:reports]',
+      'Explora relaciones: [NAVEGAR:mashup]',
+      'Gestiona usuarios: [NAVEGAR:users]',
+      'Configura áreas: [NAVEGAR:areas]',
+      'Administra sucursales: [NAVEGAR:branches]',
+      '¿Necesitas ir a alguna sección específica?',
+      'Puedo guiarte a cualquier parte del sistema.',
+      '¿Te ayudo con la navegación?',
+      'Dime qué buscas y te llevo allí.',
+      'Estoy aquí para facilitar tu navegación.',
     ];
 
     const index = Math.floor(Math.random() * botMessages.length);

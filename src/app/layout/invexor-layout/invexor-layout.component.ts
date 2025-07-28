@@ -3,7 +3,7 @@ import { SidebarLayoutComponent } from './components/sidebar/sidebar-layout.comp
 import { HeaderLayoutComponent } from './components/header/header-layout.component';
 import { RouterOutlet } from '@angular/router';
 import { ProgressbarComponent } from '../../shared/components/progressbar/progressbar.component';
-import { ChatbotComponent } from '../../feature/chatbot/components/chatbot/chatbot.component';
+import ChatbotComponent from '../../feature/chatbot/components/chatbot/chatbot.component';
 import { LayoutService } from './services/layout.service';
 import { CommonModule } from '@angular/common';
 

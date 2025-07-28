@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'chat-message',
@@ -9,7 +10,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export class ChatMessageComponent {
   from = input.required<string>();
   time = input.required<string>();
-  message = input.required<string>();
+  message = input.required<string | SafeHtml>();
   messageState? = input<'Seen' | 'Delivered' | 'Pending' | ''>('Delivered');
   side = input.required<'start' | 'end'>();
 }

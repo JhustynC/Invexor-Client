@@ -1,0 +1,62 @@
+/* Estilos para botones de navegación en mensajes del bot */
+:host ::ng-deep .nav-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 4px 2px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+:host ::ng-deep .nav-button:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+}
+
+:host ::ng-deep .nav-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+/* Animación para botones de navegación */
+:host ::ng-deep .nav-button {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Estilos para mensajes con botones */
+:host ::ng-deep .chat-bubble {
+  line-height: 1.5;
+}
+
+:host ::ng-deep .chat-bubble .nav-button {
+  margin-top: 8px;
+  display: block;
+  width: fit-content;
+}
+
+/* Responsive design para botones */
+@media (max-width: 768px) {
+  :host ::ng-deep .nav-button {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+}
