@@ -62,7 +62,6 @@ export default class BranchsComponent{
 
   addBranch(event: any) {
     
-
     this.entityService.createEntity({entity_type: 1}).subscribe({
       next: (createdEntity) => {
         this.saveBranch(event, createdEntity.id_entity);
@@ -90,7 +89,6 @@ export default class BranchsComponent{
     // Call the service to create the branch
     this.branchService.createBranch(newBranch).subscribe({
       next: (createdBranch) => {
-        console.log('Branch created successfully:', createdBranch);
 
         // Add the new branch to the local array with the display format
         this.getAllBranches();
@@ -112,10 +110,9 @@ export default class BranchsComponent{
       state: event.state === 'Activa', // Convert string to boolean
       id_entity: event.id_entity // You might want to make this dynamic
     };
-    console.log('Updating branch with data:', updatedBranch);
     this.branchService.updateBranch(event.id_branch, updatedBranch).subscribe({
       next: (updatedBranch) => {
-        console.log('Branch updated successfully:', updatedBranch);
+
         // Update the local array with the updated branch
         this.getAllBranches();
       },

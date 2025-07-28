@@ -1,6 +1,6 @@
 <div class="mb-[60px] overflow-hidden p-5 pb-8">
 
-  <table-composition-shared [columnNames]="['id', 'sucursal', 'padre', 'nombre', 'telefono', 'estado']"
+  <table-composition-shared [columnNames]="['area_id', 'branch_id', 'pattern_area_id', 'areaname', 'phone', 'active']"
                             [inputData]="areas"
                             [rowsPerPage]="15"
                             (addButtonClickedOutput)="togglePopup()"

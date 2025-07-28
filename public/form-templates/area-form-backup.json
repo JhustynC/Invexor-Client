@@ -5,7 +5,7 @@
       "label": "ID",
       "value": "",
       "type": "text",
-      "disabled": false,
+      "disabled": true,
       "validators": {
         "required": true,
         "minLength": 1
@@ -25,19 +25,31 @@
       "name": "branch_id",
       "label": "Select a branch",
       "value": "",
-      "type": "text",
+      "type": "select",
       "validators": {
         "required": false
-      }
+      },
+      "selectOptions": [
+        { "label": "Sucursal A", "value": "Sucursal A" },
+        { "label": "Sucursal Central", "value": "1f4fe2d6-15e8-4e56-8a0b-414036eec086" },
+        { "label": "Sucursal C", "value": "Sucursal C" },
+        { "label": "Sucursal D", "value": "Sucursal D" }
+      ]
     },
     {
       "name": "pattern_area_id",
       "label": "Select patern area",
       "value": "",
-      "type": "text",
+      "type": "select",
       "validators": {
         "required": false
-      }
+      },
+      "selectOptions": [
+        { "label": "Area A", "value": "Area A" },
+        { "label": "Area B", "value": "Area B" },
+        { "label": "Area C", "value": "Area C" },
+        { "label": "Area D", "value": "Area D" }
+      ]
     },
     {
       "name": "phone",
