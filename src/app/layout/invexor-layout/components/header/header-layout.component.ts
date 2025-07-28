@@ -1,5 +1,5 @@
 import { TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input, OnInit, inject } from '@angular/core';
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -7,6 +7,7 @@ import {
   RouterLink,
 } from '@angular/router';
 import { filter } from 'rxjs';
+import { AuthService } from '../../../../core/services/auth.service';
 
 interface Breadcrumb {
   label: string;
@@ -21,6 +22,9 @@ interface Breadcrumb {
 export class HeaderLayoutComponent implements OnInit {
   currentTitle = input<string | null>(null);
   breadcrumbs: Breadcrumb[] = [];
+  
+  // Inyectar AuthService
+  private authService = inject(AuthService);
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -63,5 +67,27 @@ export class HeaderLayoutComponent implements OnInit {
     }
 
     return breadcrumbs;
+  }
+
+  // Métodos para acceder a información de la sesión
+  getCurrentUser() {
+    return this.authService.getCurrentUser();
+  }
+
+  getSessionTimeRemaining(): number {
+    return this.authService.getSessionTimeRemaining();
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
+  extendSession(): void {
+    this.authService.extendSession();
   }
 }
