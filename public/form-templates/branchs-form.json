@@ -1,18 +1,18 @@
 {
   "controls": [
     {
-      "name": "id",
+      "name": "id_branch",
       "label": "ID",
       "value": "",
       "type": "text",
-      "disabled": true,
+      "disabled": false,
       "validators": {
         "required": true,
         "minLength": 1
       }
     },
     {
-      "name": "nombre",
+      "name": "name_branch",
       "label": "Name",
       "value": "",
       "type": "text",
@@ -22,7 +22,7 @@
       }
     },
     {
-      "name": "ciudad",
+      "name": "city",
       "label": "City",
       "value": "",
       "type": "text",
@@ -32,7 +32,7 @@
       }
     },
     {
-      "name": "telefono",
+      "name": "phone",
       "label": "Phone",
       "value": "",
       "type": "text",
@@ -42,7 +42,7 @@
       }
     },
     {
-      "name": "estado",
+      "name": "state",
       "label": "Select a state",
       "value": "",
       "type": "select",
