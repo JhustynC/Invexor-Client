@@ -9,7 +9,7 @@ import { EntityDto } from '../interfaces/entity.dto';
 })
 export class EntityService {
     http = inject(HttpClient);
-    apiURL: string = environment.ENV_APP_BASE_URL.replace(/\/$/, '');
+    apiURL: string = environment.apiUrl.replace(/\/$/, '');
 
     constructor() {}
 

@@ -9,7 +9,7 @@ import { BranchDto, UpdateBranchDto } from '../interfaces/branch.dto';
 })
 export class BranchService {
     http = inject(HttpClient);
-    apiURL: string = environment.ENV_APP_BASE_URL.replace(/\/$/, '');
+    apiURL: string = environment.apiUrl.replace(/\/$/, '');
 
     constructor() {}
 

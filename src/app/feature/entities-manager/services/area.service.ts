@@ -9,7 +9,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class AreaService {
   http = inject(HttpClient);
-  apiURL: string = environment.ENV_APP_BASE_URL.replace(/\/$/, '');
+  apiURL: string = environment.apiUrl.replace(/\/$/, '');
 
   constructor() {}
 
