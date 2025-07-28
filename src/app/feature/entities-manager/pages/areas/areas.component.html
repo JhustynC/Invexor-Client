@@ -5,7 +5,8 @@
                             [rowsPerPage]="15"
                             (addButtonClickedOutput)="togglePopup()"
                             (selectedEditRow)="editArea($event)"
-                            (selectedInfoRow)="toggleCustomProperties()">
+                            (selectedInfoRow)="toggleCustomProperties()"
+                            (selectedDeleteRow)="deleteArea($event)">
   </table-composition-shared>
   @if (openPopup()) {
   <div class="absolute inset-0 z-50 overflow-y-scroll">

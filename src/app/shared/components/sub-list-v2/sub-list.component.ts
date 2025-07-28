@@ -31,6 +31,20 @@ export class SubListComponent {
   showButton = input<boolean>(true);
   headerText = input<string>('Custom properties');
 
+  initialSelectedOptions = input<Set<string>>();
+  ngOnInit() {
+    const initialSelection = this.initialSelectedOptions();
+
+    // Asegúrate de que el valor del input existe y es un array
+    if (initialSelection && Array.isArray(initialSelection)) {
+      initialSelection.forEach(item => {
+        // Solo añade la opción si existe en tu lista de opciones disponibles
+        if (this.options.includes(item)) {
+          this.selectedOptions.add(item);
+        }
+      });
+    }
+  }
   toggleSelection(option: string) {
     if (this.selectedOptions.has(option)) {
       this.selectedOptions.delete(option);

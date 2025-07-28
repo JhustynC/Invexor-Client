@@ -103,6 +103,19 @@ export default class AreasComponent {
     this.openPopup() ? this.layoutService.bloquearScroll() : this.layoutService.permitirScroll();
   }
 
+  deleteArea(event: any) {
+    const areaId = event.area_id;
+    this.areaService.deleteArea(areaId).subscribe({
+      next: () => {
+        this.areas = this.areas.filter((area) => area.area_id !== areaId);
+        console.log('Area deleted successfully:', areaId);
+      },
+      error: (error) => {
+        console.error('Error deleting area:', error);
+      }
+    });
+  }
+
   togglePopup() {
     this.selectedTableArea.set(undefined);
     this.openPopup.update((prev) => !prev);
