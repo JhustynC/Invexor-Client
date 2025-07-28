@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { BranchDto } from '../interfaces/branch.dto';
+import { BranchDto, UpdateBranchDto } from '../interfaces/branch.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +25,7 @@ export class BranchService {
         return this.http.post<BranchDto>(`${this.apiURL}/branch`, branch);
     }
 
-    updateBranch(id: string, branch: BranchDto): Observable<BranchDto> {
+    updateBranch(id: string, branch: UpdateBranchDto): Observable<BranchDto> {
         return this.http.put<BranchDto>(`${this.apiURL}/branch/${id}`, branch);
     }
 
