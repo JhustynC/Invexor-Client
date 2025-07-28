@@ -11,30 +11,99 @@
 
   <div class="h-fit flex flex-col bg-[#293650] w-[80%] rounded-[10px] py-5">
 
-    <h1 class="pl-5 text-2xl">Report Type List: </h1>
-    <div class="flex gap-2 w-full justify-center flex-wrap p-5">
-      <button class="btn  bg-[#f97316] hover:bg-[#616161] hover:text-white text-white flex-1/4 ">Transactions</button>
-      <button class="btn  bg-[#f97316] hover:bg-[#616161] hover:text-white text-white flex-1/4 ">Entities Count</button>
-      <button class="btn  bg-[#f97316] hover:bg-[#616161] hover:text-white text-white flex-1/4 ">Rebase Inventory</button>
-      <button class="btn  bg-[#f97316] hover:bg-[#616161] hover:text-white text-white flex-1/4 ">Year Enterprise</button>
-      <button class="btn  bg-[#f97316] hover:bg-[#616161] hover:text-white text-white flex-1/4 ">Stable Entites</button>
-      <button class="btn  bg-[#f97316] hover:bg-[#616161] hover:text-white text-white flex-1/4 ">Min Entites</button>
-      <button class="btn  bg-[#f97316] hover:bg-[#616161] hover:text-white text-white flex-1/4 ">Max Entites</button>
+    <h1 class="pl-5 text-2xl">Tipos de Reportes: </h1>
+    <div class="flex gap-4 w-full justify-center flex-wrap p-5">
+      <!-- Botón 1: Reporte General -->
+      <button
+        class="btn bg-[#f97316] hover:bg-[#616161] hover:text-white text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        (click)="generateGeneralReport()"
+        [disabled]="isLoading">
+        <span *ngIf="!isLoading || currentReportType !== 'Reporte General'">Reporte General</span>
+        <span *ngIf="isLoading && currentReportType === 'Reporte General'" class="flex items-center">
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Generando...
+        </span>
+      </button>
+
+      <!-- Botón 2: Reporte de Transacciones -->
+      <button
+        class="btn bg-[#f97316] hover:bg-[#616161] hover:text-white text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        (click)="generateTransactionsReport()"
+        [disabled]="isLoading">
+        <span *ngIf="!isLoading || currentReportType !== 'Reporte de Transacciones'">Reporte de Transacciones</span>
+        <span *ngIf="isLoading && currentReportType === 'Reporte de Transacciones'" class="flex items-center">
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Generando...
+        </span>
+      </button>
+
+      <!-- Botón 3: Reporte de Items -->
+      <button
+        class="btn bg-[#f97316] hover:bg-[#616161] hover:text-white text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        (click)="generateItemsReport()"
+        [disabled]="isLoading">
+        <span *ngIf="!isLoading || currentReportType !== 'Reporte de Items'">Reporte de Items</span>
+        <span *ngIf="isLoading && currentReportType === 'Reporte de Items'" class="flex items-center">
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Generando...
+        </span>
+      </button>
     </div>
 
     <div class="">
       <hr class="my-10">
-      <h1 class="pl-5 text-2xl mb-5">Report Preview: </h1>
-      <div class="flex justify-center">
+      <h1 class="pl-5 text-2xl mb-5">Vista Previa del Reporte: </h1>
+
+      <!-- Mensaje de estado -->
+      <div class="flex justify-center mb-4" *ngIf="currentReportType && !pdfSrc">
+        <div class="text-center">
+          <p class="text-lg font-medium text-white mb-2">{{ currentReportType }}</p>
+          <p class="text-sm text-gray-300" *ngIf="isLoading">Generando reporte, por favor espera...</p>
+          <p class="text-sm text-red-400" *ngIf="errorMessage">{{ errorMessage }}</p>
+        </div>
+      </div>
+
+      <!-- Botón de descarga -->
+      <div class="flex justify-center mb-4" *ngIf="pdfSrc">
+        <button 
+          class="btn bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 flex items-center gap-2"
+          (click)="downloadPdf()">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Descargar PDF
+        </button>
+      </div>
+      
+      <!-- Visor PDF -->
+      <div class="flex justify-center" *ngIf="pdfSrc">
         <pdf-viewer [src]="pdfSrc"
                     [render-text]="true"
                     [original-size]="false"
-                    class="w-[200px] h-[500px] sm:w-[300px] md:w-[500px] lg:w-[630px]"></pdf-viewer>
+                    class="w-[200px] h-[500px] sm:w-[300px] md:w-[500px] lg:w-[630px] border border-gray-600 rounded-lg"></pdf-viewer>
+      </div>
+
+      <!-- Mensaje cuando no hay PDF -->
+      <div class="flex justify-center" *ngIf="!pdfSrc && !isLoading">
+        <div class="text-center py-20">
+          <svg class="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <h3 class="text-lg font-medium text-white mb-2">No hay reporte seleccionado</h3>
+          <p class="text-gray-400">Selecciona uno de los botones de arriba para generar un reporte</p>
+        </div>
       </div>
     </div>
 
   </div>
 
 </div>
-
-<json-form-v2></json-form-v2>
